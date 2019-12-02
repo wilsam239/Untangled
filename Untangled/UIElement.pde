@@ -1,6 +1,9 @@
 abstract class UIElement {
     
-    public float top, bottom, left, right;
+    public float top = 0;
+    public float bottom = 100;
+    public float left = 0;
+    public float right = 100;
 
     // ----- ALIGNMENT -----
 
@@ -35,5 +38,7 @@ abstract class UIElement {
     public void alignRightToRightOf(UIElement e) {
         this.right = e.right;
     }
+
+    public void draw();
 
 }
