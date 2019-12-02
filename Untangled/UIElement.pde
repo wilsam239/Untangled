@@ -39,6 +39,6 @@ abstract class UIElement {
         this.right = e.right;
     }
 
-    public void draw();
+    public void draw() { }
 
 }
