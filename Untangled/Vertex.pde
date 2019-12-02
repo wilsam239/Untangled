@@ -16,7 +16,7 @@ class Vertex {
     this.yPos = y;
   }
   
-  float x() { return this.xPos; }
-  float y() { return this.yPos; }
+  public float x() { return this.xPos; }
+  public float y() { return this.yPos; }
   
 }
