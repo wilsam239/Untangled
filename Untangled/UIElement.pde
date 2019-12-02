@@ -5,21 +5,25 @@ abstract class UIElement {
     public float left = 0;
     public float right = 100;
 
+    public UIElement() {
+
+    }
+
     // ----- ALIGNMENT -----
 
-    public void alignToptoTopOf(UIElement e) {
+    public void alignTopToTopOf(UIElement e) {
         this.top = e.top;
     }
 
-    public void alignToptoBottomOf(UIElement e) {
+    public void alignTopToBottomOf(UIElement e) {
         this.top = e.bottom;
     }
 
-    public void alignBottomtoTopOf(UIElement e) {
+    public void alignBottomToTopOf(UIElement e) {
         this.bottom = e.top;
     }
 
-    public void alignBottomtoBottomOf(UIElement e) {
+    public void alignBottomToBottomOf(UIElement e) {
         this.bottom = e.bottom;
     }
 
@@ -39,6 +43,34 @@ abstract class UIElement {
         this.right = e.right;
     }
 
-    public void draw() { }
+    // Update, hover, and click.
+
+    public void update() {
+        if (hover() && click()) {
+            onClick();
+        }
+    }
+
+    protected boolean hover() {
+        return false;
+    }
+
+    protected boolean click() {
+        return Mouse.buttons.hasValue(Mouse.LEFT);
+    }
+
+    protected void onClick() {
+
+    }
+
+    // Draw
+    private int debugRed = (int) random(255);
+    private int debugGreen = (int) random(255);
+    private int debugBlue = (int) random(255);
+    public void draw() {
+        fill(0, 0);
+        stroke(debugRed, debugGreen, debugBlue);
+        rect(this.left, this.top, this.right - this.left, this.bottom - this.top);
+    }
 
 }
