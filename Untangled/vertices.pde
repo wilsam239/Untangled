@@ -1,5 +1,10 @@
+/**
+  Vertex class, represents the circles on the page.
+  Have an x,y position
+*/
+
 class vertices {
-  float xPos, yPos;
+  private float xPos, yPos;
   
   vertices() {
     this.xPos = 0;
@@ -10,5 +15,8 @@ class vertices {
     this.xPos = x;
     this.yPos = y;
   }
+  
+  float x() { return this.xPos; }
+  float y() { return this.yPos; }
   
 }
