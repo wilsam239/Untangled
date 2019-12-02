@@ -1,9 +1,9 @@
-class level {
-  ArrayList<vertices> vertices = new ArrayList();
+class Level {
+  ArrayList<Vertex> vertices = new ArrayList();
   
-  level() {
+  Level() {
     for (int i = 0; i < 10; i++) {
-      vertices.add(new vertices(random(0,1280), random(0,720)));
+      vertices.add(new Vertex(random(0,1280), random(0,720)));
     }
   }
   
