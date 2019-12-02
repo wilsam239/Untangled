@@ -3,15 +3,15 @@
   Have an x,y position
 */
 
-class vertices {
+class Vertex {
   private float xPos, yPos;
   
-  vertices() {
+ Vertex() {
     this.xPos = 0;
     this.yPos = 0;
   };
   
-  vertices(float x, float y) {
+ Vertex(float x, float y) {
     this.xPos = x;
     this.yPos = y;
   }

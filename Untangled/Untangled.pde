@@ -1,10 +1,10 @@
-
 UIButton b;
 
-level l = new level();
+Level l = new Level();
+
 void setup() {
   size(1280,720);
-  background(225);
+  background(Colours.background);
   noStroke();
   fill(102);
 
@@ -13,7 +13,10 @@ void setup() {
 
 void draw() {
   b.draw();
+  
+  fill(Colours.vertexFill);
+  stroke(Colours.vertexStroke);
   for(int i = 0; i < l.getNumVertices(); i++) {
-    ellipse(l.vertices.get(i).x(), l.vertices.get(i).y(), 50, 50);
+    ellipse(l.vertices.get(i).x(), l.vertices.get(i).y(), Dimen.vertexDim, Dimen.vertexDim);
   }
 }
