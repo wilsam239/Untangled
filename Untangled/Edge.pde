@@ -1,3 +1,7 @@
+/**
+    Edge class
+*/
+
 class Edge {
     Vertex startVertex, endVertex;
     float xPosStart, yPosStart, xPosEnd, yPosEnd;
@@ -15,11 +19,11 @@ class Edge {
         this.startVertex = start;
         this.endVertex = end;
 
-        this.xPosStart = start.x() + Dimen.vertexDim/2;
-        this.yPosStart = start.y() + Dimen.vertexDim/2;
+        this.xPosStart = start.x();
+        this.yPosStart = start.y();
 
-        this.xPosEnd = end.x() + Dimen.vertexDim/2;
-        this.yPosEnd = end.y() + Dimen.vertexDim/2;
+        this.xPosEnd = end.x();
+        this.yPosEnd = end.y();
     }
 
     public void draw() {
