@@ -4,6 +4,4 @@ public static class Dimen {
 
     public static final int vertexDim = 50;
     public static final int vertexBuffer = 75;
-
-
 }
