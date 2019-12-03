@@ -2,6 +2,7 @@ abstract class LevelInterface {
     public ArrayList<Vertex> vertices = new ArrayList();
     public ArrayList<Edge> edges = new ArrayList();
     public int counter = 0;
+    public int selectedVertex = -1;
 
     public void draw() {
         if(counter > 0) {
@@ -50,6 +51,7 @@ abstract class LevelInterface {
         for( Vertex v : vertices) {
             if(v.selected()) v.select();
         }
+        this.selectedVertex = -1;
     }
 
     public void clearHover() {

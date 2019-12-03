@@ -8,23 +8,8 @@ class LevelEditor extends LevelInterface {
     }
 
     void addVertex(float xPos, float yPos) {
-        boolean createVertex = true;
-        for(Vertex v : vertices) {
-            if (xPos > v.left() - Dimen.vertexDim/2
-            && xPos < v.right() + Dimen.vertexDim/2
-            && yPos < v.bottom() + Dimen.vertexDim/2
-            && yPos > v.top() - Dimen.vertexDim/2) {
-                println("Vertices will overlap! Not adding!");
-                createVertex = false;
-                this.invalidMove();
-            }
-        }
-        
-        if(createVertex) {
-            println("Adding a new vertex at x = " + xPos + " y = " + yPos);
-            vertices.add(new Vertex(xPos, yPos));
-        }
-        
+        println("Adding a new vertex at x = " + xPos + " y = " + yPos);
+        vertices.add(new Vertex(xPos, yPos));        
     }
 
     void addEdge(int vertexIndexStart, int vertexIndexEnd) {
@@ -60,12 +45,43 @@ class LevelEditor extends LevelInterface {
 
     @Override
     public void update() {
+
         int mousedVertex = this.getVertexAtMouse(Mouse.x, Mouse.y);
         if(mousedVertex > -1) this.vertices.get(mousedVertex).hover();
         else this.clearHover();
+
         if(Mouse.btnPressed.hasValue(Mouse.LEFT)) {
-            this.addVertex(Mouse.x, Mouse.y);
+            this.clearSelection();
+            boolean createVertex = true;
+            for(Vertex v : vertices) {
+                if (Mouse.x > v.left() - Dimen.vertexDim/2
+                && Mouse.x < v.right() + Dimen.vertexDim/2
+                && Mouse.y < v.bottom() + Dimen.vertexDim/2
+                && Mouse.y > v.top() - Dimen.vertexDim/2) {
+                    println("Vertices will overlap! Not adding!");
+                    createVertex = false;
+                }
+            }
+            
+            if(createVertex) {
+                this.addVertex(Mouse.x, Mouse.y);
+            } else {
+                this.vertices.get(mousedVertex).select();
+                this.selectedVertex = mousedVertex;
+            }
+        } else if (Mouse.buttons.hasValue(Mouse.LEFT)) {
+            for(Vertex v : vertices) {
+                if(v.selected()) {
+                    v.move(Mouse.x, Mouse.y);
+                    break;
+                }
+            }
         }
+
+        if(Mouse.btnReleased.hasValue(Mouse.LEFT)) {
+            this.clearSelection();
+        }
+        
         if(Mouse.btnPressed.hasValue(Mouse.RIGHT)) {
             this.clearSelection();
             if(mousedVertex > -1) this.vertices.get(mousedVertex).select();

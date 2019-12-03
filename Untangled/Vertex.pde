@@ -60,4 +60,9 @@ class Vertex {
     public boolean selected() {
         return this.selected;
     }
+
+    public void move(float xPos, float yPos) {
+        this.xPos = xPos;
+        this.yPos = yPos;
+    }
 }
