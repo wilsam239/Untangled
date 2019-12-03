@@ -39,7 +39,7 @@ class UIHandler {
         this.root.children.add(settings);
     }
 
-    // The settings menu
+    // The settings menu.
     public void settings_menu() {
         this.root.children.clear();
 
