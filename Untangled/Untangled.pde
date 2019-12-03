@@ -4,7 +4,9 @@ UIButton b2;
 //Level l = new Level();
 LevelEditor l = new LevelEditor();
 
-public static final int FRAMERATE = 60;
+public static int FRAMERATE = 60;
+public static int WIDTH = 1280;
+public static int HEIGHT = 720;
 
 void setup() {
     size(1280,720);

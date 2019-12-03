@@ -1,0 +1,7 @@
+class UIContainer {
+
+    public UIContainer() {
+
+    }
+
+}
