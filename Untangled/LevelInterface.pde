@@ -2,6 +2,7 @@ abstract class LevelInterface {
     public ArrayList<Vertex> vertices = new ArrayList();
     public ArrayList<Edge> edges = new ArrayList();
     public int counter = 0;
+    public int selectedVertex = -1;
 
     public void draw() {
         if(counter > 0) {
@@ -29,7 +30,7 @@ abstract class LevelInterface {
     public void update() {
         
     }
-
+    
     public int getVertexAtMouse(float xPos, float yPos) {
         int vertexIndex = -1;
         for(int i = 0; i < vertices.size(); i++) {
@@ -44,5 +45,18 @@ abstract class LevelInterface {
             }
         }
         return vertexIndex;
+    }
+
+    public void clearSelection() {
+        for( Vertex v : vertices) {
+            if(v.selected()) v.select();
+        }
+        this.selectedVertex = -1;
+    }
+
+    public void clearHover() {
+        for( Vertex v : vertices) {
+            if(v.hovered()) v.clearHover();
+        }
     }
 }

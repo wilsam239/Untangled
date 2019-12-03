@@ -6,6 +6,9 @@
 class Vertex {
     private float xPos, yPos;
     private float left, right, top, bottom;
+    private int fillColour = Colours.vertexFill;
+    private boolean selected = false;
+    private boolean hovered = false;
     
     Vertex() {
         this.xPos = 0;
@@ -30,8 +33,36 @@ class Vertex {
   
     public void draw() {
         // Draw the ellipse. Default ellipseMode is CENTER, so the x and y position is the center of the ellipse.
-        fill(Colours.vertexFill);
+        fill(this.fillColour);
         stroke(Colours.vertexStroke);
         ellipse(this.x(), this.y(), Dimen.vertexDim, Dimen.vertexDim);
+    }
+
+    public void select() {
+        this.selected = !this.selected;
+        this.fillColour = this.selected ? Colours.vertexFillSelected : Colours.vertexFill;
+    }
+
+    public void hover() {
+        this.hovered = true;
+        this.fillColour = Colours.vertexFillHovered;
+    }
+
+    public void clearHover() {
+        this.hovered = false;
+        this.fillColour = this.selected ? Colours.vertexFillSelected : Colours.vertexFill;
+    }
+
+    public boolean hovered() {
+        return this.hovered;
+    }
+
+    public boolean selected() {
+        return this.selected;
+    }
+
+    public void move(float xPos, float yPos) {
+        this.xPos = xPos;
+        this.yPos = yPos;
     }
 }
