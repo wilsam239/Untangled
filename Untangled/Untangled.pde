@@ -1,6 +1,8 @@
 UIButton b;
 UIButton b2;
 
+UIHandler uiHandler;
+
 //Level l = new Level();
 LevelEditor l = new LevelEditor();
 
@@ -20,6 +22,9 @@ void setup() {
     b2.alignTopToTopOf((UIElement) b);
     b2.alignLeftToRightOf((UIElement) b);
 
+    uiHandler = new UIHandler(1280, 720);
+    uiHandler.main_menu();
+
     println(b2.left + ", "+ b2.right + ", "+ b2.top + ", "+ b2.bottom);
 }
 
@@ -28,6 +33,10 @@ void draw() {
 
     b.update();
     b2.update();
+
+    uiHandler.update();
+
+    uiHandler.draw();
 
     b.draw();
     b2.draw();
