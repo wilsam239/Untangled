@@ -7,6 +7,8 @@ abstract class UIElement {
 
     public UIElement parent = null;
 
+    public String btnText = "";
+
     // ----- ALIGNMENT -----
 
     public void alignTopToTopOf(UIElement e) {
@@ -64,6 +66,11 @@ abstract class UIElement {
     private int debugGreen = (int) random(255);
     private int debugBlue = (int) random(255);
     public void draw() {
+        // Draw the text.
+        fill(0);
+        textAlign(CENTER);
+        text(this.btnText, this.left + (this.right - this.left) / 2, this.top + (textAscent()) / 2 + (this.bottom - this.top) / 2);
+        
         fill(0, 0);
         stroke(debugRed, debugGreen, debugBlue);
         rect(this.left, this.top, this.right - this.left, this.bottom - this.top);
