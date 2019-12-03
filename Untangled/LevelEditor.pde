@@ -16,6 +16,7 @@ class LevelEditor extends LevelInterface {
             && yPos > v.top() - Dimen.vertexDim/2) {
                 println("Vertices will overlap! Not adding!");
                 createVertex = false;
+                this.invalidMove();
             }
         }
         
@@ -30,8 +31,21 @@ class LevelEditor extends LevelInterface {
         Vertex start = this.vertices.get(vertexIndexStart);
         Vertex end = this.vertices.get(vertexIndexEnd);
 
-        this.edges.add(new Edge(start, end));
-        println("Added an Edge from vertex " + vertexIndexStart + " to " + vertexIndexEnd);
+        boolean createEdge = true;
+        for(Edge e : edges) {
+            if(e.startVertex == start && e.endVertex == end) {
+                createEdge = false;
+                break;
+            }
+        }
+        if(createEdge) {
+            this.edges.add(new Edge(start, end));
+            println("Added an Edge from vertex " + vertexIndexStart + " to " + vertexIndexEnd);
+        } else {
+            println("Not creating an edge there! There must already be one there!");
+            this.invalidMove();
+        }
+        
         this.resetEdges();
     }
 
@@ -40,21 +54,7 @@ class LevelEditor extends LevelInterface {
         this.edgeEndIndex = -1;
     }
 
-    int getVertexAtMouse(float xPos, float yPos) {
-        int vertexIndex = -1;
-        for(int i = 0; i < vertices.size(); i++) {
-            Vertex v = vertices.get(i);
-            if (xPos > v.left()
-            && xPos < v.right()
-            && yPos < v.bottom()
-            && yPos > v.top()) {
-                println("Vertex here!");
-                vertexIndex = i;
-                break;
-            }
-        }
-        return vertexIndex;
-    }
+    
 
     @Override
     public void update() {
@@ -63,9 +63,13 @@ class LevelEditor extends LevelInterface {
         }
         if(Mouse.btnPressed.hasValue(Mouse.RIGHT)) {
             if(edgeStartIndex == -1) {
-                edgeStartIndex = getVertexAtMouse(Mouse.x, Mouse.y);
+                edgeStartIndex = this.getVertexAtMouse(Mouse.x, Mouse.y);
             } else if(edgeStartIndex > -1 && edgeEndIndex == -1) {
-                edgeEndIndex = getVertexAtMouse(Mouse.x, Mouse.y);
+                edgeEndIndex = this.getVertexAtMouse(Mouse.x, Mouse.y);
+                if(edgeEndIndex == edgeStartIndex) {
+                    edgeEndIndex = -1;
+                    this.invalidMove();
+                }
             } 
             
             if(edgeEndIndex > -1 && edgeStartIndex > -1) {
