@@ -29,7 +29,7 @@ abstract class LevelInterface {
     public void update() {
         
     }
-
+    
     public int getVertexAtMouse(float xPos, float yPos) {
         int vertexIndex = -1;
         for(int i = 0; i < vertices.size(); i++) {
@@ -44,5 +44,17 @@ abstract class LevelInterface {
             }
         }
         return vertexIndex;
+    }
+
+    public void clearSelection() {
+        for( Vertex v : vertices) {
+            if(v.selected()) v.select();
+        }
+    }
+
+    public void clearHover() {
+        for( Vertex v : vertices) {
+            if(v.hovered()) v.clearHover();
+        }
     }
 }

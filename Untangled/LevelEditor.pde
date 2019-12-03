@@ -52,16 +52,24 @@ class LevelEditor extends LevelInterface {
     void resetEdges() {
         this.edgeStartIndex = -1;
         this.edgeEndIndex = -1;
+        this.clearSelection();
+        this.clearHover();
     }
 
     
 
     @Override
     public void update() {
+        int mousedVertex = this.getVertexAtMouse(Mouse.x, Mouse.y);
+        if(mousedVertex > -1) this.vertices.get(mousedVertex).hover();
+        else this.clearHover();
         if(Mouse.btnPressed.hasValue(Mouse.LEFT)) {
             this.addVertex(Mouse.x, Mouse.y);
         }
         if(Mouse.btnPressed.hasValue(Mouse.RIGHT)) {
+            this.clearSelection();
+            if(mousedVertex > -1) this.vertices.get(mousedVertex).select();
+            
             if(edgeStartIndex == -1) {
                 edgeStartIndex = this.getVertexAtMouse(Mouse.x, Mouse.y);
             } else if(edgeStartIndex > -1 && edgeEndIndex == -1) {
