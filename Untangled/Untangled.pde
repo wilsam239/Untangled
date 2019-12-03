@@ -1,7 +1,4 @@
-UIHandler uiHandler;
-
-//Level l = new Level();
-LevelEditor l = new LevelEditor();
+Game game;
 
 public static int FRAMERATE = 60;
 public static int WIDTH = 1280;
@@ -14,33 +11,18 @@ void setup() {
     noStroke();
     fill(102);
 
-    uiHandler = new UIHandler(1280, 720);
-    uiHandler.main_menu();
+    game = new Game(1280, 720);
 }
 
 void draw() {
+    background(Colours.background);
     
-    update();
-    render();
+    game.run();
+
+    drawDebug();
 
     // Clear the current mouse presses so that they are only triggered for one frame.
     Mouse.clearBuffers();
-}
-
-// Update all the things.
-void update() {
-    l.update();
-    uiHandler.update();
-}
-
-// Draw all the things to the screen.
-void render() {
-    background(Colours.background);
-
-    l.draw();
-    uiHandler.draw();
-
-    drawDebug();
 }
 
 void drawDebug() {

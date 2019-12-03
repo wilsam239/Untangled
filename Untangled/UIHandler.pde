@@ -2,13 +2,17 @@ class UIHandler {
 
     public UIContainer root;
 
-    public UIHandler(int width, int height) {
+    // A reference to the entire game.
+    public Game parent;
+
+    public UIHandler(Game parent) {
+        this.parent = parent;
         // Set the root to be the entire size of the screen.
         this.root = new UIContainer();
         this.root.top = 0;
-        this.root.bottom = height;
+        this.root.bottom = parent.height;
         this.root.left = 0;
-        this.root.right = width;
+        this.root.right = parent.width;
     }
 
     // The games main menu.
@@ -18,6 +22,7 @@ class UIHandler {
         UIButton startGame = new UIButton(50, 50, 200, 100) {
             protected void onClick() {
                 println("Start Game was pressed!");
+                this.handler.parent.currentLevel = new LevelEditor();
             }
         };
         startGame.handler = this;
