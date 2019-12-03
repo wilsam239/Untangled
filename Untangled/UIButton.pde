@@ -11,7 +11,9 @@ class UIButton extends UIElement {
 
     @Override
     public void update() {
-        super.update();
+        if (hover() && click()) {
+            onClick();
+        }
     }
 
     int hoverTimer = 0;
@@ -29,6 +31,10 @@ class UIButton extends UIElement {
         }
         if (this.hoverTimer > 0) this.hoverTimer--;
         return false;
+    }
+
+    protected boolean click() {
+        return Mouse.btnPressed.hasValue(Mouse.LEFT);
     }
 
     @Override
