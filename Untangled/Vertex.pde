@@ -64,5 +64,9 @@ class Vertex {
     public void move(float xPos, float yPos) {
         this.xPos = xPos;
         this.yPos = yPos;
+        this.left = xPos - Dimen.vertexDim/2;
+        this.right = xPos + Dimen.vertexDim/2;
+        this.top = yPos - Dimen.vertexDim/2;
+        this.bottom = yPos + Dimen.vertexDim/2;
     }
 }

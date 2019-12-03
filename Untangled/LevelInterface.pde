@@ -39,7 +39,6 @@ abstract class LevelInterface {
             && xPos < v.right()
             && yPos < v.bottom()
             && yPos > v.top()) {
-                println("Vertex here!");
                 vertexIndex = i;
                 break;
             }
