@@ -1,6 +1,7 @@
 static class Mouse {
     
     public static final int LEFT = 37;
+    public static final int RIGHT = 39;
 
     public static IntList buttons = new IntList();
 
