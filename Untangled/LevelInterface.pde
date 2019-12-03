@@ -17,4 +17,8 @@ abstract class LevelInterface {
     public int getNumVertices() {
         return vertices.size();
     }
+
+    public void update() {
+        
+    }
 }

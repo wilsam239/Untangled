@@ -18,7 +18,6 @@ class UIButton extends UIElement {
 
     int hoverTimer = 0;
 
-    @Override
     protected boolean hover() {
         // Check if the mouse is within the bounds of the button.
         if (Mouse.x > this.left
@@ -37,7 +36,7 @@ class UIButton extends UIElement {
         return Mouse.btnPressed.hasValue(Mouse.LEFT);
     }
 
-    @Override
+    
     protected void onClick() {
 
     }
