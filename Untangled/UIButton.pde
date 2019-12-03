@@ -1,5 +1,7 @@
 class UIButton extends UIElement {
 
+    public UIHandler handler;
+
     public UIButton() { }
 
     public UIButton(float left, float top, float right, float bottom) {
