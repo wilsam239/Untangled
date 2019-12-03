@@ -22,7 +22,7 @@ class UIHandler {
         UIButton startGame = new UIButton(50, 50, 200, 100) {
             protected void onClick() {
                 println("Start Game was pressed!");
-                this.handler.parent.currentLevel = new LevelEditor();
+                this.handler.parent.currentLevel = new Level();
             }
         };
         startGame.handler = this;
@@ -30,8 +30,21 @@ class UIHandler {
         startGame.btnText = "START GAME";
         
         this.root.children.add(startGame);
+
+
+        UIButton levelEdit = new UIButton(50, 100, 200, 150) {
+            protected void onClick() {
+                println("Start Game was pressed!");
+                this.handler.parent.currentLevel = new LevelEditor();
+            }
+        };
+        levelEdit.handler = this;
+        levelEdit.parent = this.root;
+        levelEdit.btnText = "LEVEL EDITOR";
         
-        UIButton settings = new UIButton(50, 100, 200, 150) {
+        this.root.children.add(levelEdit);
+        
+        UIButton settings = new UIButton(50, 150, 200, 200) {
             protected void onClick() {
                 println("Settings was pressed!");
                 this.handler.settings_menu();
