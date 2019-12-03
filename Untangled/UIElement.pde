@@ -5,10 +5,6 @@ abstract class UIElement {
     public float left = 0;
     public float right = 100;
 
-    public UIElement() {
-
-    }
-
     // ----- ALIGNMENT -----
 
     public void alignTopToTopOf(UIElement e) {
@@ -46,21 +42,7 @@ abstract class UIElement {
     // Update, hover, and click.
 
     public void update() {
-        if (hover() && click()) {
-            onClick();
-        }
-    }
-
-    protected boolean hover() {
-        return false;
-    }
-
-    protected boolean click() {
-        return Mouse.buttons.hasValue(Mouse.LEFT);
-    }
-
-    protected void onClick() {
-
+        
     }
 
     // Draw
