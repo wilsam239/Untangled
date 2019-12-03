@@ -5,6 +5,8 @@ abstract class UIElement {
     public float left = 0;
     public float right = 100;
 
+    public UIElement parent = null;
+
     // ----- ALIGNMENT -----
 
     public void alignTopToTopOf(UIElement e) {
@@ -37,6 +39,18 @@ abstract class UIElement {
 
     public void alignRightToRightOf(UIElement e) {
         this.right = e.right;
+    }
+
+    public void fillParentWidth() {
+        if (this.parent == null) return;
+        this.left = this.parent.left;
+        this.right = this.parent.right;
+    }
+
+    public void fillParentHeight() {
+        if (this.parent == null) return;
+        this.top = this.parent.top;
+        this.bottom = this.parent.bottom;
     }
 
     // Update, hover, and click.

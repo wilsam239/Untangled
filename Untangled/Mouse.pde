@@ -16,6 +16,9 @@ static class Mouse {
         Mouse.btnPressed.clear();
         Mouse.btnReleased.clear();
     }
+
+    // For UIButtons
+    public static UIButton clickedButton = null;
 }
 
 // Mouse Buttons

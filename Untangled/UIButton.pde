@@ -14,6 +14,8 @@ class UIButton extends UIElement {
         if (hover() && click()) {
             onClick();
         }
+
+        if (!hover() && Mouse.clickedButton == this) Mouse.clickedButton = null;
     }
 
     int hoverTimer = 0;
@@ -33,12 +35,19 @@ class UIButton extends UIElement {
     }
 
     protected boolean click() {
-        return Mouse.btnPressed.hasValue(Mouse.LEFT);
+        if (Mouse.btnReleased.hasValue(Mouse.LEFT) && Mouse.clickedButton == this) {
+            Mouse.clickedButton = null;
+            return true;
+        } else {
+            if (Mouse.btnPressed.hasValue(Mouse.LEFT)) {
+                Mouse.clickedButton = this;
+            }
+            return false;
+        }
     }
 
-    
     protected void onClick() {
-
+        println("A BUTTON WAS PRESSED!!!!");
     }
 
     @Override
