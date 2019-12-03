@@ -1,7 +1,8 @@
 UIButton b;
 UIButton b2;
 
-Level l = new Level();
+//Level l = new Level();
+LevelEditor l = new LevelEditor();
 
 public static final int FRAMERATE = 60;
 
@@ -29,6 +30,7 @@ void draw() {
     b.draw();
     b2.draw();
     l.draw();
+    l.update();
 
     drawDebug();
 
