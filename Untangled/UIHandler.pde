@@ -3,39 +3,89 @@ class UIHandler {
     public UIContainer root;
 
     // A reference to the entire game.
-    public Game parent;
+    public Game game;
 
-    public UIHandler(Game parent) {
-        this.parent = parent;
+    public UIHandler(Game game) {
+        this.game = game;
+        
+        resetRoot();
+    }
+
+    private void resetRoot() {
         // Set the root to be the entire size of the screen.
         this.root = new UIContainer();
         this.root.top = 0;
-        this.root.bottom = parent.height;
+        this.root.bottom = game.height;
         this.root.left = 0;
-        this.root.right = parent.width;
+        this.root.right = game.width;
     }
 
     // The games main menu.
     public void main_menu() {
         this.root.children.clear();
+        this.resetRoot();
+        this.game.currentLevel = null;
+
+        // Menu Container
+        UIContainer menuContainer = new UIContainer();
+        menuContainer.parent = this.root;
+        menuContainer.fillParentHeight();
+        menuContainer.alignLeftToLeftOf(this.root);
+        menuContainer.right = 200;
+
+        this.root.children.add(menuContainer);
         
+        // Start Game Button
         UIButton startGame = new UIButton(50, 50, 200, 100) {
             protected void onClick() {
                 println("Start Game was pressed!");
-                this.handler.parent.currentLevel = new Level();
+                this.handler.choose_mode();
             }
         };
         startGame.handler = this;
-        startGame.parent = this.root;
+        startGame.parent = menuContainer;
+        startGame.fillParentWidth();
         startGame.btnText = "START GAME";
         
-        this.root.children.add(startGame);
+        menuContainer.children.add(startGame);
 
+        // Settings Button
+        UIButton settings = new UIButton(50, 100, 200, 150) {
+            protected void onClick() {
+                println("Settings was pressed!");
+                this.handler.settings_menu();
+            }
+        };
+        settings.handler = this;
+        settings.parent = menuContainer;
+        settings.fillParentWidth();
+        settings.btnText = "SETTINGS";
 
-        UIButton levelEdit = new UIButton(50, 100, 200, 150) {
+        menuContainer.children.add(settings);
+
+        // Title Container
+        PImage b_image = loadImage("title.png");
+
+        UIContainer titleContainer = new UIContainer();
+        titleContainer.parent = this.root;
+        titleContainer.alignLeftToRightOf(menuContainer);
+        titleContainer.alignRightToRightOf(this.root);
+        titleContainer.alignTopToTopOf(this.root);
+        titleContainer.setImage(b_image);
+        titleContainer.fitHeightToImage();
+
+        this.root.children.add(titleContainer);
+    }
+
+    // The settings menu.
+    public void settings_menu() {
+        this.root.children.clear();
+        this.resetRoot();
+
+        UIButton levelEdit = new UIButton(50, 50, 200, 100) {
             protected void onClick() {
                 println("Start Game was pressed!");
-                this.handler.parent.currentLevel = new LevelEditor();
+                this.handler.game.currentLevel = new LevelEditor();
             }
         };
         levelEdit.handler = this;
@@ -43,25 +93,48 @@ class UIHandler {
         levelEdit.btnText = "LEVEL EDITOR";
         
         this.root.children.add(levelEdit);
-        
-        UIButton settings = new UIButton(50, 150, 200, 200) {
+
+        UIButton back = new UIButton(50, 100, 200, 150) {
             protected void onClick() {
-                println("Settings was pressed!");
-                this.handler.settings_menu();
+                this.handler.main_menu();
             }
         };
-        settings.handler = this;
-        settings.parent = this.root;
-        settings.btnText = "SETTINGS";
-
-        this.root.children.add(settings);
+        back.handler = this;
+        back.parent = this.root;
+        back.btnText = "BACK";
+        
+        this.root.children.add(back);
     }
 
-    // The settings menu.
-    public void settings_menu() {
+    public void choose_mode() {
         this.root.children.clear();
+        this.resetRoot();
 
-        UIButton back = new UIButton(50, 50, 200, 100) {
+        UIButton casual = new UIButton(50, 50, 200, 100) {
+            protected void onClick() {
+                println("Casual was pressed!");
+                this.handler.game.currentLevel = new Level();
+            }
+        };
+        casual.handler = this;
+        casual.parent = this.root;
+        casual.btnText = "CASUAL";
+
+        this.root.children.add(casual);
+
+        UIButton endless = new UIButton(50, 100, 200, 150) {
+            protected void onClick() {
+                println("Endless was pressed!");
+                this.handler.game.currentLevel = new Level();
+            }
+        };
+        endless.handler = this;
+        endless.parent = this.root;
+        endless.btnText = "ENDLESS";
+
+        this.root.children.add(endless);
+
+        UIButton back = new UIButton(50, 150, 200, 200) {
             protected void onClick() {
                 this.handler.main_menu();
             }

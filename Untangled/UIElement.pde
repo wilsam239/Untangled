@@ -9,6 +9,14 @@ abstract class UIElement {
 
     public String btnText = "";
 
+    public boolean hasImage = false;
+    public PImage bImage;
+
+    public void setImage(PImage image) {
+        this.bImage = image;
+        this.hasImage = true;
+    }
+
     // ----- ALIGNMENT -----
 
     public void alignTopToTopOf(UIElement e) {
@@ -55,6 +63,22 @@ abstract class UIElement {
         this.bottom = this.parent.bottom;
     }
 
+    // Keep the width fixed, but alter the height of this
+    // element so that the images aspect ratio is maintained.
+    public void fitHeightToImage() {
+        float ratio = (this.right - this.left) / this.bImage.width;
+        float adjustedHeight = this.bImage.height * ratio;
+        this.bottom = this.top + adjustedHeight;
+    }
+
+    // Keep the height fixed, but alter the width of this
+    // element so that the images aspect ratio is maintained.
+    public void fitWidthToImage() {
+        float ratio = (this.bottom - this.top) / this.bImage.height;
+        float adjustedWidth = this.bImage.width * ratio;
+        this.right = this.left + adjustedWidth;
+    }
+
     // Update, hover, and click.
 
     public void update() {
@@ -62,18 +86,26 @@ abstract class UIElement {
     }
 
     // Draw
-    private int debugRed = (int) random(255);
-    private int debugGreen = (int) random(255);
-    private int debugBlue = (int) random(255);
+    private int debugRed = (int) random(127);
+    private int debugGreen = (int) random(127);
+    private int debugBlue = (int) random(127);
     public void draw() {
+        // Draw the image.
+        if (this.hasImage) drawImage();
+
         // Draw the text.
         fill(0);
         textAlign(CENTER);
-        text(this.btnText, this.left + (this.right - this.left) / 2, this.top + (textAscent()) / 2 + (this.bottom - this.top) / 2);
+        textSize(14);
+        text(this.btnText, this.left + (this.right - this.left) / 2, this.top + 7 + (this.bottom - this.top) / 2);
         
         fill(0, 0);
         stroke(debugRed, debugGreen, debugBlue);
         rect(this.left, this.top, this.right - this.left, this.bottom - this.top);
+    }
+
+    public void drawImage() {
+        image(this.bImage, this.left, this.top, this.right - this.left, this.bottom - this.top);
     }
 
 }

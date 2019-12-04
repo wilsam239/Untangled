@@ -6,5 +6,5 @@ public static class Colours {
     
     public static final int edgeStroke = 0;
 
-    public static final int background = 225;
+    public static final int background = 255;
 }
