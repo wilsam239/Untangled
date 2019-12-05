@@ -58,4 +58,18 @@ abstract class LevelInterface {
             if(v.hovered()) v.clearHover();
         }
     }
+
+    public void moveVertex() {
+        for(Vertex v : vertices) {
+            if(v.selected()) {
+                for(Edge e : edges) {
+                    if(e.connectedTo(v)) {
+                        e.move(Mouse.x, Mouse.y, v);
+                    }
+                }
+                v.move(Mouse.x, Mouse.y);                
+                break;
+            }
+        }
+    }
 }

@@ -70,18 +70,7 @@ class LevelEditor extends LevelInterface {
                 this.selectedVertex = mousedVertex;
             }
         } else if (Mouse.buttons.hasValue(Mouse.LEFT)) {
-            for(Vertex v : vertices) {
-                if(v.selected()) {
-                    for(Edge e : edges) {
-                        if(e.connectedTo(v)) {
-                            e.move(Mouse.x, Mouse.y, v);
-                        }
-                    }
-                    v.move(Mouse.x, Mouse.y);
-                    
-                    break;
-                }
-            }
+            this.moveVertex();
         }
 
         if(Mouse.btnReleased.hasValue(Mouse.LEFT)) {
