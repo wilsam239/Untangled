@@ -31,4 +31,30 @@ class Edge {
         line(this.xPosStart, this.yPosStart, this.xPosEnd, this.yPosEnd);
     }
 
+    public Vertex getStart() {
+        return this.startVertex;
+    }
+
+    public Vertex getEnd() {
+        return this.endVertex;
+    }
+
+    public boolean connectedTo(Vertex v) {
+        return (this.startVertex == v || this.endVertex == v);
+    }
+
+    public void move(float xPos, float yPos, Vertex v) {
+        if(v == startVertex) {
+            this.xPosStart = xPos;
+            this.yPosStart = yPos;
+            v.move(xPos, yPos);
+        } else if(v == endVertex) {
+            this.xPosEnd = xPos;
+            this.yPosEnd = yPos;
+            v.move(xPos, yPos);
+        } else {
+            println("Error: No vertex match on that edge.");
+        }
+    }
+
 }
