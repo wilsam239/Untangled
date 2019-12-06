@@ -65,9 +65,9 @@ class LevelEditor extends LevelInterface {
             
             if(createVertex) {
                 this.addVertex(Mouse.x, Mouse.y);
-            } else {
+            } else if(!createVertex && mousedVertex > -1) {
                 this.vertices.get(mousedVertex).select();
-                this.selectedVertex = mousedVertex;
+                this.selectedVertex = mousedVertex;            
             }
         } else if (Mouse.buttons.hasValue(Mouse.LEFT)) {
             this.moveVertex();
