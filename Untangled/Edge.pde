@@ -5,6 +5,7 @@
 class Edge {
     Vertex startVertex, endVertex;
     float xPosStart, yPosStart, xPosEnd, yPosEnd;
+    public boolean intersecting = false;
 
     Edge() {
         this.startVertex = null;
@@ -27,7 +28,11 @@ class Edge {
     }
 
     public void draw() {
-        stroke(Colours.edgeStroke);
+        if (!this.intersecting) {
+            stroke(Colours.edgeStroke);
+        } else {
+            stroke(Colours.edgeStrokeIntersectingR, Colours.edgeStrokeIntersectingG, Colours.edgeStrokeIntersectingB);
+        }
         line(this.xPosStart, this.yPosStart, this.xPosEnd, this.yPosEnd);
     }
 
@@ -57,4 +62,7 @@ class Edge {
         }
     }
 
+    public boolean intersecting() {
+        return this.intersecting;
+    }
 }

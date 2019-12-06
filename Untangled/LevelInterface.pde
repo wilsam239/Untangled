@@ -42,6 +42,10 @@ abstract class LevelInterface {
         } else if (Mouse.buttons.hasValue(Mouse.LEFT)) {
             this.moveVertex();
         }
+
+        if(Mouse.btnReleased.hasValue(Mouse.LEFT)) {
+            this.clearSelection();
+        }
     }
     
     public int getVertexAtMouse(float xPos, float yPos) {
