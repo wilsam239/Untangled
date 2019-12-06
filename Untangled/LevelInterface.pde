@@ -17,6 +17,13 @@ abstract class LevelInterface {
             vertices.get(i).draw();
         }
 
+        for (Edge e1 : this.edges) {
+            for (Edge e2 : this.edges) {
+                if (e1 == e2) continue;
+                checkIntersection(e1, e2);
+            }
+        }
+
     }
 
     public void invalidMove() {
@@ -71,5 +78,31 @@ abstract class LevelInterface {
                 break;
             }
         }
+    }
+
+    public void checkIntersection(Edge e1, Edge e2) {
+
+        float x1 = e1.xPosStart;
+        float x2 = e1.xPosEnd;
+        float x3 = e2.xPosStart;
+        float x4 = e2.xPosEnd;
+
+        float y1 = e1.yPosStart;
+        float y2 = e1.yPosEnd;
+        float y3 = e2.yPosStart;
+        float y4 = e2.yPosEnd;
+
+        float uA = ((x4-x3)*(y1-y3) - (y4-y3)*(x1-x3)) / ((y4-y3)*(x2-x1) - (x4-x3)*(y2-y1));
+
+        float uB = ((x2-x1)*(y1-y3) - (y2-y1)*(x1-x3)) / ((y4-y3)*(x2-x1) - (x4-x3)*(y2-y1));
+
+        if (uA >= 0 && uA <= 1 && uB >= 0 && uB <= 1) {
+            float intersectionX = x1 + (uA * (x2-x1));
+            float intersectionY = y1 + (uA * (y2-y1));
+
+            fill(255, 0, 255);
+            rect(intersectionX, intersectionY, 5, 5);
+        }
+
     }
 }
