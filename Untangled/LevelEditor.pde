@@ -45,13 +45,8 @@ class LevelEditor extends LevelInterface {
 
     @Override
     public void update() {
-
-        int mousedVertex = this.getVertexAtMouse(Mouse.x, Mouse.y);
-        if(mousedVertex > -1) this.vertices.get(mousedVertex).hover();
-        else this.clearHover();
-
+        super.update();
         if(Mouse.btnPressed.hasValue(Mouse.LEFT)) {
-            this.clearSelection();
             boolean createVertex = true;
             for(Vertex v : vertices) {
                 if (Mouse.x > v.left() - Dimen.vertexDim/2
@@ -61,20 +56,11 @@ class LevelEditor extends LevelInterface {
                     println("Vertices will overlap! Not adding!");
                     createVertex = false;
                 }
-            }
-            
+            }            
             if(createVertex) {
                 this.addVertex(Mouse.x, Mouse.y);
-            } else if(!createVertex && mousedVertex > -1) {
-                this.vertices.get(mousedVertex).select();
-                this.selectedVertex = mousedVertex;            
+                this.clearSelection();
             }
-        } else if (Mouse.buttons.hasValue(Mouse.LEFT)) {
-            this.moveVertex();
-        }
-
-        if(Mouse.btnReleased.hasValue(Mouse.LEFT)) {
-            this.clearSelection();
         }
         
         if(Mouse.btnPressed.hasValue(Mouse.RIGHT)) {
