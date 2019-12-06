@@ -84,8 +84,9 @@ class UIHandler {
 
         UIButton levelEdit = new UIButton(50, 50, 200, 100) {
             protected void onClick() {
-                println("Start Game was pressed!");
+                println("Level Editor was pressed!");
                 this.handler.game.currentLevel = new LevelEditor();
+                this.handler.level_editor();
             }
         };
         levelEdit.handler = this;
@@ -97,6 +98,35 @@ class UIHandler {
         UIButton back = new UIButton(50, 100, 200, 150) {
             protected void onClick() {
                 this.handler.main_menu();
+            }
+        };
+        back.handler = this;
+        back.parent = this.root;
+        back.btnText = "BACK";
+        
+        this.root.children.add(back);
+    }
+
+    public void level_editor() {
+        this.root.children.clear();
+        this.resetRoot();
+
+        UIButton saveToFile = new UIButton(50, 50, 200, 100) {
+            protected void onClick() {
+                this.handler.game.levelIO.saveLevelToFile(this.handler.game.currentLevel);
+                this.handler.settings_menu();
+            }
+        };
+        saveToFile.handler = this;
+        saveToFile.parent = this.root;
+        saveToFile.btnText = "Save to file";
+        
+        this.root.children.add(saveToFile);
+
+        UIButton back = new UIButton(50, 150, 200, 200) {
+            protected void onClick() {
+                this.handler.game.currentLevel = null;
+                this.handler.settings_menu();
             }
         };
         back.handler = this;

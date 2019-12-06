@@ -4,10 +4,13 @@ class Game {
 
     public UIHandler uiHandler;
     public LevelInterface currentLevel;
+    public LevelIO levelIO;
 
     public Game(int width, int height) {
         this.width = width;
         this.height = height;
+
+        this.levelIO = new LevelIO();
 
         this.uiHandler = new UIHandler(this);
         this.uiHandler.main_menu();
