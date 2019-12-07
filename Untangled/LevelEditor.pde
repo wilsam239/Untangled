@@ -49,10 +49,7 @@ class LevelEditor extends LevelInterface {
         if(Mouse.btnPressed.hasValue(Mouse.LEFT)) {
             boolean createVertex = true;
             for(Vertex v : vertices) {
-                if (Mouse.x > v.left() - Dimen.vertexDim/2
-                && Mouse.x < v.right() + Dimen.vertexDim/2
-                && Mouse.y < v.bottom() + Dimen.vertexDim/2
-                && Mouse.y > v.top() - Dimen.vertexDim/2) {
+                if (dist(Mouse.x, Mouse.y, v.x(), v.y()) < Dimen.vertexRadius * 2) {
                     println("Vertices will overlap! Not adding!");
                     createVertex = false;
                 }

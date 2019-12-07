@@ -58,10 +58,7 @@ abstract class LevelInterface {
         int vertexIndex = -1;
         for(int i = 0; i < vertices.size(); i++) {
             Vertex v = vertices.get(i);
-            if (xPos > v.left()
-            && xPos < v.right()
-            && yPos < v.bottom()
-            && yPos > v.top()) {
+            if (dist(xPos, yPos, v.x(), v.y()) < Dimen.vertexRadius) {
                 vertexIndex = i;
                 break;
             }

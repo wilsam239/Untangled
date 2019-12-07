@@ -5,7 +5,6 @@
 
 class Vertex {
     private float xPos, yPos;
-    private float left, right, top, bottom;
     private int fillColour = Colours.vertexFill;
     private boolean selected = false;
     private boolean hovered = false;
@@ -22,20 +21,12 @@ class Vertex {
     Vertex(float x, float y, LevelInterface level) {
         this.xPos = x;
         this.yPos = y;
-        this.left = x - Dimen.vertexDim/2;
-        this.right = x + Dimen.vertexDim/2;
-        this.top = y - Dimen.vertexDim/2;
-        this.bottom =  y + Dimen.vertexDim/2;
 
         this.level = level;
     }
     
     public float x() { return this.xPos; }
     public float y() { return this.yPos; }
-    public float left() { return this.left; }
-    public float right() { return this.right; }
-    public float top() { return this.top; }
-    public float bottom() { return this.bottom; }
   
     public void draw() {
         // Draw the ellipse. Default ellipseMode is CENTER, so the x and y position is the center of the ellipse.
@@ -70,9 +61,5 @@ class Vertex {
     public void move(float xPos, float yPos) {
         this.xPos = xPos;
         this.yPos = yPos;
-        this.left = xPos - Dimen.vertexDim/2;
-        this.right = xPos + Dimen.vertexDim/2;
-        this.top = yPos - Dimen.vertexDim/2;
-        this.bottom = yPos + Dimen.vertexDim/2;
     }
 }
