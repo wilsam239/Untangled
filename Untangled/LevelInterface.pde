@@ -18,13 +18,6 @@ abstract class LevelInterface {
             vertices.get(i).draw();
         }
 
-        for (Edge e1 : this.edges) {
-            for (Edge e2 : this.edges) {
-                if (e1 == e2) continue;
-                checkIntersection(e1, e2);
-            }
-        }
-
     }
 
     public void invalidMove() {
@@ -52,6 +45,12 @@ abstract class LevelInterface {
 
         if(Mouse.btnReleased.hasValue(Mouse.LEFT)) {
             this.clearSelection();
+        }
+
+
+        // Edge Intersection
+        for (Edge e1 : this.edges) {
+            e1.setIntersecting(this.checkEdgeForIntersection(e1));
         }
     }
     
@@ -97,7 +96,20 @@ abstract class LevelInterface {
         }
     }
 
-    public void checkIntersection(Edge e1, Edge e2) {
+    // Check to see if the given line intersects with any other lines.
+    private boolean checkEdgeForIntersection(Edge e1) {
+    for (Edge e2 : this.edges) {
+            if (e1 == e2) continue;
+            if (e1.startVertex == e2.startVertex
+            || e1.startVertex == e2.endVertex
+            || e1.endVertex == e2.startVertex
+            || e1.endVertex == e2.endVertex) continue;
+            if (checkIntersection(e1, e2)) return true;
+        }
+        return false;
+    }
+
+    private boolean checkIntersection(Edge e1, Edge e2) {
 
         float x1 = e1.xPosStart;
         float x2 = e1.xPosEnd;
@@ -117,9 +129,9 @@ abstract class LevelInterface {
             float intersectionX = x1 + (uA * (x2-x1));
             float intersectionY = y1 + (uA * (y2-y1));
 
-            fill(255, 0, 255);
-            rect(intersectionX, intersectionY, 5, 5);
+            return true;
+        } else {
+            return false;
         }
-
     }
 }

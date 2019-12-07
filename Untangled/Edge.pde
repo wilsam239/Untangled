@@ -65,4 +65,8 @@ class Edge {
     public boolean intersecting() {
         return this.intersecting;
     }
+
+    public void setIntersecting(boolean i) {
+        this.intersecting = i;
+    }
 }
