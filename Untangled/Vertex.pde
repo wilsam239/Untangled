@@ -9,19 +9,25 @@ class Vertex {
     private int fillColour = Colours.vertexFill;
     private boolean selected = false;
     private boolean hovered = false;
+
+    private LevelInterface level;
     
     Vertex() {
         this.xPos = 0;
         this.yPos = 0;
+
+        this.level = null;
     };
     
-    Vertex(float x, float y) {
+    Vertex(float x, float y, LevelInterface level) {
         this.xPos = x;
         this.yPos = y;
         this.left = x - Dimen.vertexDim/2;
         this.right = x + Dimen.vertexDim/2;
         this.top = y - Dimen.vertexDim/2;
         this.bottom =  y + Dimen.vertexDim/2;
+
+        this.level = level;
     }
     
     public float x() { return this.xPos; }
