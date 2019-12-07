@@ -95,7 +95,23 @@ class UIHandler {
         
         this.root.children.add(levelEdit);
 
-        UIButton back = new UIButton(50, 100, 200, 150) {
+        UIContainer fullscreen_text = new UIContainer();
+        fullscreen_text.parent = this.root;
+        fullscreen_text.top = 100;
+        fullscreen_text.bottom = 150;
+        fullscreen_text.left = 0;
+        fullscreen_text.right = 150;
+        fullscreen_text.btnText = "Fullscreen";
+
+        this.root.children.add(fullscreen_text);
+
+        UICheckbox fullscreen_checkbox = new UICheckbox(150, 100, 50) {
+
+        };
+
+        this.root.children.add(fullscreen_checkbox);
+
+        UIButton back = new UIButton(50, 200, 200, 250) {
             protected void onClick() {
                 this.handler.main_menu();
             }
