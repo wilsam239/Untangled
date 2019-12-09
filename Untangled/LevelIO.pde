@@ -31,8 +31,31 @@ class LevelIO {
         this.output.close();
     }
 
-    public Level loadLevelFromFile() {
-        return null;
+    public Level loadLevelFromFile(String fileName) {
+        ArrayList<Vertex> vertices = new ArrayList();
+        ArrayList<Edge> edges = new ArrayList();
+
+        String[] lines = loadStrings(fileName);
+
+        for (int i = 0; i < lines.length; i++) {
+            String[] params = split(lines[i], " ");
+
+            switch (params[0]) {
+                case "v": {
+                    Vertex temp = new Vertex(float(params[1]), float(params[2]));
+                    vertices.add(temp);
+                    break;
+                }
+                case "e": {
+                    Edge temp = new Edge(vertices.get(int(params[1])), vertices.get(int(params[2])));
+                    edges.add(temp);
+                    break;
+                }
+            }
+        }
+
+        Level level = new Level(vertices, edges);
+        return level;
     }
 
 }

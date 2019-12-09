@@ -11,7 +11,7 @@ class UIHandler {
         resetRoot();
     }
 
-    private void resetRoot() {
+    public void resetRoot() {
         // Set the root to be the entire size of the screen.
         this.root = new UIContainer();
         this.root.top = 0;
@@ -141,7 +141,19 @@ class UIHandler {
         this.root.children.clear();
         this.resetRoot();
 
-        UIButton casual = new UIButton(50, 50, 200, 100) {
+        UIButton story = new UIButton(0, 50, 200, 100) {
+            protected void onClick() {
+                println("Story was pressed!");
+                this.handler.choose_level();
+            }
+        };
+        story.handler = this;
+        story.parent = this.root;
+        story.text = "Story";
+
+        this.root.children.add(story);
+
+        UIButton casual = new UIButton(0, 100, 200, 150) {
             protected void onClick() {
                 println("Casual was pressed!");
                 this.handler.game.currentLevel = new Level();
@@ -153,7 +165,7 @@ class UIHandler {
 
         this.root.children.add(casual);
 
-        UIButton endless = new UIButton(50, 100, 200, 150) {
+        UIButton endless = new UIButton(0, 150, 200, 200) {
             protected void onClick() {
                 println("Endless was pressed!");
                 this.handler.game.currentLevel = new Level();
@@ -165,7 +177,7 @@ class UIHandler {
 
         this.root.children.add(endless);
 
-        UIButton back = new UIButton(50, 150, 200, 200) {
+        UIButton back = new UIButton(0, 250, 200, 300) {
             protected void onClick() {
                 this.handler.main_menu();
             }
@@ -175,6 +187,59 @@ class UIHandler {
         back.text = "BACK";
         
         this.root.children.add(back);
+    }
+
+    // ----- LEVEL SELECTION -----
+
+    public void choose_level() {
+        this.root.children.clear();
+        this.resetRoot();
+
+        UIButton back = new UIButton(25, 25, 200, 125) {
+            protected void onClick() {
+                this.handler.main_menu();
+            }
+        };
+        back.handler = this;
+        back.parent = this.root;
+        back.text = "BACK";
+
+        this.root.children.add(back);
+
+        UIContainer level_one_container = new UIContainer();
+        level_one_container.parent = this.root;
+        level_one_container.fillParentWidth();
+        level_one_container.top = 150;
+        level_one_container.bottom = 350;
+
+        this.root.children.add(level_one_container);
+
+        UIContainer level_one_title = new UIContainer();
+        level_one_title.parent = level_one_container;
+        level_one_title.fillParentHeight();
+        level_one_title.left = 0;
+        level_one_title.right = 300;
+        PImage title_one = loadImage("level_one.png");
+        level_one_title.setImage(title_one);
+        level_one_container.children.add(level_one_title);
+
+        UIButton level_one_v_one_btn = new UIButton() {
+            protected void onClick() {
+                println("Loading Level 1-1");
+                Level level = this.handler.game.levelIO.loadLevelFromFile("levels/level_1_1.utg");
+                this.handler.game.currentLevel = level;
+                this.handler.resetRoot();
+            }
+        };
+        level_one_v_one_btn.handler = this;
+        level_one_v_one_btn.parent = level_one_container;
+        level_one_v_one_btn.top = 225;
+        level_one_v_one_btn.bottom = 275;
+        level_one_v_one_btn.left = 375;
+        level_one_v_one_btn.right = 425;
+        level_one_v_one_btn.text = "1";
+
+        level_one_container.children.add(level_one_v_one_btn);
     }
 
     public void update() {

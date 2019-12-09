@@ -9,7 +9,7 @@ class LevelEditor extends LevelInterface {
 
     void addVertex(float xPos, float yPos) {
         println("Adding a new vertex at x = " + xPos + " y = " + yPos);
-        vertices.add(new Vertex(xPos, yPos, this));        
+        vertices.add(new Vertex(xPos, yPos));        
     }
 
     void addEdge(int vertexIndexStart, int vertexIndexEnd) {
