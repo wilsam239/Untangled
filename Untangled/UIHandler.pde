@@ -276,6 +276,24 @@ class UIHandler {
         level_one_v_three_btn.text = "3";
 
         level_one_container.children.add(level_one_v_three_btn);
+
+        UIButton level_one_v_four_btn = new UIButton() {
+            protected void onClick() {
+                println("Loading Level 1-4");
+                Level level = this.handler.game.levelIO.loadLevelFromFile("levels/level_1_4.utg");
+                this.handler.game.currentLevel = level;
+                this.handler.resetRoot();
+            }
+        };
+        level_one_v_four_btn.handler = this;
+        level_one_v_four_btn.parent = level_one_container;
+        level_one_v_four_btn.top = 155;
+        level_one_v_four_btn.bottom = 205;
+        level_one_v_four_btn.left = 520;
+        level_one_v_four_btn.right = 570;
+        level_one_v_four_btn.text = "4";
+
+        level_one_container.children.add(level_one_v_four_btn);
     }
 
     public void update() {
