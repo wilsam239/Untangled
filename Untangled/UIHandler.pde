@@ -210,7 +210,7 @@ class UIHandler {
         level_one_container.parent = this.root;
         level_one_container.fillParentWidth();
         level_one_container.top = 150;
-        level_one_container.bottom = 350;
+        level_one_container.bottom = 210;
 
         this.root.children.add(level_one_container);
 
@@ -233,13 +233,49 @@ class UIHandler {
         };
         level_one_v_one_btn.handler = this;
         level_one_v_one_btn.parent = level_one_container;
-        level_one_v_one_btn.top = 225;
-        level_one_v_one_btn.bottom = 275;
-        level_one_v_one_btn.left = 375;
-        level_one_v_one_btn.right = 425;
+        level_one_v_one_btn.top = 155;
+        level_one_v_one_btn.bottom = 205;
+        level_one_v_one_btn.left = 355;
+        level_one_v_one_btn.right = 405;
         level_one_v_one_btn.text = "1";
 
         level_one_container.children.add(level_one_v_one_btn);
+
+        UIButton level_one_v_two_btn = new UIButton() {
+            protected void onClick() {
+                println("Loading Level 1-2");
+                Level level = this.handler.game.levelIO.loadLevelFromFile("levels/level_1_2.utg");
+                this.handler.game.currentLevel = level;
+                this.handler.resetRoot();
+            }
+        };
+        level_one_v_two_btn.handler = this;
+        level_one_v_two_btn.parent = level_one_container;
+        level_one_v_two_btn.top = 155;
+        level_one_v_two_btn.bottom = 205;
+        level_one_v_two_btn.left = 410;
+        level_one_v_two_btn.right = 460;
+        level_one_v_two_btn.text = "2";
+
+        level_one_container.children.add(level_one_v_two_btn);
+
+        UIButton level_one_v_three_btn = new UIButton() {
+            protected void onClick() {
+                println("Loading Level 1-3");
+                Level level = this.handler.game.levelIO.loadLevelFromFile("levels/level_1_3.utg");
+                this.handler.game.currentLevel = level;
+                this.handler.resetRoot();
+            }
+        };
+        level_one_v_three_btn.handler = this;
+        level_one_v_three_btn.parent = level_one_container;
+        level_one_v_three_btn.top = 155;
+        level_one_v_three_btn.bottom = 205;
+        level_one_v_three_btn.left = 465;
+        level_one_v_three_btn.right = 515;
+        level_one_v_three_btn.text = "3";
+
+        level_one_container.children.add(level_one_v_three_btn);
     }
 
     public void update() {
