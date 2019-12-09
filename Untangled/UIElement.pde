@@ -7,7 +7,7 @@ abstract class UIElement {
 
     public UIElement parent = null;
 
-    public String btnText = "";
+    public String text = "";
 
     public boolean hasImage = false;
     public PImage bImage;
@@ -97,7 +97,7 @@ abstract class UIElement {
         fill(0);
         textAlign(CENTER);
         textSize(14);
-        text(this.btnText, this.left + (this.right - this.left) / 2, this.top + 7 + (this.bottom - this.top) / 2);
+        text(this.text, this.left + (this.right - this.left) / 2, this.top + 7 + (this.bottom - this.top) / 2);
         
         fill(0, 0);
         stroke(debugRed, debugGreen, debugBlue);
