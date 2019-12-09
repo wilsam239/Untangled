@@ -26,42 +26,6 @@ class UIHandler {
         this.resetRoot();
         this.game.currentLevel = null;
 
-        // Menu Container
-        UIContainer menuContainer = new UIContainer();
-        menuContainer.parent = this.root;
-        menuContainer.fillParentHeight();
-        menuContainer.alignLeftToLeftOf(this.root);
-        menuContainer.right = 200;
-
-        this.root.children.add(menuContainer);
-        
-        // Start Game Button
-        UIButton startGame = new UIButton(50, 50, 200, 100) {
-            protected void onClick() {
-                println("Start Game was pressed!");
-                this.handler.choose_mode();
-            }
-        };
-        startGame.handler = this;
-        startGame.parent = menuContainer;
-        startGame.fillParentWidth();
-        startGame.text = "START GAME";
-        
-        menuContainer.children.add(startGame);
-
-        // Settings Button
-        UIButton settings = new UIButton(50, 100, 200, 150) {
-            protected void onClick() {
-                println("Settings was pressed!");
-                this.handler.settings_menu();
-            }
-        };
-        settings.handler = this;
-        settings.parent = menuContainer;
-        settings.fillParentWidth();
-        settings.text = "SETTINGS";
-
-        menuContainer.children.add(settings);
 
         // Title Container
         PImage b_image = loadImage("UntangledLogoPortrait_360.png");
@@ -76,6 +40,51 @@ class UIHandler {
         //titleContainer.fitHeightToImage();
 
         this.root.children.add(titleContainer);
+
+        // Menu Container
+        UIContainer menuContainer = new UIContainer();
+        menuContainer.parent = this.root;
+        //menuContainer.fillParentHeight();
+        menuContainer.left = width/2 - Dimen.menuWidth/2;
+        menuContainer.right = width/2 + Dimen.menuWidth/2;
+        menuContainer.alignTopToBottomOf(titleContainer);
+        menuContainer.alignBottomToBottomOf(this.root);
+
+        this.root.children.add(menuContainer);
+        
+        // Start Game Button
+        UIButton startGame = new UIButton(50, 50, 200, 100) {
+            protected void onClick() {
+                println("Start Game was pressed!");
+                this.handler.choose_mode();
+            }
+        };
+        startGame.handler = this;
+        startGame.parent = menuContainer;
+        startGame.alignTopToTopOf(menuContainer);
+        startGame.bottom = startGame.top+50;
+        startGame.fillParentWidth();
+        startGame.text = "START GAME";
+        
+        menuContainer.children.add(startGame);
+
+        // Settings Button
+        UIButton settings = new UIButton(50, 100, 200, 150) {
+            protected void onClick() {
+                println("Settings was pressed!");
+                this.handler.settings_menu();
+            }
+        };
+        settings.handler = this;
+        settings.parent = menuContainer;
+        settings.alignTopToBottomOf(startGame);
+        settings.bottom = settings.top+50;
+        settings.fillParentWidth();
+        settings.text = "SETTINGS";
+
+        menuContainer.children.add(settings);
+
+        
     }
 
     // The settings menu.
