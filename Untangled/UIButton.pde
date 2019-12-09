@@ -15,6 +15,7 @@ class UIButton extends UIElement {
     public void update() {
         if (hover() && click()) {
             onClick();
+            // Clear the buffers to prevent any other event happening behind the button. 
         }
 
         if (!hover() && Mouse.clickedButton == this) Mouse.clickedButton = null;
@@ -39,10 +40,12 @@ class UIButton extends UIElement {
     protected boolean click() {
         if (Mouse.btnReleased.hasValue(Mouse.LEFT) && Mouse.clickedButton == this) {
             Mouse.clickedButton = null;
+            Mouse.clearBuffers();
             return true;
         } else {
             if (Mouse.btnPressed.hasValue(Mouse.LEFT)) {
                 Mouse.clickedButton = this;
+                Mouse.clearBuffers();
             }
             return false;
         }
