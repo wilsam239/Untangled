@@ -20,7 +20,7 @@ class Edge {
         if (!this.intersecting) {
             stroke(Colours.edgeStroke);
         } else {
-            stroke(Colours.edgeStrokeIntersectingR, Colours.edgeStrokeIntersectingG, Colours.edgeStrokeIntersectingB);
+            stroke(Colours.edgeStrokeIntersecting.R, Colours.edgeStrokeIntersecting.G, Colours.edgeStrokeIntersecting.B);
         }
         line(this.startVertex.x(), this.startVertex.y(), this.endVertex.x(), this.endVertex.y());
     }
