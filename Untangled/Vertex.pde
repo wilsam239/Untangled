@@ -4,7 +4,7 @@
 */
 
 class Vertex {
-    private float xPos, yPos;
+    private PVector position;
     private int fillColour = Colours.vertexFill;
     private boolean selected = false;
     private boolean hovered = false;
@@ -12,21 +12,19 @@ class Vertex {
     private LevelInterface level;
     
     Vertex() {
-        this.xPos = 0;
-        this.yPos = 0;
+        this.position = new PVector(0, 0);
 
         this.level = null;
     };
     
     Vertex(float x, float y, LevelInterface level) {
-        this.xPos = x;
-        this.yPos = y;
+        this.position = new PVector(x, y);
 
         this.level = level;
     }
     
-    public float x() { return this.xPos; }
-    public float y() { return this.yPos; }
+    public float x() { return this.position.x; }
+    public float y() { return this.position.y; }
   
     public void draw() {
         // Draw the ellipse. Default ellipseMode is CENTER, so the x and y position is the center of the ellipse.
@@ -59,7 +57,7 @@ class Vertex {
     }
 
     public void move(float xPos, float yPos) {
-        this.xPos = xPos;
-        this.yPos = yPos;
+        this.position.x = xPos;
+        this.position.y = yPos;
     }
 }

@@ -23,7 +23,7 @@ class LevelIO {
             this.output.println("v " + v.x() + " " + v.y());
         }
         for(Edge e : level.edges) {
-            this.output.println("e " + e.xPosStart + " " + e.yPosStart + " " + e.xPosEnd + " " + e.yPosEnd);
+            this.output.println("e " + level.vertices.indexOf(e.getStart()) + " " + level.vertices.indexOf(e.getEnd()));
         }
 
         // Flush the output and close it.
