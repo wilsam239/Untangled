@@ -8,19 +8,13 @@ class Vertex {
     private int fillColour = Colours.vertexFill;
     private boolean selected = false;
     private boolean hovered = false;
-
-    private LevelInterface level;
     
     Vertex() {
         this.position = new PVector(0, 0);
-
-        this.level = null;
     };
     
-    Vertex(float x, float y, LevelInterface level) {
+    Vertex(float x, float y) {
         this.position = new PVector(x, y);
-
-        this.level = level;
     }
 
     Vertex(Vertex clone) {
