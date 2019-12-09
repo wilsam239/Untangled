@@ -4,6 +4,7 @@ abstract class UIElement {
     public float bottom = 100;
     public float left = 0;
     public float right = 100;
+    public Colour fill = null;
 
     public UIElement parent = null;
 
@@ -93,15 +94,20 @@ abstract class UIElement {
         // Draw the image.
         if (this.hasImage) drawImage();
 
+        
+        if(this.fill != null) {
+            fill(this.fill.R, this.fill.G, this.fill.B, this.fill.A);
+        } else {
+            fill(0,0);
+        }
+        stroke(debugRed, debugGreen, debugBlue);
+        rect(this.left, this.top, this.right - this.left, this.bottom - this.top);
+
         // Draw the text.
         fill(0);
         textAlign(CENTER);
         textSize(14);
         text(this.text, this.left + (this.right - this.left) / 2, this.top + 7 + (this.bottom - this.top) / 2);
-        
-        fill(0, 0);
-        stroke(debugRed, debugGreen, debugBlue);
-        rect(this.left, this.top, this.right - this.left, this.bottom - this.top);
     }
 
     public void drawImage() {

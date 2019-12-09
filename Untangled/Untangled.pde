@@ -10,12 +10,7 @@ public int rows;
 void setup() {
     size(1280,720);
     frameRate(Untangled.FRAMERATE);
-    backgroundImage = loadImage("GameBackground.jpg");
-    backgroundImage.resize(0,100);
-    cols = width/backgroundImage.width;
-    rows = height/backgroundImage.height;
-    if(width%backgroundImage.width> 0){cols++;}
-    if(height%backgroundImage.height > 0){rows++;}
+    backgroundImage = loadImage("GameBackground.png");
     noStroke();
     fill(102);
 
@@ -23,11 +18,8 @@ void setup() {
 }
 
 void draw() {
-    for (int y=0; y<rows; y++){
-        for (int x=0; x<cols; x++){
-          image(backgroundImage,x*backgroundImage.width,y*backgroundImage.height);
-        }
-      }
+
+    image(backgroundImage, 0, 0);
     //background(Colours.background);
     
     game.run();

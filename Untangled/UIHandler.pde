@@ -64,15 +64,16 @@ class UIHandler {
         menuContainer.children.add(settings);
 
         // Title Container
-        PImage b_image = loadImage("title.png");
+        PImage b_image = loadImage("UntangledLogoPortrait_360.png");
 
         UIContainer titleContainer = new UIContainer();
         titleContainer.parent = this.root;
-        titleContainer.alignLeftToRightOf(menuContainer);
-        titleContainer.alignRightToRightOf(this.root);
         titleContainer.alignTopToTopOf(this.root);
+        titleContainer.left = width/2 - b_image.width/2;
+        titleContainer.bottom = 360;
         titleContainer.setImage(b_image);
-        titleContainer.fitHeightToImage();
+        titleContainer.fitWidthToImage();
+        //titleContainer.fitHeightToImage();
 
         this.root.children.add(titleContainer);
     }

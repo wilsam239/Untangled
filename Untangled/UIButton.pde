@@ -9,6 +9,7 @@ class UIButton extends UIElement {
         this.bottom = bottom;
         this.left = left;
         this.right = right;
+        this.fill = new Colour(255);
     }
 
     @Override
