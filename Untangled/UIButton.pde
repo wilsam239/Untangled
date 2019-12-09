@@ -49,7 +49,7 @@ class UIButton extends UIElement {
     }
 
     protected void onClick() {
-        println("A BUTTON WAS PRESSED!!!!");
+        println("WARNING: UIButton.onClick() should be defined on a per-instance basis!");
     }
 
     @Override

@@ -3,28 +3,17 @@
 */
 
 class Edge {
-    Vertex startVertex, endVertex;
-    float xPosStart, yPosStart, xPosEnd, yPosEnd;
+    private Vertex startVertex, endVertex;
     public boolean intersecting = false;
 
     Edge() {
         this.startVertex = null;
         this.endVertex = null;
-        this.xPosStart = -1;
-        this.yPosStart = -1;
-        this.xPosEnd = -1;
-        this.yPosEnd = -1;
     }
 
     Edge(Vertex start, Vertex end) {
         this.startVertex = start;
         this.endVertex = end;
-
-        this.xPosStart = start.x();
-        this.yPosStart = start.y();
-
-        this.xPosEnd = end.x();
-        this.yPosEnd = end.y();
     }
 
     public void draw() {
@@ -33,7 +22,7 @@ class Edge {
         } else {
             stroke(Colours.edgeStrokeIntersecting.R, Colours.edgeStrokeIntersecting.G, Colours.edgeStrokeIntersecting.B);
         }
-        line(this.xPosStart, this.yPosStart, this.xPosEnd, this.yPosEnd);
+        line(this.startVertex.x(), this.startVertex.y(), this.endVertex.x(), this.endVertex.y());
     }
 
     public Vertex getStart() {
@@ -46,20 +35,6 @@ class Edge {
 
     public boolean connectedTo(Vertex v) {
         return (this.startVertex == v || this.endVertex == v);
-    }
-
-    public void move(float xPos, float yPos, Vertex v) {
-        if(v == startVertex) {
-            this.xPosStart = xPos;
-            this.yPosStart = yPos;
-            v.move(xPos, yPos);
-        } else if(v == endVertex) {
-            this.xPosEnd = xPos;
-            this.yPosEnd = yPos;
-            v.move(xPos, yPos);
-        } else {
-            println("Error: No vertex match on that edge.");
-        }
     }
 
     public boolean intersecting() {

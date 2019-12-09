@@ -95,11 +95,6 @@ abstract class LevelInterface {
     public void moveVertex() {
         for(Vertex v : vertices) {
             if(v.selected()) {
-                for(Edge e : edges) {
-                    if(e.connectedTo(v)) {
-                        e.move(Mouse.x, Mouse.y, v);
-                    }
-                }
                 v.move(Mouse.x, Mouse.y);                
                 break;
             }
@@ -121,15 +116,15 @@ abstract class LevelInterface {
 
     private boolean checkIntersection(Edge e1, Edge e2) {
 
-        float x1 = e1.xPosStart;
-        float x2 = e1.xPosEnd;
-        float x3 = e2.xPosStart;
-        float x4 = e2.xPosEnd;
+        float x1 = e1.getStart().x();
+        float x2 = e1.getEnd().x();
+        float x3 = e2.getStart().x();
+        float x4 = e2.getEnd().x();
 
-        float y1 = e1.yPosStart;
-        float y2 = e1.yPosEnd;
-        float y3 = e2.yPosStart;
-        float y4 = e2.yPosEnd;
+        float y1 = e1.getStart().y();
+        float y2 = e1.getEnd().y();
+        float y3 = e2.getStart().y();
+        float y4 = e2.getEnd().y();
 
         float uA = ((x4-x3)*(y1-y3) - (y4-y3)*(x1-x3)) / ((y4-y3)*(x2-x1) - (x4-x3)*(y2-y1));
 

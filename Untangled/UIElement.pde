@@ -77,7 +77,7 @@ abstract class UIElement {
         float ratio = (this.bottom - this.top) / this.bImage.height;
         float adjustedWidth = this.bImage.width * ratio;
         this.right = this.left + adjustedWidth;
-    }
+    } 
 
     // Update, hover, and click.
 
