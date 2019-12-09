@@ -45,7 +45,7 @@ class UIHandler {
         startGame.handler = this;
         startGame.parent = menuContainer;
         startGame.fillParentWidth();
-        startGame.btnText = "START GAME";
+        startGame.text = "START GAME";
         
         menuContainer.children.add(startGame);
 
@@ -59,7 +59,7 @@ class UIHandler {
         settings.handler = this;
         settings.parent = menuContainer;
         settings.fillParentWidth();
-        settings.btnText = "SETTINGS";
+        settings.text = "SETTINGS";
 
         menuContainer.children.add(settings);
 
@@ -91,7 +91,7 @@ class UIHandler {
         };
         levelEdit.handler = this;
         levelEdit.parent = this.root;
-        levelEdit.btnText = "LEVEL EDITOR";
+        levelEdit.text = "LEVEL EDITOR";
         
         this.root.children.add(levelEdit);
 
@@ -102,7 +102,7 @@ class UIHandler {
         };
         back.handler = this;
         back.parent = this.root;
-        back.btnText = "BACK";
+        back.text = "BACK";
         
         this.root.children.add(back);
     }
@@ -119,7 +119,7 @@ class UIHandler {
         };
         saveToFile.handler = this;
         saveToFile.parent = this.root;
-        saveToFile.btnText = "Save to file";
+        saveToFile.text = "Save to file";
         
         this.root.children.add(saveToFile);
 
@@ -131,7 +131,7 @@ class UIHandler {
         };
         back.handler = this;
         back.parent = this.root;
-        back.btnText = "BACK";
+        back.text = "BACK";
         
         this.root.children.add(back);
     }
@@ -148,7 +148,7 @@ class UIHandler {
         };
         casual.handler = this;
         casual.parent = this.root;
-        casual.btnText = "CASUAL";
+        casual.text = "CASUAL";
 
         this.root.children.add(casual);
 
@@ -160,7 +160,7 @@ class UIHandler {
         };
         endless.handler = this;
         endless.parent = this.root;
-        endless.btnText = "ENDLESS";
+        endless.text = "ENDLESS";
 
         this.root.children.add(endless);
 
@@ -171,7 +171,7 @@ class UIHandler {
         };
         back.handler = this;
         back.parent = this.root;
-        back.btnText = "BACK";
+        back.text = "BACK";
         
         this.root.children.add(back);
     }
