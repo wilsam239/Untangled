@@ -82,7 +82,7 @@ class UIHandler {
         this.root.children.clear();
         this.resetRoot();
 
-        UIButton levelEdit = new UIButton(50, 50, 200, 100) {
+        UIButton levelEdit = new UIButton(0, 50, 200, 100) {
             protected void onClick() {
                 println("Level Editor was pressed!");
                 this.handler.game.currentLevel = new LevelEditor();
@@ -94,22 +94,6 @@ class UIHandler {
         levelEdit.btnText = "LEVEL EDITOR";
         
         this.root.children.add(levelEdit);
-
-        UIContainer fullscreen_text = new UIContainer();
-        fullscreen_text.parent = this.root;
-        fullscreen_text.top = 100;
-        fullscreen_text.bottom = 150;
-        fullscreen_text.left = 0;
-        fullscreen_text.right = 150;
-        fullscreen_text.btnText = "Fullscreen";
-
-        this.root.children.add(fullscreen_text);
-
-        UICheckbox fullscreen_checkbox = new UICheckbox(150, 100, 50) {
-
-        };
-
-        this.root.children.add(fullscreen_checkbox);
 
         UIButton back = new UIButton(50, 200, 200, 250) {
             protected void onClick() {
