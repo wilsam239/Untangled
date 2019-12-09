@@ -26,7 +26,6 @@ class UIHandler {
         this.resetRoot();
         this.game.currentLevel = null;
 
-
         // Title Container
         PImage b_image = loadImage("UntangledLogoPortrait_360.png");
 
@@ -304,6 +303,24 @@ class UIHandler {
         level_one_v_four_btn.text = "4";
 
         level_one_container.children.add(level_one_v_four_btn);
+
+        UIButton level_one_v_five_btn = new UIButton() {
+            protected void onClick() {
+                println("Loading Level 1-5");
+                Level level = this.handler.game.levelIO.loadLevelFromFile("levels/level_1_5.utg");
+                this.handler.game.currentLevel = level;
+                this.handler.resetRoot();
+            }
+        };
+        level_one_v_five_btn.handler = this;
+        level_one_v_five_btn.parent = level_one_container;
+        level_one_v_five_btn.top = 155;
+        level_one_v_five_btn.bottom = 205;
+        level_one_v_five_btn.left = 575;
+        level_one_v_five_btn.right = 625;
+        level_one_v_five_btn.text = "5";
+
+        level_one_container.children.add(level_one_v_five_btn);
     }
 
     public void update() {
