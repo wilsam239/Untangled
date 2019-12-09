@@ -114,6 +114,7 @@ class UIHandler {
         UIButton saveToFile = new UIButton(50, 50, 200, 100) {
             protected void onClick() {
                 this.handler.game.levelIO.saveLevelToFile(this.handler.game.currentLevel);
+                this.handler.game.currentLevel = null;
                 this.handler.settings_menu();
             }
         };
