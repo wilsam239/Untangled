@@ -4,10 +4,18 @@ public static int FRAMERATE = 60;
 public static int WIDTH = 1280;
 public static int HEIGHT = 720;
 
+public PImage backgroundImage;
+public int cols;
+public int rows;
 void setup() {
     size(1280,720);
     frameRate(Untangled.FRAMERATE);
-    background(Colours.background);
+    backgroundImage = loadImage("GameBackground.jpg");
+    backgroundImage.resize(0,100);
+    cols = width/backgroundImage.width;
+    rows = height/backgroundImage.height;
+    if(width%backgroundImage.width> 0){cols++;}
+    if(height%backgroundImage.height > 0){rows++;}
     noStroke();
     fill(102);
 
@@ -15,7 +23,12 @@ void setup() {
 }
 
 void draw() {
-    background(Colours.background);
+    for (int y=0; y<rows; y++){
+        for (int x=0; x<cols; x++){
+          image(backgroundImage,x*backgroundImage.width,y*backgroundImage.height);
+        }
+      }
+    //background(Colours.background);
     
     game.run();
 

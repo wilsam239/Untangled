@@ -6,6 +6,7 @@ abstract class LevelInterface {
     public int mousedVertex = -1;
     private int movesMade = 0;
     public Vertex vertexMoving;
+    private boolean solved = false;
 
     public void draw() {
         if(counter > 0) {
@@ -65,6 +66,7 @@ abstract class LevelInterface {
         for (Edge e1 : this.edges) {
             e1.setIntersecting(this.checkEdgeForIntersection(e1));
         }
+        checkIfSolved();
     }
     
     public int getVertexAtMouse(float xPos, float yPos) {
@@ -103,7 +105,7 @@ abstract class LevelInterface {
 
     // Check to see if the given line intersects with any other lines.
     private boolean checkEdgeForIntersection(Edge e1) {
-    for (Edge e2 : this.edges) {
+        for (Edge e2 : this.edges) {
             if (e1 == e2) continue;
             if (e1.startVertex == e2.startVertex
             || e1.startVertex == e2.endVertex
@@ -138,5 +140,16 @@ abstract class LevelInterface {
         } else {
             return false;
         }
+    }
+
+    public void checkIfSolved() {
+        boolean solved = true;
+        for(Edge e: edges) {
+            if(checkEdgeForIntersection(e)) {
+                solved = false;
+                break;
+            }
+        }
+        solved = this.solved;
     }
 }
