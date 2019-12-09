@@ -4,6 +4,8 @@ abstract class LevelInterface {
     public int counter = 0;
     public int selectedVertex = -1;
     public int mousedVertex = -1;
+    private int movesMade = 0;
+    public Vertex vertexMoving;
 
     public void draw() {
         if(counter > 0) {
@@ -37,13 +39,24 @@ abstract class LevelInterface {
             this.clearSelection();
             if(this.mousedVertex > -1) {
                 this.vertices.get(this.mousedVertex).select();
-                this.selectedVertex = this.mousedVertex;            
+                this.selectedVertex = this.mousedVertex;
+                if(this.selectedVertex > -1) {
+                    this.vertexMoving = new Vertex(this.vertices.get(this.selectedVertex));
+                    println("The vertex to check has been set.");
+                }
             }
-        } else if (Mouse.buttons.hasValue(Mouse.LEFT)) {
+        } else if (Mouse.buttons.hasValue(Mouse.LEFT)) {            
             this.moveVertex();
         }
 
         if(Mouse.btnReleased.hasValue(Mouse.LEFT)) {
+            if(this.selectedVertex > -1) {
+                if(!this.vertexMoving.compare(this.vertices.get(this.selectedVertex))) {
+                    movesMade++;
+                    println("Move Count: ", movesMade);
+                    this.vertexMoving = null;
+                }
+            }           
             this.clearSelection();
         }
 

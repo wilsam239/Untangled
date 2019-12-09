@@ -24,10 +24,21 @@ class Vertex {
 
         this.level = level;
     }
+
+    Vertex(Vertex clone) {
+        this.xPos = clone.xPos;
+        this.yPos = clone.yPos;
+        this.selected = clone.selected;
+        this.hovered = clone.hovered;
+    }
     
     public float x() { return this.xPos; }
     public float y() { return this.yPos; }
-  
+
+    public boolean compare(Vertex other) {
+        return (this.xPos == other.xPos && this.yPos == other.yPos);
+    }
+    
     public void draw() {
         // Draw the ellipse. Default ellipseMode is CENTER, so the x and y position is the center of the ellipse.
         fill(this.fillColour);
