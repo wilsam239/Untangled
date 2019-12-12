@@ -14,79 +14,77 @@ class UIHandler {
     public void resetRoot() {
         // Set the root to be the entire size of the screen.
         this.root = new UIContainer();
-        this.root.top = 0;
-        this.root.bottom = game.height;
-        this.root.left = 0;
-        this.root.right = game.width;
+        root.setLocationAndSize(0, 0, this.game.width, this.game.height);
     }
 
     // The games main menu.
     public void main_menu() {
-        this.root.children.clear();
         this.resetRoot();
-        this.game.currentLevel = null;
 
-        // Title Container
-        PImage b_image = loadImage("UntangledLogoPortrait_360.png");
+        // Title Image Container
+        PImage titleImage = loadImage("UntangledLogoPortrait_360.png");
 
         UIContainer titleContainer = new UIContainer();
-        titleContainer.parent = this.root;
-        titleContainer.alignTopToTopOf(this.root);
-        titleContainer.left = width/2 - b_image.width/2;
-        titleContainer.bottom = 360;
-        titleContainer.setImage(b_image);
-        titleContainer.fitWidthToImage();
-        //titleContainer.fitHeightToImage();
+        this.root.addChild(titleContainer);
+        titleContainer.setImage(titleImage);
+        titleContainer.fitToImage();
+        titleContainer.alignTop();
+        titleContainer.alignCenterX();
 
-        this.root.children.add(titleContainer);
 
         // Menu Container
         UIContainer menuContainer = new UIContainer();
-        menuContainer.parent = this.root;
-        //menuContainer.fillParentHeight();
-        menuContainer.left = width/2 - Dimen.menuWidth/2;
-        menuContainer.right = width/2 + Dimen.menuWidth/2;
-        menuContainer.alignTopToBottomOf(titleContainer);
-        menuContainer.alignBottomToBottomOf(this.root);
-
-        this.root.children.add(menuContainer);
+        this.root.addChild(menuContainer);
+        menuContainer.setTop(titleContainer.bottom());
+        menuContainer.setBottom(this.root.bottom());
+        menuContainer.setWidth(500);
+        menuContainer.alignCenterX();
         
-        // Start Game Button
-        UIButton startGame = new UIButton(50, 50, 200, 100) {
+        // Story Game Button
+        UIButton startStory = new UIButton() {
             protected void onClick() {
-                println("Start Game was pressed!");
-                this.handler.choose_mode();
+                println("Casual Game was pressed!");
+                //this.handler.choose_mode();
             }
         };
-        startGame.handler = this;
-        startGame.parent = menuContainer;
-        startGame.alignTopToTopOf(menuContainer);
-        startGame.bottom = startGame.top+50;
-        startGame.fillParentWidth();
-        startGame.text = "START GAME";
-        
-        menuContainer.children.add(startGame);
+        menuContainer.addChild(startStory);
+        startStory.handler = this;
+        startStory.fillParentWidth();
+        startStory.setHeight(50);
+        startStory.alignTop();
+        startStory.setText("Story");
+
+        // Endless Game Button
+        UIButton startEndless = new UIButton() {
+            protected void onClick() {
+                println("Endless Game was pressed!");
+                //this.handler.choose_mode();
+            }
+        };
+        menuContainer.addChild(startEndless);
+        startEndless.handler = this;
+        startEndless.fillParentWidth();
+        startEndless.setHeight(50);
+        startEndless.alignTopTo(startStory.bottom());
+        startEndless.setText("Endless");
 
         // Settings Button
-        UIButton settings = new UIButton(50, 100, 200, 150) {
+        UIButton settings = new UIButton() {
             protected void onClick() {
                 println("Settings was pressed!");
-                this.handler.settings_menu();
+                //this.handler.settings_menu();
             }
         };
+        menuContainer.addChild(settings);
         settings.handler = this;
-        settings.parent = menuContainer;
-        settings.alignTopToBottomOf(startGame);
-        settings.bottom = settings.top+50;
         settings.fillParentWidth();
-        settings.text = "SETTINGS";
-
-        menuContainer.children.add(settings);
-
-        
+        settings.setHeight(50);
+        settings.alignTopTo(startEndless.bottom());
+        settings.setText("Settings");
     }
 
     // The settings menu.
+    /*
     public void settings_menu() {
         this.root.children.clear();
         this.resetRoot();
@@ -321,7 +319,7 @@ class UIHandler {
         level_one_v_five_btn.text = "5";
 
         level_one_container.children.add(level_one_v_five_btn);
-    }
+    }*/
 
     public void update() {
         this.root.update();

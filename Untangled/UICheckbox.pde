@@ -4,11 +4,8 @@ class UICheckbox extends UIButton {
 
     public UICheckbox() { }
 
-    public UICheckbox(float left, float top, float size) {
-        this.left = left;
-        this.top = top;
-        this.right = this.left + size;
-        this.bottom = this.top + size;
+    public UICheckbox(float x, float y, float size) {
+        this.setLocationAndSize(x, y, size, size);
     }
 
     @Override
@@ -33,7 +30,7 @@ class UICheckbox extends UIButton {
         else fill(255, 156, 156, 255 - this.hoverTimer);
 
         stroke(128, 128, 128);
-        rect(this.left, this.top, this.right - this.left, this.bottom - this.top);
+        rect(this.x(), this.y(), this.width(), this.height());
     }
 
 

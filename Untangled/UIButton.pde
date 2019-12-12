@@ -4,16 +4,18 @@ class UIButton extends UIElement {
 
     public UIButton() { }
 
-    public UIButton(float left, float top, float right, float bottom) {
-        this.top = top;
-        this.bottom = bottom;
-        this.left = left;
-        this.right = right;
-        this.fill = new Colour(255);
+    public UIButton(float x, float y, float width, float height) {
+        this.setLocationAndSize(x, y, width, height);
     }
 
     @Override
     public void update() {
+        super.update();
+
+        if (this.handler == null) {
+            println("WARNING: Button handler is not set!");
+        }
+
         if (hover() && click()) {
             onClick();
             // Clear the buffers to prevent any other event happening behind the button. 
@@ -26,15 +28,15 @@ class UIButton extends UIElement {
 
     protected boolean hover() {
         // Check if the mouse is within the bounds of the button.
-        if (Mouse.x > this.left
-        && Mouse.x < this.right
-        && Mouse.y > this.top
-        && Mouse.y < this.bottom) {
+        if (Mouse.x > this.left()
+        && Mouse.x < this.right()
+        && Mouse.y > this.top()
+        && Mouse.y < this.bottom()) {
             // Increment hover timer.
-            if (this.hoverTimer < 120)this.hoverTimer++;
+            if (this.hoverTimer < 256)this.hoverTimer += 8;
             return true;
         }
-        if (this.hoverTimer > 0) this.hoverTimer--;
+        if (this.hoverTimer > 0) this.hoverTimer -= 8;
         return false;
     }
 
@@ -58,9 +60,9 @@ class UIButton extends UIElement {
 
     @Override
     public void draw() {
+        fill(Colours.waterfall.R, Colours.waterfall.G, Colours.waterfall.B, this.hoverTimer);
+        rect(this.x(), this.y(), this.width(), this.height());
         super.draw();
-        fill(255, 0, 255, this.hoverTimer);
-        rect(this.left, this.top, this.right - this.left, this.bottom - this.top);
     }
 
 }

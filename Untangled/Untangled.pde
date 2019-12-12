@@ -4,6 +4,7 @@ public static int FRAMERATE = 60;
 public static int WIDTH = 1280;
 public static int HEIGHT = 720;
 
+
 public PImage backgroundImage;
 public int cols;
 public int rows;
@@ -11,6 +12,9 @@ void setup() {
     size(1280,720);
     frameRate(Untangled.FRAMERATE);
     backgroundImage = loadImage("GameBackground.png");
+
+    Resources.gentleTouch = createFont("AGentleTouch.ttf", 32);
+
     noStroke();
     fill(102);
 
