@@ -72,7 +72,7 @@ class UIHandler {
         UIButton settings = new UIButton() {
             protected void onClick() {
                 println("Settings was pressed!");
-                //this.handler.settings_menu();
+                this.handler.settings_menu();
             }
         };
         menuContainer.addChild(settings);
@@ -81,6 +81,55 @@ class UIHandler {
         settings.setHeight(50);
         settings.alignTopTo(startEndless.bottom());
         settings.setText("Settings");
+    }
+
+    public void settings_menu() {
+        this.resetRoot();
+
+        // Menu Container
+        UIContainer menuContainer = new UIContainer();
+        this.root.addChild(menuContainer);
+        menuContainer.fillParentHeight();
+        menuContainer.setWidth(500);
+        menuContainer.alignCenterX();
+
+        // The Settings title
+        UIContainer settingsTitle = new UIContainer();
+        menuContainer.addChild(settingsTitle);
+        settingsTitle.setHeight(100);
+        settingsTitle.fillParentWidth();
+        settingsTitle.alignTop();
+        settingsTitle.setText("Settings");
+        settingsTitle.setTextSize(64);
+
+        UIButton backBtn = new UIButton() {
+            protected void onClick() {
+                println("Back!");
+                this.handler.main_menu();
+            }
+        };
+        menuContainer.addChild(backBtn);
+        backBtn.handler = this;
+        backBtn.fillParentWidth();
+        backBtn.setHeight(50);
+        backBtn.alignTopTo(settingsTitle.bottom());
+        backBtn.setText("Back");
+
+        UIButton levelEditBtn = new UIButton() {
+            protected void onClick() {
+                println("Level Editor!");
+                this.handler.game.currentLevel = new LevelEditor();
+            }
+        };
+        menuContainer.addChild(levelEditBtn);
+        levelEditBtn.handler = this;
+        levelEditBtn.fillParentWidth();
+        levelEditBtn.setHeight(50);
+        levelEditBtn.alignTopTo(backBtn.bottom());
+        levelEditBtn.setText("Level Editor");
+
+
+
     }
 
     // The settings menu.
