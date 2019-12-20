@@ -10,7 +10,7 @@ class Game {
         this.width = width;
         this.height = height;
 
-        this.levelIO = new LevelIO();
+        this.levelIO = new LevelIO(this);
 
         this.uiHandler = new UIHandler(this);
         this.uiHandler.main_menu();

@@ -139,7 +139,7 @@ class UIHandler {
         level_1_1.setHeight(50);
         level_1_1.alignCenterY();
         level_1_1.alignLeftTo(level_1_level_container.left() + 5);
-        level_1_1.setText("1 - 1");
+        level_1_1.setText("1");
 
         // -- Level 1-2 --
         UIButton level_1_2 = new UIButton() {
@@ -156,7 +156,7 @@ class UIHandler {
         level_1_2.setHeight(50);
         level_1_2.alignCenterY();
         level_1_2.alignLeftTo(level_1_1.right() + 5);
-        level_1_2.setText("1 - 2");
+        level_1_2.setText("2");
 
 
         // -- Level 1-3 --
@@ -174,7 +174,7 @@ class UIHandler {
         level_1_3.setHeight(50);
         level_1_3.alignCenterY();
         level_1_3.alignLeftTo(level_1_2.right() + 5);
-        level_1_3.setText("1 - 3");
+        level_1_3.setText("3");
 
         // -- Level 1-4 --
         UIButton level_1_4 = new UIButton() {
@@ -191,7 +191,7 @@ class UIHandler {
         level_1_4.setHeight(50);
         level_1_4.alignCenterY();
         level_1_4.alignLeftTo(level_1_3.right() + 5);
-        level_1_4.setText("1 - 4");
+        level_1_4.setText("4");
 
         // -- Level 1-5 --
         UIButton level_1_5 = new UIButton() {
@@ -208,7 +208,78 @@ class UIHandler {
         level_1_5.setHeight(50);
         level_1_5.alignCenterY();
         level_1_5.alignLeftTo(level_1_4.right() + 5);
-        level_1_5.setText("1 - 5");
+        level_1_5.setText("5");
+
+        // -- Level 1-6 --
+        UIButton level_1_6 = new UIButton() {
+            protected void onClick() {
+                println("Loading Level 1-6");
+                //Level level = this.handler.game.levelIO.loadLevelFromFile("levels/level_1_5.utg");
+                //this.handler.game.currentLevel = level;
+                //this.handler.resetRoot();
+            }
+        };
+        level_1_level_container.addChild(level_1_6);
+        level_1_6.handler = this;
+        level_1_6.setWidth(50);
+        level_1_6.setHeight(50);
+        level_1_6.alignCenterY();
+        level_1_6.alignLeftTo(level_1_5.right() + 5);
+        level_1_6.setText("6");
+
+        // -- Level 1-7 --
+        UIButton level_1_7 = new UIButton() {
+            protected void onClick() {
+                println("Loading Level 1-7");
+                //Level level = this.handler.game.levelIO.loadLevelFromFile("levels/level_1_5.utg");
+                //this.handler.game.currentLevel = level;
+                //this.handler.resetRoot();
+            }
+        };
+        level_1_level_container.addChild(level_1_7);
+        level_1_7.handler = this;
+        level_1_7.setWidth(50);
+        level_1_7.setHeight(50);
+        level_1_7.alignCenterY();
+        level_1_7.alignLeftTo(level_1_6.right() + 5);
+        level_1_7.setText("7");
+
+        // -- Level 1-8 --
+        UIButton level_1_8 = new UIButton() {
+            protected void onClick() {
+                println("Loading Level 1-8");
+                //Level level = this.handler.game.levelIO.loadLevelFromFile("levels/level_1_8.utg");
+                //this.handler.game.currentLevel = level;
+                //this.handler.resetRoot();
+            }
+        };
+        level_1_level_container.addChild(level_1_8);
+        level_1_8.handler = this;
+        level_1_8.setWidth(50);
+        level_1_8.setHeight(50);
+        level_1_8.alignCenterY();
+        level_1_8.alignLeftTo(level_1_7.right() + 5);
+        level_1_8.setText("8");
+
+        // -- Level 1-9 --
+        UIButton level_1_9 = new UIButton() {
+            protected void onClick() {
+                println("Loading Level 1-9");
+                //Level level = this.handler.game.levelIO.loadLevelFromFile("levels/level_1_9.utg");
+                //this.handler.game.currentLevel = level;
+                //this.handler.resetRoot();
+            }
+        };
+        level_1_level_container.addChild(level_1_9);
+        level_1_9.handler = this;
+        level_1_9.setWidth(50);
+        level_1_9.setHeight(50);
+        level_1_9.alignCenterY();
+        level_1_9.alignLeftTo(level_1_8.right() + 5);
+        level_1_9.setText("9");
+
+
+        // --- Level 2 ---
 
     }
 

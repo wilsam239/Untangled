@@ -1,6 +1,7 @@
 class Level extends LevelInterface {
     // Random Level Constructor
-    Level() {
+    Level(Game game) {
+        this.game = game;
         // If no parameters, generate a new blank level
         for (int i = 0; i < 10; i++) {
             vertices.add(new Vertex(random(Dimen.vertexBuffer, Dimen.gameWidth - Dimen.vertexBuffer), random(Dimen.vertexBuffer,Dimen.gameHeight - Dimen.vertexBuffer)));
@@ -11,8 +12,9 @@ class Level extends LevelInterface {
     }
 
     // Loaded Level Constructor
-    Level(ArrayList<Vertex> vertices, ArrayList<Edge> edges) {
+    Level(ArrayList<Vertex> vertices, ArrayList<Edge> edges, Game game) {
         this.vertices = vertices;
         this.edges = edges;
+        this.game = game;
     }
 }

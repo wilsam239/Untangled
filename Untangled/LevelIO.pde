@@ -3,8 +3,11 @@ import java.util.UUID;
 class LevelIO {
 
     public PrintWriter output;
+    private Game game;
 
-    public LevelIO () { }
+    public LevelIO (Game game) {
+        this.game = game;
+    }
 
     public void saveLevelToFile(LevelInterface level) {
         println("No name was given, generating random name");
@@ -54,7 +57,7 @@ class LevelIO {
             }
         }
 
-        Level level = new Level(vertices, edges);
+        Level level = new Level(vertices, edges, this.game);
         return level;
     }
 

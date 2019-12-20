@@ -6,7 +6,7 @@ abstract class LevelInterface {
     public int mousedVertex = -1;
     private int movesMade = 0;
     public Vertex vertexMoving;
-    private boolean solved = false;
+    protected Game game;
 
     public void draw() {
         if(counter > 0) {
@@ -143,13 +143,10 @@ abstract class LevelInterface {
     }
 
     public void checkIfSolved() {
-        boolean solved = true;
         for(Edge e: edges) {
             if(checkEdgeForIntersection(e)) {
-                solved = false;
-                break;
+                return;
             }
         }
-        solved = this.solved;
     }
 }
