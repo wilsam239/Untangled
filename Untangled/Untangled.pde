@@ -32,10 +32,12 @@ void draw() {
 
     // Clear the current mouse presses so that they are only triggered for one frame.
     Mouse.clearBuffers();
+    Keyboard.clearBuffers();
 }
 
 void drawDebug() {
     fill(255, 0, 0);
+    textSize(10);
     for(int i = 0; i < Mouse.buttons.size(); i++) {
         text(Mouse.buttons.get(i), 100, 100 + 10 * i);
     }
@@ -44,6 +46,11 @@ void drawDebug() {
     }
     for(int i = 0; i < Mouse.btnReleased.size(); i++) {
         text(Mouse.btnReleased.get(i), 180, 100 + 10 * i);
+    }
+
+    // Keyboard
+    for(int i = 0; i < Keyboard.keys.size(); i++) {
+        text(Keyboard.keys.get(i), 200, 100 + 20 * i);
     }
     
 }
