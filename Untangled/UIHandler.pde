@@ -283,6 +283,32 @@ class UIHandler {
 
     }
 
+    public void level_completed() {
+        this.resetRoot();
+
+        UIContainer menuContainer = new UIContainer();
+        this.root.addChild(menuContainer);
+        menuContainer.fillParentHeight();
+        menuContainer.setWidth(menuContainer.height());
+        menuContainer.alignCenterX();
+        menuContainer.setFill(new Colour(128, 128, 182, 128));
+
+        UIButton backToMenu = new UIButton() {
+            protected void onClick() {
+                this.handler.main_menu();
+                this.handler.game.currentLevel = null;
+            }
+        };
+        menuContainer.addChild(backToMenu);
+        backToMenu.handler = this;
+        backToMenu.setHeight(100);
+        backToMenu.fillParentWidth();
+        backToMenu.alignBottom();
+        backToMenu.setText("Return To Menu");
+        backToMenu.setTextSize(32);
+
+    }
+
     public void settings_menu() {
         this.resetRoot();
 

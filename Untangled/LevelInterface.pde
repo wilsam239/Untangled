@@ -66,7 +66,6 @@ abstract class LevelInterface {
         for (Edge e1 : this.edges) {
             e1.setIntersecting(this.checkEdgeForIntersection(e1));
         }
-        checkIfSolved();
     }
     
     public int getVertexAtMouse(float xPos, float yPos) {
@@ -148,5 +147,6 @@ abstract class LevelInterface {
                 return;
             }
         }
+        this.game.uiHandler.level_completed();
     }
 }

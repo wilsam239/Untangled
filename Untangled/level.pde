@@ -17,4 +17,9 @@ class Level extends LevelInterface {
         this.edges = edges;
         this.game = game;
     }
+    
+    public void update() {
+        super.update();
+        if (Mouse.btnReleased.hasValue(Mouse.LEFT)) checkIfSolved();
+    }
 }
