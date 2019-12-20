@@ -7,4 +7,6 @@ public static class Dimen {
     public static final int vertexRadius = 25;
 
     public static final int menuWidth = 240;
+
+    public static final int headingTextSize = 64;
 }

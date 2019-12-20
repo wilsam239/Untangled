@@ -303,6 +303,7 @@ abstract class UIElement {
 
     private void drawFill() {
         fill(this.fill.R, this.fill.G, this.fill.B, this.fill.A);
+        rect(this.x(), this.y(), this.width(), this.height());
     }
 
     private void drawText() {

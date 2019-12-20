@@ -30,7 +30,7 @@ class UIHandler {
         titleContainer.fitToImage();
         titleContainer.alignTop();
         titleContainer.alignCenterX();
-
+ 
 
         // Menu Container
         UIContainer menuContainer = new UIContainer();
@@ -43,8 +43,8 @@ class UIHandler {
         // Story Game Button
         UIButton startStory = new UIButton() {
             protected void onClick() {
-                println("Casual Game was pressed!");
-                //this.handler.choose_mode();
+                println("Story Game was pressed!");
+                this.handler.story_menu();
             }
         };
         menuContainer.addChild(startStory);
@@ -58,7 +58,7 @@ class UIHandler {
         UIButton startEndless = new UIButton() {
             protected void onClick() {
                 println("Endless Game was pressed!");
-                //this.handler.choose_mode();
+                //this.handler.story_menu();
             }
         };
         menuContainer.addChild(startEndless);
@@ -83,6 +83,135 @@ class UIHandler {
         settings.setText("Settings");
     }
 
+    public void story_menu() {
+        this.resetRoot();
+
+        UIContainer menuContainer =  new UIContainer();
+        this.root.addChild(menuContainer);
+        menuContainer.fillParentHeight();
+        menuContainer.setWidth(500);
+        menuContainer.alignCenterX();
+
+        // Title
+        UIContainer storyTitle = new UIContainer();
+        menuContainer.addChild(storyTitle);
+        storyTitle.setHeight(100);
+        storyTitle.fillParentWidth();
+        storyTitle.alignTop();
+        storyTitle.setText("Story");
+        storyTitle.setTextSize(Dimen.headingTextSize);
+
+        // --- Level 1 ---
+        UIContainer level_1_container = new UIContainer();
+        this.root.addChild(level_1_container);
+        level_1_container.fillParentWidth();
+        level_1_container.setHeight(100);
+        level_1_container.alignTopTo(storyTitle.bottom());
+        level_1_container.setFill(new Colour(55, 55, 128, 32));
+        
+
+        UIContainer level_1_title = new UIContainer();
+        level_1_container.addChild(level_1_title);
+        level_1_title.fillParentWidth();
+        level_1_title.setHeight(40);
+        level_1_title.alignTop();
+        level_1_title.setText("Level 1");
+        level_1_title.setTextSize(32);
+        
+        UIContainer level_1_level_container = new UIContainer();
+        level_1_container.addChild(level_1_level_container);
+        level_1_level_container.fillParentWidth();
+        level_1_level_container.setHeight(60);
+        level_1_level_container.alignBottom();
+
+        // -- Level 1-1 --
+        UIButton level_1_1 = new UIButton() {
+            protected void onClick() {
+                println("Loading Level 1-1");
+                Level level = this.handler.game.levelIO.loadLevelFromFile("levels/level_1_1.utg");
+                this.handler.game.currentLevel = level;
+                this.handler.resetRoot();
+            }
+        };
+        level_1_level_container.addChild(level_1_1);
+        level_1_1.handler = this;
+        level_1_1.setWidth(50);
+        level_1_1.setHeight(50);
+        level_1_1.alignCenterY();
+        level_1_1.alignLeftTo(level_1_level_container.left() + 5);
+        level_1_1.setText("1 - 1");
+
+        // -- Level 1-2 --
+        UIButton level_1_2 = new UIButton() {
+            protected void onClick() {
+                println("Loading Level 1-2");
+                Level level = this.handler.game.levelIO.loadLevelFromFile("levels/level_1_2.utg");
+                this.handler.game.currentLevel = level;
+                this.handler.resetRoot();
+            }
+        };
+        level_1_level_container.addChild(level_1_2);
+        level_1_2.handler = this;
+        level_1_2.setWidth(50);
+        level_1_2.setHeight(50);
+        level_1_2.alignCenterY();
+        level_1_2.alignLeftTo(level_1_1.right() + 5);
+        level_1_2.setText("1 - 2");
+
+
+        // -- Level 1-3 --
+        UIButton level_1_3 = new UIButton() {
+            protected void onClick() {
+                println("Loading Level 1-3");
+                Level level = this.handler.game.levelIO.loadLevelFromFile("levels/level_1_3.utg");
+                this.handler.game.currentLevel = level;
+                this.handler.resetRoot();
+            }
+        };
+        level_1_level_container.addChild(level_1_3);
+        level_1_3.handler = this;
+        level_1_3.setWidth(50);
+        level_1_3.setHeight(50);
+        level_1_3.alignCenterY();
+        level_1_3.alignLeftTo(level_1_2.right() + 5);
+        level_1_3.setText("1 - 3");
+
+        // -- Level 1-4 --
+        UIButton level_1_4 = new UIButton() {
+            protected void onClick() {
+                println("Loading Level 1-4");
+                Level level = this.handler.game.levelIO.loadLevelFromFile("levels/level_1_4.utg");
+                this.handler.game.currentLevel = level;
+                this.handler.resetRoot();
+            }
+        };
+        level_1_level_container.addChild(level_1_4);
+        level_1_4.handler = this;
+        level_1_4.setWidth(50);
+        level_1_4.setHeight(50);
+        level_1_4.alignCenterY();
+        level_1_4.alignLeftTo(level_1_3.right() + 5);
+        level_1_4.setText("1 - 4");
+
+        // -- Level 1-5 --
+        UIButton level_1_5 = new UIButton() {
+            protected void onClick() {
+                println("Loading Level 1-5");
+                Level level = this.handler.game.levelIO.loadLevelFromFile("levels/level_1_5.utg");
+                this.handler.game.currentLevel = level;
+                this.handler.resetRoot();
+            }
+        };
+        level_1_level_container.addChild(level_1_5);
+        level_1_5.handler = this;
+        level_1_5.setWidth(50);
+        level_1_5.setHeight(50);
+        level_1_5.alignCenterY();
+        level_1_5.alignLeftTo(level_1_4.right() + 5);
+        level_1_5.setText("1 - 5");
+
+    }
+
     public void settings_menu() {
         this.resetRoot();
 
@@ -100,7 +229,7 @@ class UIHandler {
         settingsTitle.fillParentWidth();
         settingsTitle.alignTop();
         settingsTitle.setText("Settings");
-        settingsTitle.setTextSize(64);
+        settingsTitle.setTextSize(Dimen.headingTextSize);
 
         UIButton backBtn = new UIButton() {
             protected void onClick() {
@@ -131,6 +260,8 @@ class UIHandler {
 
 
     }
+
+
 
     // The settings menu.
     /*
