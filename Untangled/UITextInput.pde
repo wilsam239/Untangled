@@ -2,6 +2,7 @@ public class UITextInput extends UIButton {
 
     private boolean focused = false;
     private String input = "";
+    private String hintText = "enter text here";
 
     private int pipeTimer = 0;
 
@@ -15,7 +16,10 @@ public class UITextInput extends UIButton {
 
         if (!hover() && Mouse.btnPressed.hasValue(Mouse.LEFT)) this.focused = false;
 
+        if (this.input == "" && !this.focused) this.text = this.hintText;
+
         if (this.focused) {
+            pipeTimer++;
             if (Keyboard.keys.hasValue(Keyboard.ENTER)) this.submit();
             this.captureText();
             this.hoverTimer = 255;
@@ -24,7 +28,6 @@ public class UITextInput extends UIButton {
             return;
         }
 
-        pipeTimer++;
         if (pipeTimer < 60) {
             this.text = input + "|";
         } else if (pipeTimer < 120) {
@@ -67,6 +70,10 @@ public class UITextInput extends UIButton {
     public void submit() {
         this.submitted = true;
         this.onSubmit();
+    }
+
+    public void setHint(String hint) {
+        this.hintText = hint;
     }
 
     // Override this!

@@ -4,6 +4,8 @@ class UIButton extends UIElement {
 
     private boolean hovered = false;
 
+    public UITextInput linkedTextInput = null;
+
     public UIButton() { }
 
     public UIButton(float x, float y, float width, float height) {

@@ -13,6 +13,12 @@ abstract class UIElement {
     protected String text = null;
     private float textSize = 24;
 
+    // Padding for inner elements when fitting to children
+    private float paddingTop = 0;
+    private float paddingBottom = 0;
+    private float paddingLeft = 0;
+    private float paddingRight = 0;
+
     // The elements image
     private PImage bImage = null;
 
@@ -201,7 +207,7 @@ abstract class UIElement {
         float diff = oldPos - this.y();
 
         for (UIElement child : this.children) {
-            child.alignLeftTo(child.y() - diff);
+            child.alignTopTo(child.y() - diff);
         }
     }
 
@@ -236,8 +242,8 @@ abstract class UIElement {
             min.append(child.left());
             max.append(child.right());
         }
-        this.setLeft(min.min());
-        this.setRight(max.max());
+        this.setLeft(min.min() + this.paddingLeft);
+        this.setRight(max.max() + this.paddingRight);
     }
 
     public void fitToChildrenY() {
@@ -247,8 +253,8 @@ abstract class UIElement {
             min.append(child.top());
             max.append(child.bottom());
         }
-        this.setTop(min.min());
-        this.setBottom(max.max());
+        this.setTop(min.min() + this.paddingTop);
+        this.setBottom(max.max() + this.paddingBottom);
     }
 
     // Fitting to image
@@ -295,6 +301,22 @@ abstract class UIElement {
 
     public void setTextSize(float size) {
         this.textSize = size;
+    }
+
+    // Set padding
+
+    public void setPadding(float all) {
+        this.paddingTop = all;
+        this.paddingBottom = all;
+        this.paddingLeft = all;
+        this.paddingRight = all;
+    }
+
+    public void setPadding(float top, float right, float bottom, float left) {
+        this.paddingTop = top;
+        this.paddingBottom = bottom;
+        this.paddingLeft = left;
+        this.paddingRight = right;
     }
 
     // Update

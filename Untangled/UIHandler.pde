@@ -279,7 +279,6 @@ class UIHandler {
 
         level_1_level_container.fitToChildrenX();
         level_1_level_container.alignCenterWithChildrenX();
-        level_1_level_container.setFill(new Colour(255, 0, 255));
 
 
         // --- Level 2 ---
@@ -357,18 +356,9 @@ class UIHandler {
         levelEditBtn.setHeight(50);
         levelEditBtn.alignTopTo(backBtn.bottom());
         levelEditBtn.setText("Level Editor");
-
-        UITextInput testInput = new UITextInput() {
-            protected void onSubmit() {
-                println("Submitted: " + this.getInput());
-            }
-        };
-        menuContainer.addChild(testInput);
-        testInput.handler = this;
-        testInput.fillParentWidth();
-        testInput.setHeight(50);
-        testInput.alignTopTo(levelEditBtn.bottom());
     }
+
+    // ----- LEVEL EDITOR -----
 
     public void level_editor() {
         this.resetRoot();
@@ -385,9 +375,17 @@ class UIHandler {
         this.resetRoot();
         UIContainer menuContainer = new UIContainer();
         this.root.addChild(menuContainer);
-        menuContainer.fillParentHeight();
-        menuContainer.setWidth(500);
-        menuContainer.alignCenterX();
+
+        UIButton save = new UIButton() {
+            protected void onClick() {
+                this.handler.level_editor_esc_save();
+            }
+        };
+        menuContainer.addChild(save);
+        save.handler = this;
+        save.setWidth(500);
+        save.setHeight(50);
+        save.setText("Save");
 
         UIButton exit = new UIButton() {
             protected void onClick() {
@@ -397,10 +395,70 @@ class UIHandler {
         };
         menuContainer.addChild(exit);
         exit.handler = this;
-        exit.fillParentWidth();
+        exit.setWidth(500);
         exit.setHeight(50);
-        exit.alignCenter();
+        exit.alignTopTo(save.bottom());
         exit.setText("Exit");
+
+        menuContainer.fitToChildren();
+        menuContainer.alignCenterWithChildren();
+
+    }
+
+    public void level_editor_esc_save() {
+        this.resetRoot();
+
+        UIContainer menuContainer = new UIContainer();
+        this.root.addChild(menuContainer);
+        menuContainer.setWidth(500);
+        menuContainer.setPadding(10);
+
+        UITextInput levelName = new UITextInput() {
+            protected void onSubmit() {
+                println("Saving level to file.");
+                this.handler.game.levelIO.saveLevelToFile(this.handler.game.currentLevel, "levels/" + this.getInput() + ".utg");
+                this.handler.level_editor_esc();
+            }
+        };
+        menuContainer.addChild(levelName);
+        levelName.handler = this;
+        levelName.fillParentWidth();
+        levelName.setHeight(50);
+        levelName.setHint("enter level name");
+
+        UIButton cancel = new UIButton() {
+            protected void onClick() {
+                println("Canceled saving.");
+                this.handler.level_editor_esc();
+            }
+        };
+        menuContainer.addChild(cancel);
+        cancel.handler = this;
+        cancel.setWidth(menuContainer.width() / 2);
+        cancel.setHeight(50);
+        cancel.alignLeft();
+        cancel.alignTopTo(levelName.bottom());
+        cancel.setText("Cancel");
+
+        UIButton save = new UIButton() {
+            protected void onClick() {
+                println("Saving.");
+                this.linkedTextInput.submit();
+                this.handler.level_editor_esc();
+            }
+        };
+        menuContainer.addChild(save);
+        save.handler = this;
+        save.linkedTextInput = levelName;
+        save.setWidth(menuContainer.width() / 2);
+        save.setHeight(50);
+        save.alignLeftTo(cancel.right());
+        save.alignTopTo(levelName.bottom());
+        save.setText("Save");
+
+        menuContainer.fitToChildren();
+        menuContainer.alignCenterWithChildren();
+
     }
 
     public void update() {
