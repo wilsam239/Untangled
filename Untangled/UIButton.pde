@@ -2,6 +2,8 @@ class UIButton extends UIElement {
 
     public UIHandler handler;
 
+    private boolean hovered = false;
+
     public UIButton() { }
 
     public UIButton(float x, float y, float width, float height) {
@@ -32,12 +34,28 @@ class UIButton extends UIElement {
         && Mouse.x < this.right()
         && Mouse.y > this.top()
         && Mouse.y < this.bottom()) {
+            if (!this.hovered) this.entered();
+            this.hovered = true;
             // Increment hover timer.
             if (this.hoverTimer < 256)this.hoverTimer += 8;
             return true;
         }
+        if (this.hovered) this.exited();
+        this.hovered = false;
         if (this.hoverTimer > 0) this.hoverTimer -= 8;
         return false;
+    }
+
+    // When the mouse enters the buttons bounds.
+    protected void entered() {
+        println("MOUSE ENTERED!");
+        cursor(HAND);
+    }
+
+    // When the mouse exits the buttons bounds.
+    protected void exited() {
+        println("MOUSE EXITED!");
+        cursor(ARROW);
     }
 
     protected boolean click() {

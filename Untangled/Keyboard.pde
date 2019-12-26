@@ -1,7 +1,8 @@
 static class Keyboard {
     
-    public static final int LEFT = 37;
-    public static final int RIGHT = 39;
+    public static final int SHIFT = 16;
+    public static final int ENTER = 13;
+    public static final int DELETE = 8;
 
     public static IntList keys = new IntList();
 

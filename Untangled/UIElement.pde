@@ -10,7 +10,7 @@ abstract class UIElement {
     private Colour fill = null;
 
     // The elements text
-    private String text = null;
+    protected String text = null;
     private float textSize = 24;
 
     // The elements image

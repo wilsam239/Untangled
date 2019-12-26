@@ -354,7 +354,16 @@ class UIHandler {
         levelEditBtn.alignTopTo(backBtn.bottom());
         levelEditBtn.setText("Level Editor");
 
-
+        UITextInput testInput = new UITextInput() {
+            protected void onSubmit() {
+                println("Submitted: " + this.getInput());
+            }
+        };
+        menuContainer.addChild(testInput);
+        testInput.handler = this;
+        testInput.fillParentWidth();
+        testInput.setHeight(50);
+        testInput.alignTopTo(levelEditBtn.bottom());
 
     }
 
