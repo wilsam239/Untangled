@@ -32,6 +32,9 @@ abstract class LevelInterface {
     }
 
     public void update() {
+        // Check for 'esc' keypress
+        if (Keyboard.keys.hasValue(Keyboard.ESCAPE)) this.openEscMenu();
+
         this.mousedVertex = this.getVertexAtMouse(Mouse.x, Mouse.y);
         if(this.mousedVertex > -1) this.vertices.get(mousedVertex).hover();
         else this.clearHover();
@@ -66,8 +69,14 @@ abstract class LevelInterface {
         for (Edge e1 : this.edges) {
             e1.setIntersecting(this.checkEdgeForIntersection(e1));
         }
+
     }
     
+    // Open the escape menu for the level.
+    protected void openEscMenu() {
+        println("WARNING: LevelInterface.openEscMenu() should be overriden!");
+    }
+
     public int getVertexAtMouse(float xPos, float yPos) {
         int vertexIndex = -1;
         for(int i = 0; i < vertices.size(); i++) {

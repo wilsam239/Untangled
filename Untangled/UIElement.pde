@@ -180,6 +180,31 @@ abstract class UIElement {
         this.setY(this.parent.centerY() - (this.height() / 2));
     }
 
+    public void alignCenterWithChildren() {
+        alignCenterWithChildrenX();
+        alignCenterWithChildrenY();
+    }
+
+    public void alignCenterWithChildrenX() {
+        float oldPos = this.x();
+        alignCenterX();
+        float diff = oldPos - this.x();
+
+        for (UIElement child : this.children) {
+            child.alignLeftTo(child.x() - diff);
+        }
+    }
+
+    public void alignCenterWithChildrenY() {
+        float oldPos = this.y();
+        alignCenterY();
+        float diff = oldPos - this.y();
+
+        for (UIElement child : this.children) {
+            child.alignLeftTo(child.y() - diff);
+        }
+    }
+
     // Fill parent
 
     public void fillParent() {

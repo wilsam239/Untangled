@@ -2,7 +2,8 @@ class LevelEditor extends LevelInterface {
 
     private int edgeStartIndex;
     private int edgeEndIndex;
-    LevelEditor() {
+    LevelEditor(Game game) {
+        this.game = game;
         edgeStartIndex = -1;
         edgeEndIndex = -1;
     }
@@ -78,5 +79,10 @@ class LevelEditor extends LevelInterface {
                 this.addEdge(edgeStartIndex, edgeEndIndex);
             }
         }
+    }
+
+    @Override
+    protected void openEscMenu() {
+        this.game.uiHandler.level_editor_esc();
     }
 }
