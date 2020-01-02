@@ -285,6 +285,8 @@ class UIHandler {
 
     }
 
+    // ----- Story Mode -----
+
     public void level_completed() {
         this.resetRoot();
 
@@ -308,6 +310,41 @@ class UIHandler {
         backToMenu.alignBottom();
         backToMenu.setText("Return To Menu");
         backToMenu.setTextSize(32);
+    }
+
+    public void story_esc() {
+        this.resetRoot();
+
+        UIContainer menuContainer = new UIContainer();
+        this.root.addChild(menuContainer);
+
+        UIButton resetLevel = new UIButton() {
+            protected void onClick() {
+                ((Level) this.handler.game.currentLevel).reset();
+                this.handler.resetRoot();
+            }
+        };
+        menuContainer.addChild(resetLevel);
+        resetLevel.handler = this;
+        resetLevel.setWidth(500);
+        resetLevel.setHeight(50);
+        resetLevel.setText("Reset Level");
+
+        UIButton exit = new UIButton() {
+            protected void onClick() {
+                this.handler.game.currentLevel = null;
+                this.handler.story_menu();
+            }
+        };
+        menuContainer.addChild(exit);
+        exit.handler = this;
+        exit.setWidth(500);
+        exit.setHeight(50);
+        exit.alignTopTo(resetLevel.bottom());
+        exit.setText("Exit");
+
+        menuContainer.fitToChildren();
+        menuContainer.alignCenterWithChildren();
 
     }
 

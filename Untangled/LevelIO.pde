@@ -57,7 +57,7 @@ class LevelIO {
             }
         }
 
-        Level level = new Level(vertices, edges, this.game);
+        Level level = new Level(vertices, edges, this.game, fileName);
         return level;
     }
 
