@@ -6,11 +6,16 @@ public static int HEIGHT = 720;
 
 
 public PImage backgroundImage;
+PImage icon;
 public int cols;
 public int rows;
 void setup() {
     size(1280,720);
     frameRate(Untangled.FRAMERATE);
+
+    icon = loadImage("icon.png");
+    surface.setIcon(icon);
+
     backgroundImage = loadImage("GameBackground.png");
 
     Resources.gentleTouch = createFont("AGentleTouch.ttf", 32);
