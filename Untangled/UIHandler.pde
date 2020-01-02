@@ -213,9 +213,9 @@ class UIHandler {
         UIButton level_1_6 = new UIButton() {
             protected void onClick() {
                 println("Loading Level 1-6");
-                //Level level = this.handler.game.levelIO.loadLevelFromFile("levels/level_1_5.utg");
-                //this.handler.game.currentLevel = level;
-                //this.handler.resetRoot();
+                Level level = this.handler.game.levelIO.loadLevelFromFile("levels/level_1_6.utg");
+                this.handler.game.currentLevel = level;
+                this.handler.resetRoot();
             }
         };
         level_1_level_container.addChild(level_1_6);
