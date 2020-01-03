@@ -55,9 +55,10 @@ public class UITextInput extends UIButton {
         boolean shift = Keyboard.keys.hasValue(Keyboard.SHIFT);
 
         for (int i : Keyboard.keyPressed) {
-            if (i < 65 || i > 90) continue;
             String c = str(char(i));
             if (!shift) c = c.toLowerCase();
+            if (!Resources.validCharacters.contains(c)) return;
+            println("Entered: " + c);
             this.input += c;
         }
     }
