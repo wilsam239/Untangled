@@ -26,6 +26,15 @@ public class LevelRandom extends LevelInterface {
             counter++;
         }
 
+        // Position the vertices in a circle.
+
+        // Add edges to the vertices.
+        counter = 0;
+    }
+
+    // Position all the vertices into a circle.
+    private void makeCircle() {
+        
     }
 
 }
