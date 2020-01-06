@@ -32,6 +32,7 @@ abstract class LevelInterface {
     }
 
     public void update() {
+        stroke(Colours.thundercloud.R, Colours.thundercloud.G, Colours.thundercloud.B);
         fill(Colours.crossbones.R, Colours.crossbones.G, Colours.crossbones.B, Colours.crossbones.A);
         rect(Dimen.gameAreaStart, Dimen.gameAreaStart, Dimen.gameWidth - 2 * Dimen.gameAreaStart, Dimen.gameHeight - 2 * Dimen.gameAreaStart);
         // Check for 'esc' keypress
