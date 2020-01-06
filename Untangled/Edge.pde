@@ -44,4 +44,38 @@ class Edge {
     public void setIntersecting(boolean i) {
         this.intersecting = i;
     }
+
+    // Returns true if this edge intersects the given edge.
+    public boolean intersects(Edge e) {
+        float x1 = this.getStart().x();
+        float x2 = this.getEnd().x();
+        float x3 = e.getStart().x();
+        float x4 = e.getEnd().x();
+
+        float y1 = this.getStart().y();
+        float y2 = this.getEnd().y();
+        float y3 = e.getStart().y();
+        float y4 = e.getEnd().y();
+
+        float uA = ((x4-x3)*(y1-y3) - (y4-y3)*(x1-x3)) / ((y4-y3)*(x2-x1) - (x4-x3)*(y2-y1));
+
+        float uB = ((x2-x1)*(y1-y3) - (y2-y1)*(x1-x3)) / ((y4-y3)*(x2-x1) - (x4-x3)*(y2-y1));
+
+        // The lines intersect if both uA & uB are within 0-1
+        if (uA >= 0 && uA <= 1 && uB >= 0 && uB <= 1) {
+            //float intersectionX = x1 + (uA * (x2-x1));
+            //float intersectionY = y1 + (uA * (y2-y1));
+
+            return true;
+        }
+        return false;
+    }
+
+    // Returns true if this edge intersects any of the given edges.
+    public boolean intersectsAny(ArrayList<Edge> edges) {
+        for (Edge e : edges) {
+            if (this.intersects(e)) return true;
+        }
+        return false;
+    }
 }
