@@ -153,6 +153,16 @@ abstract class LevelInterface {
         }
     }
 
+    // Returns true if there are no collisions in the level.
+    protected boolean isSolved() {
+        for(Edge e: edges) {
+            if(checkEdgeForIntersection(e)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public void checkIfSolved() {
         for(Edge e: edges) {
             if(checkEdgeForIntersection(e)) {

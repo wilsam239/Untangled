@@ -29,7 +29,9 @@ public class LevelRandom extends LevelInterface {
 
         this.makeCircle();
         this.placeEdges();
-        this.randomisePlacement();
+
+        counter = 0;
+        while (this.isSolved()) this.randomisePlacement();
     }
 
     // Position all the vertices into a circle.
@@ -58,13 +60,20 @@ public class LevelRandom extends LevelInterface {
         int minCount = this.vertices.size() - 1;
         int counter = 0;
 
+        // Link each vertex to at least one other vertex.
+        for (Vertex v : this.vertices) {
+            Edge e = null;
+
+            while (e == null) e = this.attemptEdgeGivenParent(v);
+
+            this.edges.add(e);
+        }
+
         while ( this.edges.size() < minCount || random(100) > 5) {
             
             Edge e = attemptEdge();
 
             if (e == null) continue;
-            
-            println("Added Edge");
 
             this.edges.add(e);
             
@@ -78,9 +87,16 @@ public class LevelRandom extends LevelInterface {
     private Edge attemptEdge() {
         // Get the number of vertices in the level.
         int vertexCount = this.vertices.size();
-
         // Get a random start vertex.
         Vertex parent1 = this.vertices.get(int(random(vertexCount)));
+        return attemptEdgeGivenParent(parent1);
+    }
+
+    // Attempt to create a new edge with a given parent1
+    private Edge attemptEdgeGivenParent(Vertex parent1) {
+        // Get the number of vertices in the level.
+        int vertexCount = this.vertices.size();
+
         Vertex parent2 = parent1;
         // Ensure the end vertex is not the same as the start vertex.
         while (parent2 == parent1) {
