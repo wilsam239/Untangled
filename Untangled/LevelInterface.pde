@@ -32,6 +32,7 @@ abstract class LevelInterface {
     }
 
     public void update() {
+        stroke(Colours.thundercloud.R, Colours.thundercloud.G, Colours.thundercloud.B);
         fill(Colours.crossbones.R, Colours.crossbones.G, Colours.crossbones.B, Colours.crossbones.A);
         rect(Dimen.gameAreaStart, Dimen.gameAreaStart, Dimen.gameWidth - 2 * Dimen.gameAreaStart, Dimen.gameHeight - 2 * Dimen.gameAreaStart);
         // Check for 'esc' keypress
@@ -107,10 +108,7 @@ abstract class LevelInterface {
     public void moveVertex() {
         for(Vertex v : vertices) {
             if(v.selected()) {
-                if(Mouse.x >= Dimen.gameBuffer && Mouse.x <= Dimen.gameWidth - Dimen.gameBuffer
-                  && Mouse.y >= Dimen.gameBuffer && Mouse.y <= Dimen.gameHeight - Dimen.gameBuffer) {
-                    v.move(Mouse.x, Mouse.y);
-                  }               
+                v.move(Mouse.x, Mouse.y);             
                 break;
             }
         }

@@ -4,17 +4,17 @@
 */
 
 class Vertex {
-    private PVector position;
+    private PVector position = new PVector(0, 0);
     private int fillColour = Colours.vertexFill;
     private boolean selected = false;
     private boolean hovered = false;
     
     Vertex() {
-        this.position = new PVector(0, 0);
+        // Default constructor
     };
     
     Vertex(float x, float y) {
-        this.position = new PVector(x, y);
+        this.move(x, y);
     }
 
     Vertex(Vertex clone) {
@@ -62,7 +62,20 @@ class Vertex {
     }
 
     public void move(float xPos, float yPos) {
-        this.position.x = xPos;
-        this.position.y = yPos;
+        if(xPos < Dimen.gameBuffer) {
+            this.position.x = Dimen.gameBuffer;
+        } else if(xPos > Dimen.gameWidth - Dimen.gameBuffer) {
+            this.position.x = Dimen.gameWidth - Dimen.gameBuffer;
+        } else {
+            this.position.x = xPos;
+        }
+
+        if(yPos < Dimen.gameBuffer) {
+            this.position.y = Dimen.gameBuffer;
+        } else if(yPos > Dimen.gameHeight - Dimen.gameBuffer) {
+            this.position.y = Dimen.gameHeight - Dimen.gameBuffer;
+        } else {
+            this.position.y = yPos;
+        }
     }
 }
