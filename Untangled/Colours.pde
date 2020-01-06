@@ -11,5 +11,7 @@ public static class Colours {
     public static final Colour thundercloud = new Colour(81, 85, 90);
     public static final Colour waterfall = new Colour(229, 243, 246);
 
+    public static final Colour crossbones = new Colour(255, 255, 255);
+
     public static final int background = 255;
 }
