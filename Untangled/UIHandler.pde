@@ -58,7 +58,8 @@ class UIHandler {
         UIButton startEndless = new UIButton() {
             protected void onClick() {
                 println("Endless Game was pressed!");
-                //this.handler.story_menu();
+                this.handler.resetRoot();
+                this.handler.game.currentLevel = new LevelRandom(this.handler.game, 10);
             }
         };
         menuContainer.addChild(startEndless);
