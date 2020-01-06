@@ -108,10 +108,7 @@ abstract class LevelInterface {
     public void moveVertex() {
         for(Vertex v : vertices) {
             if(v.selected()) {
-                if(Mouse.x >= Dimen.gameBuffer && Mouse.x <= Dimen.gameWidth - Dimen.gameBuffer
-                  && Mouse.y >= Dimen.gameBuffer && Mouse.y <= Dimen.gameHeight - Dimen.gameBuffer) {
-                    v.move(Mouse.x, Mouse.y);
-                  }               
+                v.move(Mouse.x, Mouse.y);             
                 break;
             }
         }
