@@ -15,10 +15,8 @@ public class LevelRandom extends LevelInterface {
         int counter = 0;
 
         // Add new vertices.
-        while (random(100) > 5 && counter < difficulty) {
-            //float vertexX = random(Dimen.vertexBuffer, Dimen.gameWidth - Dimen.vertexBuffer);
-            //float vertexY = random(Dimen.vertexBuffer, Dimen.gameHeight - Dimen.vertexBuffer);
-
+        while ((random(100) > 5 && counter < difficulty) || counter < difficulty / 2) {
+            
             this.vertices.add(new Vertex());
 
             counter++;
@@ -31,6 +29,7 @@ public class LevelRandom extends LevelInterface {
 
         this.makeCircle();
         this.placeEdges();
+        this.randomisePlacement();
     }
 
     // Position all the vertices into a circle.
@@ -55,21 +54,60 @@ public class LevelRandom extends LevelInterface {
 
     // Places edges on to the levels vertices.
     private void placeEdges() {
-        // Get the number of vertices in the level.
-        int vertexCount = this.vertices.size();
         // The minimum number of edges required to connect all vertices.
         int minCount = this.vertices.size() - 1;
         int counter = 0;
 
-        while (random(100) > 5 || counter < minCount) {
-            this.edges.add(new Edge(vertices.get(int(random(vertexCount))), this.vertices.get(int(random(vertexCount)))));
+        while ( this.edges.size() < minCount || random(100) > 5) {
+            
+            Edge e = attemptEdge();
+
+            if (e == null) continue;
+            
+            println("Added Edge");
+
+            this.edges.add(e);
             
             counter++;
         }
     }
 
-    private void attemptPlaceEdge() {
+    // Attempt to create a new Edge
+    // If the edge intersects or is a duplicate it returns false,
+    // else success.
+    private Edge attemptEdge() {
+        // Get the number of vertices in the level.
+        int vertexCount = this.vertices.size();
 
+        // Get a random start vertex.
+        Vertex parent1 = this.vertices.get(int(random(vertexCount)));
+        Vertex parent2 = parent1;
+        // Ensure the end vertex is not the same as the start vertex.
+        while (parent2 == parent1) {
+            parent2 = this.vertices.get(int(random(vertexCount)));
+        }
+
+        // Create the new edge.
+        Edge e = new Edge(parent1, parent2);
+
+        if (e.intersectsAny(this.edges)) return null;
+        if (e.isDuplicateOfAny(this.edges)) return null;
+        return e;
+    }
+
+    // Randomise the placement of each vertex.
+    private void randomisePlacement() {
+        for (Vertex v : this.vertices) {
+            float vertexX = random(Dimen.vertexBuffer, Dimen.gameWidth - Dimen.vertexBuffer);
+            float vertexY = random(Dimen.vertexBuffer, Dimen.gameHeight - Dimen.vertexBuffer);
+
+            v.move(vertexX, vertexY);
+        }
+    }
+
+    @Override
+    protected void openEscMenu() {
+        this.game.currentLevel = new LevelRandom(this.game, 10);
     }
 
 }

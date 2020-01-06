@@ -35,7 +35,7 @@ abstract class LevelInterface {
         fill(Colours.crossbones.R, Colours.crossbones.G, Colours.crossbones.B, Colours.crossbones.A);
         rect(Dimen.gameAreaStart, Dimen.gameAreaStart, Dimen.gameWidth - 2 * Dimen.gameAreaStart, Dimen.gameHeight - 2 * Dimen.gameAreaStart);
         // Check for 'esc' keypress
-        if (Keyboard.keys.hasValue(Keyboard.ESCAPE)) this.openEscMenu();
+        if (Keyboard.keyPressed.hasValue(Keyboard.ESCAPE)) this.openEscMenu();
 
         this.mousedVertex = this.getVertexAtMouse(Mouse.x, Mouse.y);
         if(this.mousedVertex > -1) this.vertices.get(mousedVertex).hover();
