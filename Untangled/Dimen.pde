@@ -9,7 +9,8 @@ public static class Dimen {
     public static final int gameAreaStart = 30;
     public static final int gameBuffer = gameAreaStart + vertexRadius;
 
-    public static final int menuWidth = 240;
-
     public static final int headingTextSize = 64;
+    public static final int menuTextSize = 24;
+
+    public static final float menuWidth = 500;
 }

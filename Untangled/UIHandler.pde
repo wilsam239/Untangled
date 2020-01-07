@@ -59,7 +59,7 @@ class UIHandler {
             protected void onClick() {
                 println("Endless Game was pressed!");
                 this.handler.resetRoot();
-                this.handler.game.currentLevel = new LevelRandom(this.handler.game, 10);
+                this.handler.game.currentLevel = new LevelRandom(this.handler.game);
             }
         };
         menuContainer.addChild(startEndless);
@@ -327,7 +327,7 @@ class UIHandler {
         };
         menuContainer.addChild(resetLevel);
         resetLevel.handler = this;
-        resetLevel.setWidth(500);
+        resetLevel.setWidth(Dimen.menuWidth);
         resetLevel.setHeight(50);
         resetLevel.setText("Reset Level");
 
@@ -347,6 +347,48 @@ class UIHandler {
         menuContainer.fitToChildren();
         menuContainer.alignCenterWithChildren();
 
+    }
+
+    // ----- Endless Mode -----
+
+    public void endless_finished() {
+        this.resetRoot();
+
+        // Menu Container
+        UIContainer menuContainer = new UIContainer();
+        this.root.addChild(menuContainer);
+
+        int levelsCompleted = ((LevelRandom) this.game.currentLevel).getDifficulty() - LevelRandom.difficultyStart;
+        float timeLasted = LevelRandom.timerStart + levelsCompleted * 5;
+
+        UIContainer levels = new UIContainer();
+        menuContainer.addChild(levels);
+        levels.setWidth(Dimen.menuWidth);
+        levels.setHeight(50);
+        levels.setText("You completed " + levelsCompleted + " levels!");
+
+        UIContainer time = new UIContainer();
+        menuContainer.addChild(time);
+        time.setWidth(Dimen.menuWidth);
+        time.setHeight(50);
+        time.alignTopTo(levels.bottom());
+        time.setText("You lasted " + timeLasted + " seconds!");
+
+        UIButton exit = new UIButton() {
+            protected void onClick() {
+                this.handler.game.currentLevel = null;
+                this.handler.main_menu();
+            }
+        };
+        menuContainer.addChild(exit);
+        exit.handler = this;
+        exit.setWidth(500);
+        exit.setHeight(50);
+        exit.alignTopTo(time.bottom());
+        exit.setText("Exit");
+
+        menuContainer.fitToChildren();
+        menuContainer.alignCenterWithChildren();
     }
 
     public void settings_menu() {

@@ -11,7 +11,7 @@ abstract class UIElement {
 
     // The elements text
     protected String text = null;
-    private float textSize = 24;
+    private float textSize = Dimen.menuTextSize;
 
     // Padding for inner elements when fitting to children
     private float paddingTop = 0;

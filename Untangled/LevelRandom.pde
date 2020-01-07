@@ -1,21 +1,41 @@
 public class LevelRandom extends LevelInterface {
 
-    // Constructor for creating a random level.
-    public LevelRandom(Game game, int difficulty) {
-        this.game = game;
+    public static final float timerStart = 10.0;
+    private float timer;
+    public static final float levelCompleteBonus = 5.0;
 
-        createRandomLevel(difficulty);
+    private static final int difficultyStart = 10;
+    private int difficulty;
+
+    private boolean gameCompleted = false;
+
+    // A simple constructor for the createing the first random level in an endless game.
+    public LevelRandom(Game game) {
+        this.game = game;
+        this.difficulty = LevelRandom.difficultyStart;
+        this.timer = LevelRandom.timerStart;
+
+        createRandomLevel();
+    }
+
+    // Constructor for creating a secondary random level.
+    public LevelRandom(Game game, int difficulty, float timer) {
+        this.game = game;
+        this.difficulty = difficulty;
+        this.timer = timer;
+
+        createRandomLevel();
     }
 
     // Generates a new random level.
-    private void createRandomLevel(int difficulty) {
+    private void createRandomLevel() {
 
         println("TODO: Use difficulty to create random level!");
 
         int counter = 0;
 
         // Add new vertices.
-        while ((random(100) > 5 && counter < difficulty) || counter < difficulty / 2) {
+        while ((random(100) > 5 && counter < this.difficulty) || counter < this.difficulty / 2) {
             
             this.vertices.add(new Vertex());
 
@@ -121,9 +141,63 @@ public class LevelRandom extends LevelInterface {
         }
     }
 
+    // Returns this levels difficulty.
+    public int getDifficulty() {
+        return this.difficulty;
+    }
+
+    public float getTimer() {
+        return this.timer;
+    }
+
+    // Update the level.
+    public void update() {
+        if (this.gameCompleted) return;
+
+        // Update all the normal stuff.
+        super.update();
+
+        // Decrement the level timer.
+        this.timer -= 1.0 / Untangled.FRAMERATE;
+
+        if (this.timer <= 0) {
+            this.gameCompleted = true;
+            this.onFinish();
+        }
+    }
+
+    // Called when the timer reaches zero.
+    private void onFinish() {
+        println("Finished Game!");
+        this.game.uiHandler.endless_finished();
+    }
+
     @Override
     protected void openEscMenu() {
-        this.game.currentLevel = new LevelRandom(this.game, 10);
+        println("TODO: Make an esc menu for endless, shouldn't pause timer!");
+        this.game.uiHandler.story_esc();
+    }
+
+    @Override
+    protected void onSolve() {
+        println("Level Finished");
+        this.timer += LevelRandom.levelCompleteBonus;
+        
+        this.game.currentLevel = new LevelRandom(this.game, this.difficulty += 1, this.timer);
+    }
+
+    @Override
+    public void draw() {
+        // Draw the level as per normal.
+        super.draw();
+
+        // Draw the timer.
+        fill(0);
+        textFont(Resources.gentleTouch);
+        textAlign(LEFT);
+        textSize(Dimen.menuTextSize);
+        float width = textWidth("30.000");
+        text(this.timer, Dimen.gameWidth / 2 - width / 2, Dimen.gameAreaStart / 2 + Dimen.menuTextSize / 2);
     }
 
 }

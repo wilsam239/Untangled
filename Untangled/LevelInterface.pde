@@ -8,6 +8,8 @@ abstract class LevelInterface {
     public Vertex vertexMoving;
     protected Game game;
 
+    private boolean solved = false;
+
     public void draw() {
         if(counter > 0) {
             background(255,0,0);
@@ -21,6 +23,10 @@ abstract class LevelInterface {
             vertices.get(i).draw();
         }
 
+        // Draw the levels bounds.
+        stroke(Colours.thundercloud.R, Colours.thundercloud.G, Colours.thundercloud.B);
+        fill(Colours.crossbones.R, Colours.crossbones.G, Colours.crossbones.B, Colours.crossbones.A);
+        rect(Dimen.gameAreaStart, Dimen.gameAreaStart, Dimen.gameWidth - 2 * Dimen.gameAreaStart, Dimen.gameHeight - 2 * Dimen.gameAreaStart);
     }
 
     public void invalidMove() {
@@ -32,9 +38,6 @@ abstract class LevelInterface {
     }
 
     public void update() {
-        stroke(Colours.thundercloud.R, Colours.thundercloud.G, Colours.thundercloud.B);
-        fill(Colours.crossbones.R, Colours.crossbones.G, Colours.crossbones.B, Colours.crossbones.A);
-        rect(Dimen.gameAreaStart, Dimen.gameAreaStart, Dimen.gameWidth - 2 * Dimen.gameAreaStart, Dimen.gameHeight - 2 * Dimen.gameAreaStart);
         // Check for 'esc' keypress
         if (Keyboard.keyPressed.hasValue(Keyboard.ESCAPE)) this.openEscMenu();
 
@@ -62,6 +65,12 @@ abstract class LevelInterface {
                     movesMade++;
                     println("Move Count: ", movesMade);
                     this.vertexMoving = null;
+                }
+
+                // If the level has just been solved call onSolve().
+                if (this.isSolved() && !this.solved) {
+                    this.solved = true;
+                    this.onSolve();
                 }
             }           
             this.clearSelection();
@@ -161,6 +170,11 @@ abstract class LevelInterface {
             }
         }
         return true;
+    }
+
+    // Called a single time when the level is first solved.
+    protected void onSolve() {
+        println("WARNING: LevelInterface.onSolve() should be overriden!");
     }
 
     public void checkIfSolved() {
