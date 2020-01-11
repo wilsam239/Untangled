@@ -9,7 +9,7 @@ class LevelIO {
         this.game = game;
     }
 
-    public void saveLevelToFile(LevelInterface level) {
+    public void saveLevelToFile(Level level) {
         println("No name was given, generating random name");
 
         // Generate a random UUID for the file name.
@@ -19,7 +19,7 @@ class LevelIO {
 
     }
 
-    public void saveLevelToFile(LevelInterface level, String fileName) {
+    public void saveLevelToFile(Level level, String fileName) {
         this.output = createWriter(fileName);
 
         for(Vertex v : level.vertices) {
@@ -34,7 +34,7 @@ class LevelIO {
         this.output.close();
     }
 
-    public Level loadLevelFromFile(String fileName) {
+    public LevelStory loadLevelStoryFromFile(String fileName) {
         ArrayList<Vertex> vertices = new ArrayList();
         ArrayList<Edge> edges = new ArrayList();
 
@@ -57,7 +57,7 @@ class LevelIO {
             }
         }
 
-        Level level = new Level(vertices, edges, this.game, fileName);
+        LevelStory level = new LevelStory(vertices, edges, this.game, fileName);
         return level;
     }
 

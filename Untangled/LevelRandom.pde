@@ -1,6 +1,6 @@
-public class LevelRandom extends LevelInterface {
+public class LevelRandom extends Level {
 
-    public static final float timerStart = 10.0;
+    public static final float timerStart = 30.0;
     private float timer;
     public static final float levelCompleteBonus = 5.0;
 

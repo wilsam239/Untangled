@@ -3,7 +3,7 @@ class Game {
     private int width, height;
 
     public UIHandler uiHandler;
-    public LevelInterface currentLevel;
+    public Level currentLevel;
     public LevelIO levelIO;
 
     public Game(int width, int height) {

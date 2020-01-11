@@ -1,4 +1,4 @@
-class LevelEditor extends LevelInterface {
+class LevelEditor extends Level {
 
     private int edgeStartIndex;
     private int edgeEndIndex;

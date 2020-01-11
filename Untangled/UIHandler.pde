@@ -128,7 +128,7 @@ class UIHandler {
         UIButton level_1_1 = new UIButton() {
             protected void onClick() {
                 println("Loading Level 1-1");
-                Level level = this.handler.game.levelIO.loadLevelFromFile("levels/level_1_1.utg");
+                LevelStory level = this.handler.game.levelIO.loadLevelStoryFromFile("levels/level_1_1.utg");
                 this.handler.game.currentLevel = level;
                 this.handler.resetRoot();
             }
@@ -145,7 +145,7 @@ class UIHandler {
         UIButton level_1_2 = new UIButton() {
             protected void onClick() {
                 println("Loading Level 1-2");
-                Level level = this.handler.game.levelIO.loadLevelFromFile("levels/level_1_2.utg");
+                LevelStory level = this.handler.game.levelIO.loadLevelStoryFromFile("levels/level_1_2.utg");
                 this.handler.game.currentLevel = level;
                 this.handler.resetRoot();
             }
@@ -163,7 +163,7 @@ class UIHandler {
         UIButton level_1_3 = new UIButton() {
             protected void onClick() {
                 println("Loading Level 1-3");
-                Level level = this.handler.game.levelIO.loadLevelFromFile("levels/level_1_3.utg");
+                LevelStory level = this.handler.game.levelIO.loadLevelStoryFromFile("levels/level_1_3.utg");
                 this.handler.game.currentLevel = level;
                 this.handler.resetRoot();
             }
@@ -180,7 +180,7 @@ class UIHandler {
         UIButton level_1_4 = new UIButton() {
             protected void onClick() {
                 println("Loading Level 1-4");
-                Level level = this.handler.game.levelIO.loadLevelFromFile("levels/level_1_4.utg");
+                LevelStory level = this.handler.game.levelIO.loadLevelStoryFromFile("levels/level_1_4.utg");
                 this.handler.game.currentLevel = level;
                 this.handler.resetRoot();
             }
@@ -197,7 +197,7 @@ class UIHandler {
         UIButton level_1_5 = new UIButton() {
             protected void onClick() {
                 println("Loading Level 1-5");
-                Level level = this.handler.game.levelIO.loadLevelFromFile("levels/level_1_5.utg");
+                LevelStory level = this.handler.game.levelIO.loadLevelStoryFromFile("levels/level_1_5.utg");
                 this.handler.game.currentLevel = level;
                 this.handler.resetRoot();
             }
@@ -214,7 +214,7 @@ class UIHandler {
         UIButton level_1_6 = new UIButton() {
             protected void onClick() {
                 println("Loading Level 1-6");
-                Level level = this.handler.game.levelIO.loadLevelFromFile("levels/level_1_6.utg");
+                LevelStory level = this.handler.game.levelIO.loadLevelStoryFromFile("levels/level_1_6.utg");
                 this.handler.game.currentLevel = level;
                 this.handler.resetRoot();
             }
@@ -231,7 +231,7 @@ class UIHandler {
         UIButton level_1_7 = new UIButton() {
             protected void onClick() {
                 println("Loading Level 1-7");
-                Level level = this.handler.game.levelIO.loadLevelFromFile("levels/level_1_7.utg");
+                LevelStory level = this.handler.game.levelIO.loadLevelStoryFromFile("levels/level_1_7.utg");
                 this.handler.game.currentLevel = level;
                 this.handler.resetRoot();
             }
@@ -248,7 +248,7 @@ class UIHandler {
         UIButton level_1_8 = new UIButton() {
             protected void onClick() {
                 println("Loading Level 1-8");
-                Level level = this.handler.game.levelIO.loadLevelFromFile("levels/level_1_8.utg");
+                LevelStory level = this.handler.game.levelIO.loadLevelStoryFromFile("levels/level_1_8.utg");
                 this.handler.game.currentLevel = level;
                 this.handler.resetRoot();
             }
@@ -265,7 +265,7 @@ class UIHandler {
         UIButton level_1_9 = new UIButton() {
             protected void onClick() {
                 println("Loading Level 1-9");
-                //Level level = this.handler.game.levelIO.loadLevelFromFile("levels/level_1_9.utg");
+                //LevelStory level = this.handler.game.levelIO.loadLevelStoryFromFile("levels/level_1_9.utg");
                 //this.handler.game.currentLevel = level;
                 //this.handler.resetRoot();
             }
@@ -321,7 +321,7 @@ class UIHandler {
 
         UIButton resetLevel = new UIButton() {
             protected void onClick() {
-                ((Level) this.handler.game.currentLevel).reset();
+                ((LevelStory) this.handler.game.currentLevel).reset();
                 this.handler.resetRoot();
             }
         };
@@ -359,7 +359,7 @@ class UIHandler {
         this.root.addChild(menuContainer);
 
         int levelsCompleted = ((LevelRandom) this.game.currentLevel).getDifficulty() - LevelRandom.difficultyStart;
-        float timeLasted = LevelRandom.timerStart + levelsCompleted * 5;
+        float timeLasted = int(LevelRandom.timerStart + levelsCompleted * 5);
 
         UIContainer levels = new UIContainer();
         menuContainer.addChild(levels);
