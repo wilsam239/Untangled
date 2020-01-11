@@ -176,13 +176,4 @@ abstract class Level {
     protected void onSolve() {
         println("WARNING: LevelInterface.onSolve() should be overriden!");
     }
-
-    public void checkIfSolved() {
-        for(Edge e: edges) {
-            if(checkEdgeForIntersection(e)) {
-                return;
-            }
-        }
-        this.game.uiHandler.level_completed();
-    }
 }
