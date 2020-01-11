@@ -30,6 +30,13 @@ class LevelStory extends Level {
     @Override
     protected void openEscMenu() {
         this.game.uiHandler.story_esc();
+    }
+
+    @Override
+    protected void onSolve() {
+        println("Level Solved!");
+
+        this.game.uiHandler.story_solved();
     } 
 }
 

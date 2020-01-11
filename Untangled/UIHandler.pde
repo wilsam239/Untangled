@@ -288,7 +288,7 @@ class UIHandler {
 
     // ----- Story Mode -----
 
-    public void level_completed() {
+    public void story_solved() {
         this.resetRoot();
 
         UIContainer menuContainer = new UIContainer();
