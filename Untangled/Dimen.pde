@@ -13,4 +13,5 @@ public static class Dimen {
     public static final int menuTextSize = 24;
 
     public static final float menuWidth = 500;
+    public static final float menuHeight = 50;
 }

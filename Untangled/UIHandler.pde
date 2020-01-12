@@ -291,10 +291,18 @@ class UIHandler {
     public void story_solved() {
         this.resetRoot();
 
+        // Container for the menu.
         UIContainer menuContainer = new UIContainer();
         this.root.addChild(menuContainer);
         menuContainer.setFill(new Colour(128, 128, 182, 128));
 
+        UIContainer movesMade = new UIContainer();
+        menuContainer.addChild(movesMade);
+        movesMade.setWidth(Dimen.menuWidth);
+        movesMade.setHeight(Dimen.menuHeight);
+        movesMade.setText("Moves made: " + this.game.currentLevel.numberOfMovesMade());
+
+        // Return to menu button.
         UIButton backToMenu = new UIButton() {
             protected void onClick() {
                 this.handler.story_menu();
@@ -304,10 +312,12 @@ class UIHandler {
         menuContainer.addChild(backToMenu);
         backToMenu.handler = this;
         backToMenu.setWidth(Dimen.menuWidth / 2);
-        backToMenu.setHeight(50);
+        backToMenu.setHeight(Dimen.menuHeight);
+        backToMenu.alignTopTo(movesMade.bottom());
         backToMenu.setText("Return To Menu");
         backToMenu.setTextSize(Dimen.menuTextSize);
 
+        // Next level button.
         UIButton nextLevel = new UIButton() {
             protected void onClick() {
                 int id = ((LevelStory) this.handler.game.currentLevel).getID();
@@ -319,7 +329,8 @@ class UIHandler {
         menuContainer.addChild(nextLevel);
         nextLevel.handler = this;
         nextLevel.setWidth(Dimen.menuWidth / 2);
-        nextLevel.setHeight(50);
+        nextLevel.setHeight(Dimen.menuHeight);
+        nextLevel.alignTopTo(movesMade.bottom());
         nextLevel.alignLeftTo(backToMenu.right());
         nextLevel.setText("Next Level");
         nextLevel.setTextSize(Dimen.menuTextSize);
