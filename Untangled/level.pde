@@ -162,6 +162,10 @@ abstract class Level {
         }
     }
 
+    public int numberOfMovesMade() {
+        return this.movesMade;
+    }
+
     // Returns true if there are no collisions in the level.
     protected boolean isSolved() {
         for(Edge e: edges) {

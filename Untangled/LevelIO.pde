@@ -34,11 +34,11 @@ class LevelIO {
         this.output.close();
     }
 
-    public LevelStory loadLevelStoryFromFile(LevelStoryInfo info) {
+    public LevelStory loadLevelStoryFromFile(String filePath) {
         ArrayList<Vertex> vertices = new ArrayList();
         ArrayList<Edge> edges = new ArrayList();
 
-        String[] lines = loadStrings(info.filePath);
+        String[] lines = loadStrings(filePath);
 
         for (int i = 0; i < lines.length; i++) {
             String[] params = split(lines[i], " ");
@@ -57,7 +57,7 @@ class LevelIO {
             }
         }
 
-        LevelStory level = new LevelStory(vertices, edges, this.game, info);
+        LevelStory level = new LevelStory(vertices, edges, this.game, filePath);
         return level;
     }
 

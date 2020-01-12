@@ -1,26 +1,67 @@
 class LevelStory extends Level {
 
     protected String filePath;
-    protected LevelStoryInfo info;
 
-    LevelStory(ArrayList<Vertex> vertices, ArrayList<Edge> edges, Game game, LevelStoryInfo info) {
+    LevelStory(ArrayList<Vertex> vertices, ArrayList<Edge> edges, Game game, String filePath) {
         this.vertices = vertices;
         this.edges = edges;
         this.game = game;
-        this.info = info;
+        this.filePath = filePath;
+    }
+
+    private int id;
+
+    LevelStory(Game game, int id) {
+        this.game = game;
+        this.id = id;
+
+        this.filePath = LevelStoryInfo.getFilePath(id);
+        if (this.filePath == null) {
+            println("CRITICAL: Invalid Level ID!");
+        } else {
+            this.loadFromFile();
+        }
+    }
+
+    // Load the level from the file
+    private void loadFromFile() {
+        // Load each line of the file into an array.
+        String[] lines = loadStrings(this.filePath);
+
+        for (int i = 0; i < lines.length; i++) {
+            String[] params = split(lines[i], " ");
+
+            switch (params[0]) {
+                case "v": {
+                    Vertex temp = new Vertex(float(params[1]), float(params[2]));
+                    this.vertices.add(temp);
+                    break;
+                }
+                case "e": {
+                    Edge temp = new Edge(vertices.get(int(params[1])), vertices.get(int(params[2])));
+                    this.edges.add(temp);
+                    break;
+                }
+            }
+        }
+    }
+
+    // Return this levels ID.
+    public int getID() {
+        return this.id;
     }
 
     // Reload the level from the file.
     // TODO: Store an immutable version of the level so that IO only needs to be done once.
     public void reload() {
-        if (this.info.filePath == null) {
+        if (this.filePath == null) {
             println("WARNING: Cannot call resetLevel if the level was not loaded from a file!");
             return;
         }
         // Unload the current level;
         this.game.currentLevel = null;
 
-        this.game.currentLevel = this.game.levelIO.loadLevelStoryFromFile(this.info);
+        this.game.currentLevel = new LevelStory(this.game, this.id);
     }
     
     public void update() {
@@ -42,24 +83,22 @@ class LevelStory extends Level {
 
 public static class LevelStoryInfo {
 
-    public String filePath;
-    public String next;
-
     // Level Definitions
 
-    public static final LevelStoryInfo level_1_1 = new LevelStoryInfo("levels/level_1_1.utg", "levels/level_1_2.utg");
-    public static final LevelStoryInfo level_1_2 = new LevelStoryInfo("levels/level_1_2.utg", "levels/level_1_3.utg");
-    public static final LevelStoryInfo level_1_3 = new LevelStoryInfo("levels/level_1_3.utg", "levels/level_1_4.utg");
-    public static final LevelStoryInfo level_1_4 = new LevelStoryInfo("levels/level_1_4.utg", "levels/level_1_5.utg");
-    public static final LevelStoryInfo level_1_5 = new LevelStoryInfo("levels/level_1_5.utg", "levels/level_1_6.utg");
-    public static final LevelStoryInfo level_1_6 = new LevelStoryInfo("levels/level_1_6.utg", "levels/level_1_7.utg");
-    public static final LevelStoryInfo level_1_7 = new LevelStoryInfo("levels/level_1_7.utg", "levels/level_1_8.utg");
-    public static final LevelStoryInfo level_1_8 = new LevelStoryInfo("levels/level_1_8.utg", "levels/level_1_9.utg");
-    public static final LevelStoryInfo level_1_9 = new LevelStoryInfo("levels/level_1_9.utg", null);
+    public static final String[] filePaths = {
+        "levels/level_1_1.utg",
+        "levels/level_1_2.utg",
+        "levels/level_1_3.utg",
+        "levels/level_1_4.utg",
+        "levels/level_1_5.utg",
+        "levels/level_1_6.utg",
+        "levels/level_1_7.utg",
+        "levels/level_1_8.utg",
+        "levels/level_1_9.utg"
+    };
 
-    public LevelStoryInfo(String filePath, String next) {
-        this.filePath = filePath;
-        this.next = next;
+    public static String getFilePath(int id) {
+        return LevelStoryInfo.filePaths[id - 1];
     }
 
 }
