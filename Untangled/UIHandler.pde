@@ -37,7 +37,7 @@ class UIHandler {
         this.root.addChild(menuContainer);
         menuContainer.setTop(titleContainer.bottom());
         menuContainer.setBottom(this.root.bottom());
-        menuContainer.setWidth(500);
+        menuContainer.setWidth(Dimen.menuWidth);
         menuContainer.alignCenterX();
         
         // Story Game Button
@@ -50,7 +50,7 @@ class UIHandler {
         menuContainer.addChild(startStory);
         startStory.handler = this;
         startStory.fillParentWidth();
-        startStory.setHeight(50);
+        startStory.setHeight(Dimen.menuHeight);
         startStory.alignTop();
         startStory.setText("Story");
 
@@ -65,7 +65,7 @@ class UIHandler {
         menuContainer.addChild(startEndless);
         startEndless.handler = this;
         startEndless.fillParentWidth();
-        startEndless.setHeight(50);
+        startEndless.setHeight(Dimen.menuHeight);
         startEndless.alignTopTo(startStory.bottom());
         startEndless.setText("Endless");
 
@@ -79,7 +79,7 @@ class UIHandler {
         menuContainer.addChild(settings);
         settings.handler = this;
         settings.fillParentWidth();
-        settings.setHeight(50);
+        settings.setHeight(Dimen.menuHeight);
         settings.alignTopTo(startEndless.bottom());
         settings.setText("Settings");
     }
@@ -90,7 +90,7 @@ class UIHandler {
         UIContainer menuContainer =  new UIContainer();
         this.root.addChild(menuContainer);
         menuContainer.fillParentHeight();
-        menuContainer.setWidth(500);
+        menuContainer.setWidth(Dimen.menuWidth);
         menuContainer.alignCenterX();
 
         // Title
@@ -354,7 +354,7 @@ class UIHandler {
         menuContainer.addChild(resetLevel);
         resetLevel.handler = this;
         resetLevel.setWidth(Dimen.menuWidth);
-        resetLevel.setHeight(50);
+        resetLevel.setHeight(Dimen.menuHeight);
         resetLevel.setText("Reset Level");
 
         UIButton exit = new UIButton() {
@@ -365,8 +365,8 @@ class UIHandler {
         };
         menuContainer.addChild(exit);
         exit.handler = this;
-        exit.setWidth(500);
-        exit.setHeight(50);
+        exit.setWidth(Dimen.menuWidth);
+        exit.setHeight(Dimen.menuHeight);
         exit.alignTopTo(resetLevel.bottom());
         exit.setText("Exit");
 
@@ -390,13 +390,13 @@ class UIHandler {
         UIContainer levels = new UIContainer();
         menuContainer.addChild(levels);
         levels.setWidth(Dimen.menuWidth);
-        levels.setHeight(50);
+        levels.setHeight(Dimen.menuHeight);
         levels.setText("You completed " + levelsCompleted + " levels!");
 
         UIContainer time = new UIContainer();
         menuContainer.addChild(time);
         time.setWidth(Dimen.menuWidth);
-        time.setHeight(50);
+        time.setHeight(Dimen.menuHeight);
         time.alignTopTo(levels.bottom());
         time.setText("You lasted " + timeLasted + " seconds!");
 
@@ -408,8 +408,8 @@ class UIHandler {
         };
         menuContainer.addChild(exit);
         exit.handler = this;
-        exit.setWidth(500);
-        exit.setHeight(50);
+        exit.setWidth(Dimen.menuWidth);
+        exit.setHeight(Dimen.menuHeight);
         exit.alignTopTo(time.bottom());
         exit.setText("Exit");
 
@@ -424,7 +424,7 @@ class UIHandler {
         UIContainer menuContainer = new UIContainer();
         this.root.addChild(menuContainer);
         menuContainer.fillParentHeight();
-        menuContainer.setWidth(500);
+        menuContainer.setWidth(Dimen.menuWidth);
         menuContainer.alignCenterX();
 
         // The Settings title
@@ -445,7 +445,7 @@ class UIHandler {
         menuContainer.addChild(backBtn);
         backBtn.handler = this;
         backBtn.fillParentWidth();
-        backBtn.setHeight(50);
+        backBtn.setHeight(Dimen.menuHeight);
         backBtn.alignTopTo(settingsTitle.bottom());
         backBtn.setText("Back");
 
@@ -459,7 +459,7 @@ class UIHandler {
         menuContainer.addChild(levelEditBtn);
         levelEditBtn.handler = this;
         levelEditBtn.fillParentWidth();
-        levelEditBtn.setHeight(50);
+        levelEditBtn.setHeight(Dimen.menuHeight);
         levelEditBtn.alignTopTo(backBtn.bottom());
         levelEditBtn.setText("Level Editor");
     }
@@ -468,10 +468,11 @@ class UIHandler {
 
     public void level_editor() {
         this.resetRoot();
+
         UIContainer hint = new UIContainer();
         this.root.addChild(hint);
-        hint.setHeight(50);
-        hint.setWidth(100);
+        hint.setHeight(Dimen.menuHeight);
+        hint.setWidth(150);
         hint.alignBottom();
         hint.alignRight();
         hint.setText("Press 'esc' to open menu");
@@ -489,8 +490,8 @@ class UIHandler {
         };
         menuContainer.addChild(save);
         save.handler = this;
-        save.setWidth(500);
-        save.setHeight(50);
+        save.setWidth(Dimen.menuWidth);
+        save.setHeight(Dimen.menuHeight);
         save.setText("Save");
 
         UIButton exit = new UIButton() {
@@ -501,8 +502,8 @@ class UIHandler {
         };
         menuContainer.addChild(exit);
         exit.handler = this;
-        exit.setWidth(500);
-        exit.setHeight(50);
+        exit.setWidth(Dimen.menuWidth);
+        exit.setHeight(Dimen.menuHeight);
         exit.alignTopTo(save.bottom());
         exit.setText("Exit");
 
@@ -516,7 +517,7 @@ class UIHandler {
 
         UIContainer menuContainer = new UIContainer();
         this.root.addChild(menuContainer);
-        menuContainer.setWidth(500);
+        menuContainer.setWidth(Dimen.menuWidth);
         menuContainer.setPadding(10);
 
         UITextInput levelName = new UITextInput() {
@@ -529,7 +530,7 @@ class UIHandler {
         menuContainer.addChild(levelName);
         levelName.handler = this;
         levelName.fillParentWidth();
-        levelName.setHeight(50);
+        levelName.setHeight(Dimen.menuHeight);
         levelName.setHint("enter level name");
 
         UIButton cancel = new UIButton() {
@@ -541,7 +542,7 @@ class UIHandler {
         menuContainer.addChild(cancel);
         cancel.handler = this;
         cancel.setWidth(menuContainer.width() / 2);
-        cancel.setHeight(50);
+        cancel.setHeight(Dimen.menuHeight);
         cancel.alignLeft();
         cancel.alignTopTo(levelName.bottom());
         cancel.setText("Cancel");
@@ -557,7 +558,7 @@ class UIHandler {
         save.handler = this;
         save.linkedTextInput = levelName;
         save.setWidth(menuContainer.width() / 2);
-        save.setHeight(50);
+        save.setHeight(Dimen.menuHeight);
         save.alignLeftTo(cancel.right());
         save.alignTopTo(levelName.bottom());
         save.setText("Save");
