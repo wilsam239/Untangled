@@ -10,6 +10,34 @@ abstract class Level {
 
     private boolean solved = false;
 
+    protected String filePath = null;
+
+    // Load the level from the file
+    protected void loadFromFile() {
+        if (this.filePath == null) {
+            println("Critical: Level.filePath not set.");
+        }
+        // Load each line of the file into an array.
+        String[] lines = loadStrings(this.filePath);
+
+        for (int i = 0; i < lines.length; i++) {
+            String[] params = split(lines[i], " ");
+
+            switch (params[0]) {
+                case "v": {
+                    Vertex temp = new Vertex(float(params[1]), float(params[2]));
+                    this.vertices.add(temp);
+                    break;
+                }
+                case "e": {
+                    Edge temp = new Edge(vertices.get(int(params[1])), vertices.get(int(params[2])));
+                    this.edges.add(temp);
+                    break;
+                }
+            }
+        }
+    }
+
     public void draw() {
         if(counter > 0) {
             background(255,0,0);

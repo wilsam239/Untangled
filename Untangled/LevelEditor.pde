@@ -2,7 +2,18 @@ class LevelEditor extends Level {
 
     private int edgeStartIndex;
     private int edgeEndIndex;
-    LevelEditor(Game game) {
+
+    // Constructor for loading a level from file.
+    public LevelEditor(Game game, String filePath) {
+        this.game = game;
+        this.filePath = filePath;
+
+        this.loadFromFile();
+    }
+
+
+    // Constructor for a new blank level.
+    public LevelEditor(Game game) {
         this.game = game;
         edgeStartIndex = -1;
         edgeEndIndex = -1;

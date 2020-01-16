@@ -537,7 +537,10 @@ public class UIHandler {
             println("No file was selected!");
             return;
         } else {
-            println(selection.getAbsolutePath());
+            String filePath = selection.getAbsolutePath();
+            println(filePath);
+            this.game.currentLevel = new LevelEditor(this.game, filePath);
+            this.level_editor();
         }
     }
 

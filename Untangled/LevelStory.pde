@@ -1,7 +1,5 @@
 class LevelStory extends Level {
 
-    protected String filePath;
-
     LevelStory(ArrayList<Vertex> vertices, ArrayList<Edge> edges, Game game, String filePath) {
         this.vertices = vertices;
         this.edges = edges;
@@ -20,29 +18,6 @@ class LevelStory extends Level {
             println("CRITICAL: Invalid Level ID!");
         } else {
             this.loadFromFile();
-        }
-    }
-
-    // Load the level from the file
-    private void loadFromFile() {
-        // Load each line of the file into an array.
-        String[] lines = loadStrings(this.filePath);
-
-        for (int i = 0; i < lines.length; i++) {
-            String[] params = split(lines[i], " ");
-
-            switch (params[0]) {
-                case "v": {
-                    Vertex temp = new Vertex(float(params[1]), float(params[2]));
-                    this.vertices.add(temp);
-                    break;
-                }
-                case "e": {
-                    Edge temp = new Edge(vertices.get(int(params[1])), vertices.get(int(params[2])));
-                    this.edges.add(temp);
-                    break;
-                }
-            }
         }
     }
 
