@@ -1,4 +1,4 @@
-class UIHandler {
+public class UIHandler {
 
     public UIContainer root;
 
@@ -265,7 +265,7 @@ class UIHandler {
         UIButton level_1_9 = new UIButton() {
             protected void onClick() {
                 println("Loading Level 1-9");
-                //LevelStory level = new LevelStory(this.handeler.game, 9);
+                //LevelStory level = new LevelStory(this.handler.game, 9);
                 //this.handler.game.currentLevel = level;
                 //this.handler.resetRoot();
             }
@@ -452,8 +452,7 @@ class UIHandler {
         UIButton levelEditBtn = new UIButton() {
             protected void onClick() {
                 println("Level Editor!");
-                this.handler.game.currentLevel = new LevelEditor(this.handler.game);
-                this.handler.level_editor();
+                this.handler.level_editor_select();
             }
         };
         menuContainer.addChild(levelEditBtn);
@@ -465,6 +464,69 @@ class UIHandler {
     }
 
     // ----- LEVEL EDITOR -----
+
+    public void level_editor_select() {
+        this.resetRoot();
+
+        UIContainer menuContainer = new UIContainer();
+        this.root.addChild(menuContainer);
+
+        // New Level
+        UIButton newLevel = new UIButton() {
+            protected void onClick() {
+                println("New Level!");
+                this.handler.game.currentLevel = new LevelEditor(this.handler.game);
+                this.handler.level_editor();
+            }
+        };
+        menuContainer.addChild(newLevel);
+        newLevel.handler = this;
+        newLevel.setWidth(Dimen.menuWidth);
+        newLevel.setHeight(Dimen.menuHeight);
+        newLevel.setText("New Level");
+
+        // Load Level
+        UIButton loadLevel = new UIButton() {
+            protected void onClick() {
+                println("Load Level!");
+                selectInput("Select a file to load:", "load_level_from_file", null, this.handler);
+            }
+        };
+        menuContainer.addChild(loadLevel);
+        loadLevel.handler = this;
+        loadLevel.setWidth(Dimen.menuWidth);
+        loadLevel.setHeight(Dimen.menuHeight);
+        loadLevel.alignTopTo(newLevel.bottom());
+        loadLevel.setText("Load Level");
+
+        // Back
+        UIButton backBtn = new UIButton() {
+            protected void onClick() {
+                println("Back!");
+                this.handler.settings_menu();
+            }
+        };
+        menuContainer.addChild(backBtn);
+        backBtn.handler = this;
+        backBtn.setWidth(Dimen.menuWidth);
+        backBtn.setHeight(Dimen.menuHeight);
+        backBtn.alignTopTo(loadLevel.bottom());
+        backBtn.setText("Back");
+
+        menuContainer.fitToChildren();
+        menuContainer.alignCenterWithChildren();
+    }
+
+    // Callback function for the level editors file selector.
+    public void load_level_from_file(File selection) {
+        println("I am a callback");
+        if (selection == null) {
+            println("No file was selected!");
+            return;
+        } else {
+            println(selection.getAbsolutePath());
+        }
+    }
 
     public void level_editor() {
         this.resetRoot();
