@@ -284,6 +284,20 @@ public class UIHandler {
 
         // --- Level 2 ---
 
+        // --- Back Button ---
+        UIButton back = new UIButton() {
+            protected void onClick() {
+                this.handler.main_menu();
+            }
+        };
+        menuContainer.addChild(back);
+        back.handler = this;
+        back.setWidth(Dimen.menuWidth);
+        back.setHeight(Dimen.menuHeight);
+        back.alignBottom();
+        back.alignCenterX();
+        back.setText("Back");
+        back.setTextSize(Dimen.menuTextSize);
     }
 
     // ----- Story Mode -----
@@ -519,7 +533,6 @@ public class UIHandler {
 
     // Callback function for the level editors file selector.
     public void load_level_from_file(File selection) {
-        println("I am a callback");
         if (selection == null) {
             println("No file was selected!");
             return;
