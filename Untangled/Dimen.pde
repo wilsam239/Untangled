@@ -1,6 +1,22 @@
 public static class Dimen {
-    public static final int gameWidth = 1280;
-    public static final int gameHeight = 720;
+
+    public static final PVector[] resolutions = {
+        new PVector(1280, 720),
+        new PVector(1366, 768),
+        new PVector(1600, 900),
+        new PVector(1920, 1080),
+        new PVector(2560, 1440),
+        new PVector(3840, 2160)
+    };
+
+    public static ArrayList<PVector> availableResolutions = new ArrayList<PVector>();
+
+    public static float gameWidth = 1280;
+    public static float gameHeight = 1280;
+
+    public static final int baseWidth = 1280;
+
+    public static final int baseHeight = 720;
 
     public static final int vertexDim = 50;
     public static final int vertexBuffer = 75;
