@@ -14,7 +14,7 @@ public class UIHandler {
     public void resetRoot() {
         // Set the root to be the entire size of the screen.
         this.root = new UIContainer();
-        root.setLocationAndSize(0, 0, this.game.width, this.game.height);
+        root.setLocationAndSize(0, 0, Dimen.currentSizeX(), Dimen.currentSizeY());
     }
 
     // The games main menu.
@@ -438,17 +438,17 @@ public class UIHandler {
         UIContainer menuContainer = new UIContainer();
         this.root.addChild(menuContainer);
         menuContainer.fillParentHeight();
-        menuContainer.setWidth(Dimen.menuWidth);
+        menuContainer.setWidth(Dimen.menuWidth());
         menuContainer.alignCenterX();
 
         // The Settings title
         UIContainer settingsTitle = new UIContainer();
         menuContainer.addChild(settingsTitle);
-        settingsTitle.setHeight(100);
+        settingsTitle.setHeight(Dimen.menuHeight() * 2);
         settingsTitle.fillParentWidth();
         settingsTitle.alignTop();
         settingsTitle.setText("Settings");
-        settingsTitle.setTextSize(Dimen.headingTextSize);
+        settingsTitle.setTextSize(Dimen.headingTextSize());
 
         UIButton backBtn = new UIButton() {
             protected void onClick() {
@@ -459,9 +459,10 @@ public class UIHandler {
         menuContainer.addChild(backBtn);
         backBtn.handler = this;
         backBtn.fillParentWidth();
-        backBtn.setHeight(Dimen.menuHeight);
+        backBtn.setHeight(Dimen.menuHeight());
         backBtn.alignTopTo(settingsTitle.bottom());
         backBtn.setText("Back");
+        backBtn.setTextSize(Dimen.menuTextSize());
 
         UIButton levelEditBtn = new UIButton() {
             protected void onClick() {
@@ -472,9 +473,71 @@ public class UIHandler {
         menuContainer.addChild(levelEditBtn);
         levelEditBtn.handler = this;
         levelEditBtn.fillParentWidth();
-        levelEditBtn.setHeight(Dimen.menuHeight);
+        levelEditBtn.setHeight(Dimen.menuHeight());
         levelEditBtn.alignTopTo(backBtn.bottom());
         levelEditBtn.setText("Level Editor");
+        levelEditBtn.setTextSize(Dimen.menuTextSize());
+
+        // Resolution Setting
+
+        UIContainer resContainer = new UIContainer();
+        menuContainer.addChild(resContainer);
+        resContainer.fillParentWidth();
+        resContainer.setHeight(Dimen.menuHeight() * 2);
+        resContainer.alignTopTo(levelEditBtn.bottom());
+
+        UIContainer resolution = new UIContainer();
+        resContainer.addChild(resolution);
+        resolution.fillParentWidth();
+        resolution.setHeight(Dimen.menuHeight());
+        resolution.alignTop();
+        resolution.setText("Resolution");
+        resolution.setTextSize(Dimen.menuTextSize());
+
+        UIContainer resChanger = new UIContainer();
+        resContainer.addChild(resChanger);
+        resChanger.fillParentWidth();
+        resChanger.setHeight(Dimen.menuHeight());
+        resChanger.alignBottom();
+        resChanger.setText(Dimen.currentSizeX() + "x" + Dimen.currentSizeY());
+        resChanger.setTextSize(Dimen.menuTextSize());
+
+        UIButton resChangerLeft = new UIButton() {
+            protected void onClick() {
+                println("Left!");
+                if (Dimen.currentResolution == 0) return;
+                Dimen.currentResolution -= 1;
+                surface.setSize(Dimen.currentSizeX(), Dimen.currentSizeY());
+                this.handler.settings_menu();
+            }
+        };
+        resChanger.addChild(resChangerLeft);
+        resChangerLeft.handler = this;
+        resChangerLeft.setWidth(Dimen.menuHeight());
+        resChangerLeft.setHeight(Dimen.menuHeight());
+        resChangerLeft.alignTop();
+        resChangerLeft.alignLeft();
+        resChangerLeft.setText("<");
+        resChangerLeft.setTextSize(Dimen.menuTextSize());
+
+        UIButton resChangerRight = new UIButton() {
+            protected void onClick() {
+                println("Right!");
+                if (Dimen.currentResolution == Dimen.resolutions.length) return;
+                Dimen.currentResolution += 1;
+                surface.setSize(Dimen.currentSizeX(), Dimen.currentSizeY());
+                this.handler.settings_menu();
+            }
+        };
+        resChanger.addChild(resChangerRight);
+        resChangerRight.handler = this;
+        resChangerRight.setWidth(Dimen.menuHeight());
+        resChangerRight.setHeight(Dimen.menuHeight());
+        resChangerRight.alignTop();
+        resChangerRight.alignRight();
+        resChangerRight.setText(">");
+        resChangerRight.setTextSize(Dimen.menuTextSize());
+
     }
 
     // ----- LEVEL EDITOR -----

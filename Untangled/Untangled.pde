@@ -1,8 +1,6 @@
 Game game;
 
 public static int FRAMERATE = 60;
-public static int WIDTH = 1280;
-public static int HEIGHT = 720;
 
 
 public PImage backgroundImage;
@@ -23,7 +21,7 @@ void setup() {
     noStroke();
     fill(102);
 
-    game = new Game(1280, 720);
+    game = new Game(Dimen.baseWidth, Dimen.baseHeight);
 }
 
 void draw() {

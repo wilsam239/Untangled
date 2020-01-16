@@ -16,6 +16,7 @@ class Game {
 
         this.uiHandler = new UIHandler(this);
         this.uiHandler.main_menu();
+        println(Dimen.menuWidth);
     }
 
     private void setAvailableResolutions() {
