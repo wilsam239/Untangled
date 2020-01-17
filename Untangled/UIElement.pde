@@ -260,8 +260,8 @@ abstract class UIElement {
     // Fitting to image
 
     public void fitToImage() {
-        this.setWidth(this.bImage.height);
-        this.setHeight(this.bImage.width);
+        this.setWidth(this.bImage.height * Dimen.displayRatio());
+        this.setHeight(this.bImage.width * Dimen.displayRatio());
     }
 
     public void fitToImageMaintainWidth() {

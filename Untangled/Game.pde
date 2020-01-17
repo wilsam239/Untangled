@@ -16,18 +16,19 @@ class Game {
 
         this.uiHandler = new UIHandler(this);
         this.uiHandler.main_menu();
-        println(Dimen.menuWidth);
     }
 
     private void setAvailableResolutions() {
         for (PVector p : Dimen.resolutions) {
             if (p.x < displayWidth && p.y < displayHeight) {
+                Dimen.availableResolutions.add(p);
                 println(p.x + ", " + p.y);
             }
         }
     }
 
     public void run() {
+        println(frameRate);
         update();
         draw();
     }

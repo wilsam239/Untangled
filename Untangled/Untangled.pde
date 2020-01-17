@@ -26,7 +26,7 @@ void setup() {
 
 void draw() {
 
-    image(backgroundImage, 0, 0);
+    image(backgroundImage, 0, 0, Dimen.currentSizeX(), Dimen.currentSizeY());
     //background(Colours.background);
     
     game.run();

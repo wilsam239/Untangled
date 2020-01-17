@@ -37,7 +37,7 @@ public class UIHandler {
         this.root.addChild(menuContainer);
         menuContainer.setTop(titleContainer.bottom());
         menuContainer.setBottom(this.root.bottom());
-        menuContainer.setWidth(Dimen.menuWidth);
+        menuContainer.setWidth(Dimen.menuWidth());
         menuContainer.alignCenterX();
         
         // Story Game Button
@@ -50,7 +50,7 @@ public class UIHandler {
         menuContainer.addChild(startStory);
         startStory.handler = this;
         startStory.fillParentWidth();
-        startStory.setHeight(Dimen.menuHeight);
+        startStory.setHeight(Dimen.menuHeight());
         startStory.alignTop();
         startStory.setText("Story");
 
@@ -65,7 +65,7 @@ public class UIHandler {
         menuContainer.addChild(startEndless);
         startEndless.handler = this;
         startEndless.fillParentWidth();
-        startEndless.setHeight(Dimen.menuHeight);
+        startEndless.setHeight(Dimen.menuHeight());
         startEndless.alignTopTo(startStory.bottom());
         startEndless.setText("Endless");
 
@@ -79,7 +79,7 @@ public class UIHandler {
         menuContainer.addChild(settings);
         settings.handler = this;
         settings.fillParentWidth();
-        settings.setHeight(Dimen.menuHeight);
+        settings.setHeight(Dimen.menuHeight());
         settings.alignTopTo(startEndless.bottom());
         settings.setText("Settings");
     }
@@ -90,7 +90,7 @@ public class UIHandler {
         UIContainer menuContainer =  new UIContainer();
         this.root.addChild(menuContainer);
         menuContainer.fillParentHeight();
-        menuContainer.setWidth(Dimen.menuWidth);
+        menuContainer.setWidth(Dimen.menuWidth());
         menuContainer.alignCenterX();
 
         // Title
@@ -100,7 +100,7 @@ public class UIHandler {
         storyTitle.fillParentWidth();
         storyTitle.alignTop();
         storyTitle.setText("Story");
-        storyTitle.setTextSize(Dimen.headingTextSize);
+        storyTitle.setTextSize(Dimen.headingTextSize());
 
         // --- Level 1 ---
         UIContainer level_1_container = new UIContainer();
@@ -523,7 +523,11 @@ public class UIHandler {
         UIButton resChangerRight = new UIButton() {
             protected void onClick() {
                 println("Right!");
-                if (Dimen.currentResolution == Dimen.resolutions.length) return;
+                if (Dimen.currentResolution == Dimen.availableResolutions.size()) {
+                    this.setFill(new Colour(0, 0, 0, 127));
+                    return;
+                }
+                this.setFill(null);
                 Dimen.currentResolution += 1;
                 surface.setSize(Dimen.currentSizeX(), Dimen.currentSizeY());
                 this.handler.settings_menu();
