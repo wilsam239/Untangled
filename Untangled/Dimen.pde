@@ -10,7 +10,7 @@ public static class Dimen {
     };
 
     public static int currentResolution = 0;
-    
+
     public static PVector currentSize() {
         return Dimen.resolutions[Dimen.currentResolution];
     }
@@ -81,6 +81,10 @@ public static class Dimen {
     }
     public static float menuHeight() {
         return Dimen.menuHeight * Dimen.displayRatio();
+    }
+
+    public static float storyMenuPadding() {
+        return Dimen.menuHeight() / 10;
     }
 
     

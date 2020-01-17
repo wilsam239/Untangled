@@ -35,7 +35,7 @@ class Vertex {
         // Draw the ellipse. Default ellipseMode is CENTER, so the x and y position is the center of the ellipse.
         fill(this.fillColour);
         stroke(Colours.vertexStroke);
-        ellipse(this.x(), this.y(), Dimen.vertexDim, Dimen.vertexDim);
+        ellipse(this.x(), this.y(), Dimen.vertexDim(), Dimen.vertexDim());
     }
 
     public void select() {
@@ -62,18 +62,18 @@ class Vertex {
     }
 
     public void move(float xPos, float yPos) {
-        if(xPos < Dimen.gameBuffer) {
-            this.position.x = Dimen.gameBuffer;
-        } else if(xPos > Dimen.gameWidth - Dimen.gameBuffer) {
-            this.position.x = Dimen.gameWidth - Dimen.gameBuffer;
+        if(xPos < Dimen.gameBuffer()) {
+            this.position.x = Dimen.gameBuffer();
+        } else if(xPos > Dimen.currentSizeX() - Dimen.gameBuffer()) {
+            this.position.x = Dimen.currentSizeX() - Dimen.gameBuffer();
         } else {
             this.position.x = xPos;
         }
 
-        if(yPos < Dimen.gameBuffer) {
-            this.position.y = Dimen.gameBuffer;
-        } else if(yPos > Dimen.gameHeight - Dimen.gameBuffer) {
-            this.position.y = Dimen.gameHeight - Dimen.gameBuffer;
+        if(yPos < Dimen.gameBuffer()) {
+            this.position.y = Dimen.gameBuffer();
+        } else if(yPos > Dimen.currentSizeY() - Dimen.gameBuffer()) {
+            this.position.y = Dimen.currentSizeY() - Dimen.gameBuffer();
         } else {
             this.position.y = yPos;
         }

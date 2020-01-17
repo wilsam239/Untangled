@@ -14,7 +14,7 @@ void setup() {
     icon = loadImage("icon.png");
     surface.setIcon(icon);
 
-    backgroundImage = loadImage("GameBackground.png");
+    Resources.currentBgImage = loadImage(Resources.currentBgImagePath());
 
     Resources.gentleTouch = createFont("AGentleTouch.ttf", 32);
 
@@ -26,12 +26,12 @@ void setup() {
 
 void draw() {
 
-    image(backgroundImage, 0, 0, 1280, 720);
+    background(Resources.currentBgImage);
     //background(Colours.background);
     
     game.run();
 
-    drawDebug();
+    //drawDebug();
 
     // Clear the current mouse presses so that they are only triggered for one frame.
     Mouse.clearBuffers();

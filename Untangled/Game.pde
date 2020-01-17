@@ -28,7 +28,6 @@ class Game {
     }
 
     public void run() {
-        println(frameRate);
         update();
         draw();
     }

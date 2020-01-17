@@ -195,9 +195,9 @@ public class LevelRandom extends Level {
         fill(0);
         textFont(Resources.gentleTouch);
         textAlign(LEFT);
-        textSize(Dimen.menuTextSize);
+        textSize(Dimen.menuTextSize());
         float width = textWidth("30.000");
-        text(this.timer, Dimen.gameWidth / 2 - width / 2, Dimen.gameAreaStart / 2 + Dimen.menuTextSize / 2);
+        text(this.timer, Dimen.currentSizeX() / 2 - width / 2, Dimen.gameAreaStart() / 2 + Dimen.menuTextSize() / 2);
     }
 
 }

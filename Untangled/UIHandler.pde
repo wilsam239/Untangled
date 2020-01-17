@@ -53,6 +53,7 @@ public class UIHandler {
         startStory.setHeight(Dimen.menuHeight());
         startStory.alignTop();
         startStory.setText("Story");
+        startStory.setTextSize(Dimen.menuTextSize());
 
         // Endless Game Button
         UIButton startEndless = new UIButton() {
@@ -68,6 +69,7 @@ public class UIHandler {
         startEndless.setHeight(Dimen.menuHeight());
         startEndless.alignTopTo(startStory.bottom());
         startEndless.setText("Endless");
+        startEndless.setTextSize(Dimen.menuTextSize());
 
         // Settings Button
         UIButton settings = new UIButton() {
@@ -82,6 +84,7 @@ public class UIHandler {
         settings.setHeight(Dimen.menuHeight());
         settings.alignTopTo(startEndless.bottom());
         settings.setText("Settings");
+        settings.setTextSize(Dimen.menuTextSize());
     }
 
     public void story_menu() {
@@ -96,7 +99,7 @@ public class UIHandler {
         // Title
         UIContainer storyTitle = new UIContainer();
         menuContainer.addChild(storyTitle);
-        storyTitle.setHeight(100);
+        storyTitle.setHeight(Dimen.menuHeight() * 2);
         storyTitle.fillParentWidth();
         storyTitle.alignTop();
         storyTitle.setText("Story");
@@ -106,7 +109,7 @@ public class UIHandler {
         UIContainer level_1_container = new UIContainer();
         this.root.addChild(level_1_container);
         level_1_container.fillParentWidth();
-        level_1_container.setHeight(100);
+        level_1_container.setHeight(Dimen.menuHeight() * 2);
         level_1_container.alignTopTo(storyTitle.bottom());
         level_1_container.setFill(new Colour(55, 55, 128, 32));
         
@@ -114,14 +117,14 @@ public class UIHandler {
         UIContainer level_1_title = new UIContainer();
         level_1_container.addChild(level_1_title);
         level_1_title.fillParentWidth();
-        level_1_title.setHeight(40);
+        level_1_title.setHeight(Dimen.menuHeight());
         level_1_title.alignTop();
         level_1_title.setText("Level 1");
-        level_1_title.setTextSize(32);
+        level_1_title.setTextSize(Dimen.menuTextSize());
         
         UIContainer level_1_level_container = new UIContainer();
         level_1_container.addChild(level_1_level_container);
-        level_1_level_container.setHeight(60);
+        level_1_level_container.setHeight(Dimen.menuHeight());
         level_1_level_container.alignBottom();
 
         // -- Level 1-1 --
@@ -135,10 +138,10 @@ public class UIHandler {
         };
         level_1_level_container.addChild(level_1_1);
         level_1_1.handler = this;
-        level_1_1.setWidth(50);
-        level_1_1.setHeight(50);
+        level_1_1.setWidth(Dimen.menuHeight());
+        level_1_1.setHeight(Dimen.menuHeight());
         level_1_1.alignCenterY();
-        level_1_1.alignLeftTo(level_1_level_container.left() + 5);
+        level_1_1.alignLeftTo(level_1_level_container.left() + Dimen.storyMenuPadding());
         level_1_1.setText("1");
 
         // -- Level 1-2 --
@@ -152,10 +155,10 @@ public class UIHandler {
         };
         level_1_level_container.addChild(level_1_2);
         level_1_2.handler = this;
-        level_1_2.setWidth(50);
-        level_1_2.setHeight(50);
+        level_1_2.setWidth(Dimen.menuHeight());
+        level_1_2.setHeight(Dimen.menuHeight());
         level_1_2.alignCenterY();
-        level_1_2.alignLeftTo(level_1_1.right() + 5);
+        level_1_2.alignLeftTo(level_1_1.right() + Dimen.storyMenuPadding());
         level_1_2.setText("2");
 
 
@@ -170,10 +173,10 @@ public class UIHandler {
         };
         level_1_level_container.addChild(level_1_3);
         level_1_3.handler = this;
-        level_1_3.setWidth(50);
-        level_1_3.setHeight(50);
+        level_1_3.setWidth(Dimen.menuHeight());
+        level_1_3.setHeight(Dimen.menuHeight());
         level_1_3.alignCenterY();
-        level_1_3.alignLeftTo(level_1_2.right() + 5);
+        level_1_3.alignLeftTo(level_1_2.right() + Dimen.storyMenuPadding());
         level_1_3.setText("3");
 
         // -- Level 1-4 --
@@ -187,10 +190,10 @@ public class UIHandler {
         };
         level_1_level_container.addChild(level_1_4);
         level_1_4.handler = this;
-        level_1_4.setWidth(50);
-        level_1_4.setHeight(50);
+        level_1_4.setWidth(Dimen.menuHeight());
+        level_1_4.setHeight(Dimen.menuHeight());
         level_1_4.alignCenterY();
-        level_1_4.alignLeftTo(level_1_3.right() + 5);
+        level_1_4.alignLeftTo(level_1_3.right() + Dimen.storyMenuPadding());
         level_1_4.setText("4");
 
         // -- Level 1-5 --
@@ -204,10 +207,10 @@ public class UIHandler {
         };
         level_1_level_container.addChild(level_1_5);
         level_1_5.handler = this;
-        level_1_5.setWidth(50);
-        level_1_5.setHeight(50);
+        level_1_5.setWidth(Dimen.menuHeight());
+        level_1_5.setHeight(Dimen.menuHeight());
         level_1_5.alignCenterY();
-        level_1_5.alignLeftTo(level_1_4.right() + 5);
+        level_1_5.alignLeftTo(level_1_4.right() + Dimen.storyMenuPadding());
         level_1_5.setText("5");
 
         // -- Level 1-6 --
@@ -221,10 +224,10 @@ public class UIHandler {
         };
         level_1_level_container.addChild(level_1_6);
         level_1_6.handler = this;
-        level_1_6.setWidth(50);
-        level_1_6.setHeight(50);
+        level_1_6.setWidth(Dimen.menuHeight());
+        level_1_6.setHeight(Dimen.menuHeight());
         level_1_6.alignCenterY();
-        level_1_6.alignLeftTo(level_1_5.right() + 5);
+        level_1_6.alignLeftTo(level_1_5.right() + Dimen.storyMenuPadding());
         level_1_6.setText("6");
 
         // -- Level 1-7 --
@@ -238,10 +241,10 @@ public class UIHandler {
         };
         level_1_level_container.addChild(level_1_7);
         level_1_7.handler = this;
-        level_1_7.setWidth(50);
-        level_1_7.setHeight(50);
+        level_1_7.setWidth(Dimen.menuHeight());
+        level_1_7.setHeight(Dimen.menuHeight());
         level_1_7.alignCenterY();
-        level_1_7.alignLeftTo(level_1_6.right() + 5);
+        level_1_7.alignLeftTo(level_1_6.right() + Dimen.storyMenuPadding());
         level_1_7.setText("7");
 
         // -- Level 1-8 --
@@ -255,10 +258,10 @@ public class UIHandler {
         };
         level_1_level_container.addChild(level_1_8);
         level_1_8.handler = this;
-        level_1_8.setWidth(50);
-        level_1_8.setHeight(50);
+        level_1_8.setWidth(Dimen.menuHeight());
+        level_1_8.setHeight(Dimen.menuHeight());
         level_1_8.alignCenterY();
-        level_1_8.alignLeftTo(level_1_7.right() + 5);
+        level_1_8.alignLeftTo(level_1_7.right() + Dimen.storyMenuPadding());
         level_1_8.setText("8");
 
         // -- Level 1-9 --
@@ -272,10 +275,10 @@ public class UIHandler {
         };
         level_1_level_container.addChild(level_1_9);
         level_1_9.handler = this;
-        level_1_9.setWidth(50);
-        level_1_9.setHeight(50);
+        level_1_9.setWidth(Dimen.menuHeight());
+        level_1_9.setHeight(Dimen.menuHeight());
         level_1_9.alignCenterY();
-        level_1_9.alignLeftTo(level_1_8.right() + 5);
+        level_1_9.alignLeftTo(level_1_8.right() + Dimen.storyMenuPadding());
         level_1_9.setText("9");
 
         level_1_level_container.fitToChildrenX();
@@ -292,8 +295,8 @@ public class UIHandler {
         };
         menuContainer.addChild(back);
         back.handler = this;
-        back.setWidth(Dimen.menuWidth);
-        back.setHeight(Dimen.menuHeight);
+        back.setWidth(Dimen.menuWidth());
+        back.setHeight(Dimen.menuHeight());
         back.alignBottom();
         back.alignCenterX();
         back.setText("Back");
@@ -508,6 +511,7 @@ public class UIHandler {
                 if (Dimen.currentResolution == 0) return;
                 Dimen.currentResolution -= 1;
                 surface.setSize(Dimen.currentSizeX(), Dimen.currentSizeY());
+                Resources.currentBgImage = loadImage(Resources.currentBgImagePath());
                 this.handler.settings_menu();
             }
         };
@@ -523,13 +527,14 @@ public class UIHandler {
         UIButton resChangerRight = new UIButton() {
             protected void onClick() {
                 println("Right!");
-                if (Dimen.currentResolution == Dimen.availableResolutions.size()) {
+                if (Dimen.currentResolution == Dimen.availableResolutions.size() - 1) {
                     this.setFill(new Colour(0, 0, 0, 127));
                     return;
                 }
                 this.setFill(null);
                 Dimen.currentResolution += 1;
                 surface.setSize(Dimen.currentSizeX(), Dimen.currentSizeY());
+                Resources.currentBgImage = loadImage(Resources.currentBgImagePath());
                 this.handler.settings_menu();
             }
         };
@@ -562,8 +567,8 @@ public class UIHandler {
         };
         menuContainer.addChild(newLevel);
         newLevel.handler = this;
-        newLevel.setWidth(Dimen.menuWidth);
-        newLevel.setHeight(Dimen.menuHeight);
+        newLevel.setWidth(Dimen.menuWidth());
+        newLevel.setHeight(Dimen.menuHeight());
         newLevel.setText("New Level");
 
         // Load Level
@@ -575,8 +580,8 @@ public class UIHandler {
         };
         menuContainer.addChild(loadLevel);
         loadLevel.handler = this;
-        loadLevel.setWidth(Dimen.menuWidth);
-        loadLevel.setHeight(Dimen.menuHeight);
+        loadLevel.setWidth(Dimen.menuWidth());
+        loadLevel.setHeight(Dimen.menuHeight());
         loadLevel.alignTopTo(newLevel.bottom());
         loadLevel.setText("Load Level");
 
@@ -589,8 +594,8 @@ public class UIHandler {
         };
         menuContainer.addChild(backBtn);
         backBtn.handler = this;
-        backBtn.setWidth(Dimen.menuWidth);
-        backBtn.setHeight(Dimen.menuHeight);
+        backBtn.setWidth(Dimen.menuWidth());
+        backBtn.setHeight(Dimen.menuHeight());
         backBtn.alignTopTo(loadLevel.bottom());
         backBtn.setText("Back");
 
@@ -616,11 +621,12 @@ public class UIHandler {
 
         UIContainer hint = new UIContainer();
         this.root.addChild(hint);
-        hint.setHeight(Dimen.menuHeight);
-        hint.setWidth(150);
+        hint.setHeight(Dimen.menuHeight());
+        hint.setWidth(Dimen.menuWidth());
         hint.alignBottom();
         hint.alignRight();
         hint.setText("Press 'esc' to open menu");
+        hint.setTextSize(Dimen.menuTextSize());
     }
 
     public void level_editor_esc() {
@@ -635,9 +641,10 @@ public class UIHandler {
         };
         menuContainer.addChild(save);
         save.handler = this;
-        save.setWidth(Dimen.menuWidth);
-        save.setHeight(Dimen.menuHeight);
+        save.setWidth(Dimen.menuWidth());
+        save.setHeight(Dimen.menuHeight());
         save.setText("Save");
+        save.setTextSize(Dimen.menuTextSize());
 
         UIButton exit = new UIButton() {
             protected void onClick() {
@@ -647,10 +654,11 @@ public class UIHandler {
         };
         menuContainer.addChild(exit);
         exit.handler = this;
-        exit.setWidth(Dimen.menuWidth);
-        exit.setHeight(Dimen.menuHeight);
+        exit.setWidth(Dimen.menuWidth());
+        exit.setHeight(Dimen.menuHeight());
         exit.alignTopTo(save.bottom());
         exit.setText("Exit");
+        exit.setTextSize(Dimen.menuTextSize());
 
         menuContainer.fitToChildren();
         menuContainer.alignCenterWithChildren();
@@ -662,7 +670,7 @@ public class UIHandler {
 
         UIContainer menuContainer = new UIContainer();
         this.root.addChild(menuContainer);
-        menuContainer.setWidth(Dimen.menuWidth);
+        menuContainer.setWidth(Dimen.menuWidth());
         menuContainer.setPadding(10);
 
         UITextInput levelName = new UITextInput() {
@@ -675,8 +683,9 @@ public class UIHandler {
         menuContainer.addChild(levelName);
         levelName.handler = this;
         levelName.fillParentWidth();
-        levelName.setHeight(Dimen.menuHeight);
+        levelName.setHeight(Dimen.menuHeight());
         levelName.setHint("enter level name");
+        levelName.setTextSize(Dimen.menuTextSize());
 
         UIButton cancel = new UIButton() {
             protected void onClick() {
@@ -687,10 +696,11 @@ public class UIHandler {
         menuContainer.addChild(cancel);
         cancel.handler = this;
         cancel.setWidth(menuContainer.width() / 2);
-        cancel.setHeight(Dimen.menuHeight);
+        cancel.setHeight(Dimen.menuHeight());
         cancel.alignLeft();
         cancel.alignTopTo(levelName.bottom());
         cancel.setText("Cancel");
+        cancel.setTextSize(Dimen.menuTextSize());
 
         UIButton save = new UIButton() {
             protected void onClick() {
@@ -703,10 +713,11 @@ public class UIHandler {
         save.handler = this;
         save.linkedTextInput = levelName;
         save.setWidth(menuContainer.width() / 2);
-        save.setHeight(Dimen.menuHeight);
+        save.setHeight(Dimen.menuHeight());
         save.alignLeftTo(cancel.right());
         save.alignTopTo(levelName.bottom());
         save.setText("Save");
+        save.setTextSize(Dimen.menuTextSize());
 
         menuContainer.fitToChildren();
         menuContainer.alignCenterWithChildren();

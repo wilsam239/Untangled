@@ -25,7 +25,7 @@ abstract class Level {
 
             switch (params[0]) {
                 case "v": {
-                    Vertex temp = new Vertex(float(params[1]), float(params[2]));
+                    Vertex temp = new Vertex(float(params[1]) * Dimen.displayRatio(), float(params[2]) * Dimen.displayRatio());
                     this.vertices.add(temp);
                     break;
                 }
@@ -54,7 +54,7 @@ abstract class Level {
         // Draw the levels bounds.
         stroke(Colours.thundercloud.R, Colours.thundercloud.G, Colours.thundercloud.B);
         fill(Colours.crossbones.R, Colours.crossbones.G, Colours.crossbones.B, Colours.crossbones.A);
-        rect(Dimen.gameAreaStart, Dimen.gameAreaStart, Dimen.gameWidth - 2 * Dimen.gameAreaStart, Dimen.gameHeight - 2 * Dimen.gameAreaStart);
+        rect(Dimen.gameAreaStart(), Dimen.gameAreaStart(), Dimen.currentSizeX() - 2 * Dimen.gameAreaStart(), Dimen.currentSizeY() - 2 * Dimen.gameAreaStart());
     }
 
     public void invalidMove() {
