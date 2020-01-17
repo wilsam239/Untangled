@@ -10,6 +10,7 @@ public static class Dimen {
     };
 
     public static int currentResolution = 0;
+    
     public static PVector currentSize() {
         return Dimen.resolutions[Dimen.currentResolution];
     }

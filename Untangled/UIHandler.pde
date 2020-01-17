@@ -22,7 +22,7 @@ public class UIHandler {
         this.resetRoot();
 
         // Title Image Container
-        PImage titleImage = loadImage("UntangledLogoPortrait_360.png");
+        PImage titleImage = loadImage(Resources.currentLogo());
 
         UIContainer titleContainer = new UIContainer();
         this.root.addChild(titleContainer);
