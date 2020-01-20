@@ -23,7 +23,7 @@ class LevelIO {
         this.output = createWriter(fileName);
 
         for(Vertex v : level.vertices) {
-            this.output.println("v " + v.x() + " " + v.y());
+            this.output.println("v " + v.x() / Dimen.displayRatio() + " " + v.y() / Dimen.displayRatio());
         }
         for(Edge e : level.edges) {
             this.output.println("e " + level.vertices.indexOf(e.getStart()) + " " + level.vertices.indexOf(e.getEnd()));
