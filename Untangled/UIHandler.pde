@@ -524,9 +524,9 @@ public class UIHandler {
 
         UIButton hard = new UIButton() {
             protected void onClick() {
-                println("Creating new Endless game!\nTODO: Change difficulty on selection!");
+                println("Creating new Endless game!");
                 this.handler.resetRoot();
-                this.handler.game.currentLevel = new LevelRandom(this.handler.game);
+                this.handler.game.currentLevel = new LevelRandom(this.handler.game, true);
             }
         };
         menuContainer.addChild(hard);
@@ -538,9 +538,9 @@ public class UIHandler {
         
         UIButton easy = new UIButton() {
             protected void onClick() {
-                println("Creating new Endless game!\nTODO: Change difficulty on selection!");
+                println("Creating new Endless game!");
                 this.handler.resetRoot();
-                this.handler.game.currentLevel = new LevelRandom(this.handler.game);
+                this.handler.game.currentLevel = new LevelRandom(this.handler.game, false);
             }
         };
         menuContainer.addChild(easy);
@@ -577,8 +577,15 @@ public class UIHandler {
         this.root.addChild(menuContainer);
         menuContainer.setFill(Colours.waterfall);
 
-        int levelsCompleted = ((LevelRandom) this.game.currentLevel).getDifficulty() - LevelRandom.difficultyStart;
-        float timeLasted = int(LevelRandom.timerStart + levelsCompleted * 5);
+        int levelsCompleted;
+        float timeLasted;
+        if (((LevelRandom) this.game.currentLevel).isHard()) {
+            levelsCompleted = ((LevelRandom) this.game.currentLevel).getDifficulty() - LevelRandom.difficultyHardStart;
+            timeLasted = int(LevelRandom.timerHardStart + levelsCompleted * 5);
+        } else {
+            levelsCompleted = ((LevelRandom) this.game.currentLevel).getDifficulty() - LevelRandom.difficultyEasyStart;
+            timeLasted = int(LevelRandom.timerEasyStart + levelsCompleted * 5);
+        }
 
         UIContainer levels = new UIContainer();
         menuContainer.addChild(levels);
@@ -621,7 +628,7 @@ public class UIHandler {
             protected void onClick() {
                 println("Restarting Endless!");
                 this.handler.resetRoot();
-                this.handler.game.currentLevel = new LevelRandom(this.handler.game);
+                this.handler.game.currentLevel = new LevelRandom(this.handler.game, ((LevelRandom) this.handler.game.currentLevel).isHard());
             }
         };
         menuContainer.addChild(restart);

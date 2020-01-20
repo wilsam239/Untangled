@@ -1,28 +1,39 @@
 public class LevelRandom extends Level {
 
-    public static final float timerStart = 30.0;
+    public static final float timerEasyStart = 45.0;
+    public static final float timerHardStart = 30.0;
     private float timer;
     public static final float levelCompleteBonus = 5.0;
 
-    private static final int difficultyStart = 10;
+    private static final int difficultyEasyStart = 8;
+    private static final int difficultyHardStart = 10;
     private int difficulty;
 
     private boolean gameCompleted = false;
+    private boolean isHard;
 
     // A simple constructor for the createing the first random level in an endless game.
-    public LevelRandom(Game game) {
+    public LevelRandom(Game game, boolean isHard) {
         this.game = game;
-        this.difficulty = LevelRandom.difficultyStart;
-        this.timer = LevelRandom.timerStart;
+        this.isHard = isHard;
+
+        if (this.isHard) {
+            this.difficulty = LevelRandom.difficultyHardStart;
+            this.timer = LevelRandom.timerHardStart;
+        } else {
+            this.difficulty = LevelRandom.difficultyEasyStart;
+            this.timer = LevelRandom.timerEasyStart;
+        }
 
         createRandomLevel();
     }
 
     // Constructor for creating a secondary random level.
-    public LevelRandom(Game game, int difficulty, float timer) {
+    public LevelRandom(Game game, int difficulty, float timer, boolean isHard) {
         this.game = game;
         this.difficulty = difficulty;
         this.timer = timer;
+        this.isHard = isHard;
 
         createRandomLevel();
     }
@@ -183,7 +194,11 @@ public class LevelRandom extends Level {
         println("Level Finished");
         this.timer += LevelRandom.levelCompleteBonus;
         
-        this.game.currentLevel = new LevelRandom(this.game, this.difficulty += 1, this.timer);
+        this.game.currentLevel = new LevelRandom(this.game, this.difficulty += 1, this.timer, this.isHard);
+    }
+
+    public boolean isHard() {
+        return this.isHard;
     }
 
     @Override
