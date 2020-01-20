@@ -59,8 +59,7 @@ public class UIHandler {
         UIButton startEndless = new UIButton() {
             protected void onClick() {
                 println("Endless Game was pressed!");
-                this.handler.resetRoot();
-                this.handler.game.currentLevel = new LevelRandom(this.handler.game);
+                this.handler.endless_menu();
             }
         };
         menuContainer.addChild(startEndless);
@@ -419,7 +418,7 @@ public class UIHandler {
         // Container for the menu.
         UIContainer menuContainer = new UIContainer();
         this.root.addChild(menuContainer);
-        menuContainer.setFill(new Colour(128, 128, 182, 128));
+        menuContainer.setFill(Colours.waterfall);
 
         UIContainer movesMade = new UIContainer();
         menuContainer.addChild(movesMade);
@@ -474,6 +473,7 @@ public class UIHandler {
 
         UIContainer menuContainer = new UIContainer();
         this.root.addChild(menuContainer);
+        menuContainer.setFill(Colours.waterfall);
 
         UIButton resetLevel = new UIButton() {
             protected void onClick() {
@@ -502,10 +502,72 @@ public class UIHandler {
 
         menuContainer.fitToChildren();
         menuContainer.alignCenterWithChildren();
-
     }
 
     // ----- Endless Mode -----
+
+    public void endless_menu() {
+        this.resetRoot();
+
+        // The Endless title
+        UIContainer title = new UIContainer();
+        this.root.addChild(title);
+        title.setHeight(Dimen.menuHeight() * 2);
+        title.fillParentWidth();
+        title.alignTop();
+        title.setText("Endless");
+        title.setTextSize(Dimen.headingTextSize());
+
+        // Menu Container
+        UIContainer menuContainer = new UIContainer();
+        this.root.addChild(menuContainer);
+
+        UIButton hard = new UIButton() {
+            protected void onClick() {
+                println("Creating new Endless game!\nTODO: Change difficulty on selection!");
+                this.handler.resetRoot();
+                this.handler.game.currentLevel = new LevelRandom(this.handler.game);
+            }
+        };
+        menuContainer.addChild(hard);
+        hard.handler = this;
+        hard.setWidth(Dimen.menuWidth());
+        hard.setHeight(Dimen.menuHeight());
+        hard.setText("Hard");
+        hard.setTextSize(Dimen.menuTextSize());
+        
+        UIButton easy = new UIButton() {
+            protected void onClick() {
+                println("Creating new Endless game!\nTODO: Change difficulty on selection!");
+                this.handler.resetRoot();
+                this.handler.game.currentLevel = new LevelRandom(this.handler.game);
+            }
+        };
+        menuContainer.addChild(easy);
+        easy.handler = this;
+        easy.setWidth(Dimen.menuWidth());
+        easy.setHeight(Dimen.menuHeight());
+        easy.alignTopTo(hard.bottom());
+        easy.setText("Easy");
+        easy.setTextSize(Dimen.menuTextSize());
+
+        UIButton backBtn = new UIButton() {
+            protected void onClick() {
+                println("Back!");
+                this.handler.main_menu();
+            }
+        };
+        menuContainer.addChild(backBtn);
+        backBtn.handler = this;
+        backBtn.setWidth(Dimen.menuWidth());
+        backBtn.setHeight(Dimen.menuHeight());
+        backBtn.alignTopTo(easy.bottom());
+        backBtn.setText("Back");
+        backBtn.setTextSize(Dimen.menuTextSize());
+
+        menuContainer.fitToChildren();
+        menuContainer.alignCenterWithChildren();
+    }
 
     public void endless_finished() {
         this.resetRoot();
@@ -513,6 +575,7 @@ public class UIHandler {
         // Menu Container
         UIContainer menuContainer = new UIContainer();
         this.root.addChild(menuContainer);
+        menuContainer.setFill(Colours.waterfall);
 
         int levelsCompleted = ((LevelRandom) this.game.currentLevel).getDifficulty() - LevelRandom.difficultyStart;
         float timeLasted = int(LevelRandom.timerStart + levelsCompleted * 5);
@@ -541,6 +604,43 @@ public class UIHandler {
         exit.setWidth(Dimen.menuWidth);
         exit.setHeight(Dimen.menuHeight);
         exit.alignTopTo(time.bottom());
+        exit.setText("Exit");
+
+        menuContainer.fitToChildren();
+        menuContainer.alignCenterWithChildren();
+    }
+
+    public void endless_esc() {
+        this.resetRoot();
+
+        UIContainer menuContainer = new UIContainer();
+        this.root.addChild(menuContainer);
+        menuContainer.setFill(Colours.waterfall);
+
+        UIButton restart = new UIButton() {
+            protected void onClick() {
+                println("Restarting Endless!");
+                this.handler.resetRoot();
+                this.handler.game.currentLevel = new LevelRandom(this.handler.game);
+            }
+        };
+        menuContainer.addChild(restart);
+        restart.handler = this;
+        restart.setWidth(Dimen.menuWidth);
+        restart.setHeight(Dimen.menuHeight);
+        restart.setText("Restart");
+
+        UIButton exit = new UIButton() {
+            protected void onClick() {
+                this.handler.game.currentLevel = null;
+                this.handler.endless_menu();
+            }
+        };
+        menuContainer.addChild(exit);
+        exit.handler = this;
+        exit.setWidth(Dimen.menuWidth);
+        exit.setHeight(Dimen.menuHeight);
+        exit.alignTopTo(restart.bottom());
         exit.setText("Exit");
 
         menuContainer.fitToChildren();

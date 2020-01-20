@@ -175,7 +175,7 @@ public class LevelRandom extends Level {
     @Override
     protected void openEscMenu() {
         println("TODO: Make an esc menu for endless, shouldn't pause timer!");
-        this.game.uiHandler.story_esc();
+        this.game.uiHandler.endless_esc();
     }
 
     @Override
