@@ -268,9 +268,9 @@ public class UIHandler {
         UIButton level_1_9 = new UIButton() {
             protected void onClick() {
                 println("Loading Level 1-9");
-                //LevelStory level = new LevelStory(this.handler.game, 9);
-                //this.handler.game.currentLevel = level;
-                //this.handler.resetRoot();
+                LevelStory level = new LevelStory(this.handler.game, 9);
+                this.handler.game.currentLevel = level;
+                this.handler.resetRoot();
             }
         };
         level_1_level_container.addChild(level_1_9);
