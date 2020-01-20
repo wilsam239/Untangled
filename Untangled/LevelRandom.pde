@@ -3,7 +3,8 @@ public class LevelRandom extends Level {
     public static final float timerEasyStart = 45.0;
     public static final float timerHardStart = 30.0;
     private float timer;
-    public static final float levelCompleteBonus = 5.0;
+    public static final float levelCompleteEasyBonus = 7.5;
+    public static final float levelCompleteHardBonus = 5.0;
 
     private static final int difficultyEasyStart = 8;
     private static final int difficultyHardStart = 10;
@@ -192,7 +193,8 @@ public class LevelRandom extends Level {
     @Override
     protected void onSolve() {
         println("Level Finished");
-        this.timer += LevelRandom.levelCompleteBonus;
+        if (this.isHard) this.timer += LevelRandom.levelCompleteHardBonus;
+        else this.timer += LevelRandom.levelCompleteEasyBonus;
         
         this.game.currentLevel = new LevelRandom(this.game, this.difficulty += 1, this.timer, this.isHard);
     }

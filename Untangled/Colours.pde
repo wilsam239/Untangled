@@ -10,6 +10,9 @@ public static class Colours {
     // In memoriam of Ethan Charles Pamplin
     public static final Colour thundercloud = new Colour(81, 85, 90);
     public static final Colour waterfall = new Colour(229, 243, 246);
+    public static final Colour waterfallSqrd = new Colour(206, 232, 237);
+
+    public static final Colour redUI = new Colour(255, 128, 128);
 
     public static final Colour crossbones = new Colour(255, 255, 255, 0);
 

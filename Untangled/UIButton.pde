@@ -4,6 +4,8 @@ class UIButton extends UIElement {
 
     private boolean hovered = false;
 
+    private Colour hoverColour = Colours.waterfallSqrd;
+
     public UITextInput linkedTextInput = null;
 
     public UIButton() { }
@@ -78,9 +80,13 @@ class UIButton extends UIElement {
         println("WARNING: UIButton.onClick() should be defined on a per-instance basis!");
     }
 
+    public void setHoverColour(Colour colour) {
+        this.hoverColour = colour;
+    }
+
     @Override
     public void draw() {
-        fill(Colours.waterfall.R, Colours.waterfall.G, Colours.waterfall.B, this.hoverTimer);
+        fill(this.hoverColour.R,this.hoverColour.G, this.hoverColour.B, this.hoverTimer);
         rect(this.x(), this.y(), this.width(), this.height());
         super.draw();
     }

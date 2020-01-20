@@ -581,10 +581,10 @@ public class UIHandler {
         float timeLasted;
         if (((LevelRandom) this.game.currentLevel).isHard()) {
             levelsCompleted = ((LevelRandom) this.game.currentLevel).getDifficulty() - LevelRandom.difficultyHardStart;
-            timeLasted = int(LevelRandom.timerHardStart + levelsCompleted * 5);
+            timeLasted = int(LevelRandom.timerHardStart + levelsCompleted * LevelRandom.levelCompleteHardBonus);
         } else {
             levelsCompleted = ((LevelRandom) this.game.currentLevel).getDifficulty() - LevelRandom.difficultyEasyStart;
-            timeLasted = int(LevelRandom.timerEasyStart + levelsCompleted * 5);
+            timeLasted = int(LevelRandom.timerEasyStart + levelsCompleted * LevelRandom.levelCompleteEasyBonus);
         }
 
         UIContainer levels = new UIContainer();
@@ -714,15 +714,12 @@ public class UIHandler {
         resChangerLeft.alignLeft();
         resChangerLeft.setText("<");
         resChangerLeft.setTextSize(Dimen.menuTextSize());
+        if (Dimen.currentResolution == 0) resChangerLeft.setHoverColour(Colours.redUI);
 
         UIButton resChangerRight = new UIButton() {
             protected void onClick() {
                 println("Right!");
-                if (Dimen.currentResolution == Dimen.availableResolutions.size() - 1) {
-                    this.setFill(new Colour(0, 0, 0, 127));
-                    return;
-                }
-                this.setFill(null);
+                if (Dimen.currentResolution == Dimen.availableResolutions.size() - 1) return;
                 Dimen.currentResolution += 1;
                 surface.setSize(Dimen.currentSizeX(), Dimen.currentSizeY());
                 Resources.currentBgImage = loadImage(Resources.currentBgImagePath());
@@ -737,6 +734,7 @@ public class UIHandler {
         resChangerRight.alignRight();
         resChangerRight.setText(">");
         resChangerRight.setTextSize(Dimen.menuTextSize());
+        if (Dimen.currentResolution == Dimen.availableResolutions.size() - 1) resChangerRight.setHoverColour(Colours.redUI);
 
         UIButton backBtn = new UIButton() {
             protected void onClick() {
