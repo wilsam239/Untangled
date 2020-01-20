@@ -12,6 +12,14 @@ abstract class Level {
 
     protected String filePath = null;
 
+    public String getFilePath() {
+        return this.filePath;
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
+
     // Load the level from the file
     protected void loadFromFile() {
         if (this.filePath == null) {

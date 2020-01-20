@@ -653,6 +653,7 @@ public class UIHandler {
         newLevel.setWidth(Dimen.menuWidth());
         newLevel.setHeight(Dimen.menuHeight());
         newLevel.setText("New Level");
+        newLevel.setTextSize(Dimen.menuTextSize());
 
         // Load Level
         UIButton loadLevel = new UIButton() {
@@ -667,6 +668,7 @@ public class UIHandler {
         loadLevel.setHeight(Dimen.menuHeight());
         loadLevel.alignTopTo(newLevel.bottom());
         loadLevel.setText("Load Level");
+        loadLevel.setTextSize(Dimen.menuTextSize());
 
         // Back
         UIButton backBtn = new UIButton() {
@@ -681,6 +683,7 @@ public class UIHandler {
         backBtn.setHeight(Dimen.menuHeight());
         backBtn.alignTopTo(loadLevel.bottom());
         backBtn.setText("Back");
+        backBtn.setTextSize(Dimen.menuTextSize());
 
         menuContainer.fitToChildren();
         menuContainer.alignCenterWithChildren();
@@ -717,17 +720,17 @@ public class UIHandler {
         UIContainer menuContainer = new UIContainer();
         this.root.addChild(menuContainer);
 
-        UIButton save = new UIButton() {
+        UIButton saveas = new UIButton() {
             protected void onClick() {
-                this.handler.level_editor_esc_save();
+                this.handler.level_editor_esc_saveas();
             }
         };
-        menuContainer.addChild(save);
-        save.handler = this;
-        save.setWidth(Dimen.menuWidth());
-        save.setHeight(Dimen.menuHeight());
-        save.setText("Save");
-        save.setTextSize(Dimen.menuTextSize());
+        menuContainer.addChild(saveas);
+        saveas.handler = this;
+        saveas.setWidth(Dimen.menuWidth());
+        saveas.setHeight(Dimen.menuHeight());
+        saveas.setText("Save As...");
+        saveas.setTextSize(Dimen.menuTextSize());
 
         UIButton exit = new UIButton() {
             protected void onClick() {
@@ -739,16 +742,71 @@ public class UIHandler {
         exit.handler = this;
         exit.setWidth(Dimen.menuWidth());
         exit.setHeight(Dimen.menuHeight());
-        exit.alignTopTo(save.bottom());
+        exit.alignTopTo(saveas.bottom());
         exit.setText("Exit");
         exit.setTextSize(Dimen.menuTextSize());
 
+        if (this.game.currentLevel.getFilePath() != null) {
+            UIButton save = new UIButton() {
+                protected void onClick() {
+                    this.handler.level_editor_esc_save();
+                }
+            };
+            menuContainer.addChild(save);
+            save.handler = this;
+            save.setWidth(Dimen.menuWidth());
+            save.setHeight(Dimen.menuHeight());
+            save.setText("Save");
+            save.setTextSize(Dimen.menuTextSize());
+
+            saveas.alignTopTo(save.bottom());
+            exit.alignTopTo(saveas.bottom());
+        }
+
         menuContainer.fitToChildren();
         menuContainer.alignCenterWithChildren();
-
     }
 
+    // Save the open level to its file.
     public void level_editor_esc_save() {
+        this.resetRoot();
+        // First check that this level did indeed get loaded from a file.
+        if (this.game.currentLevel.getFilePath() == null) this.level_editor_esc_saveas();
+
+    
+        println("Saving level to file.");
+        this.game.levelIO.saveLevelToFile(this.game.currentLevel, this.game.currentLevel.getFilePath());
+
+        UIContainer menuContainer = new UIContainer();
+        this.root.addChild(menuContainer);
+
+        UIContainer saved = new UIContainer();
+        menuContainer.addChild(saved);
+        saved.setWidth(Dimen.menuWidth());
+        saved.setHeight(Dimen.menuHeight());
+        saved.setText("Level Saved!");
+        saved.setTextSize(Dimen.menuTextSize());
+
+        UIButton okay = new UIButton() {
+            protected void onClick() {
+                println("Okay");
+                this.handler.level_editor_esc();
+            }
+        };
+        menuContainer.addChild(okay);
+        okay.handler = this;
+        okay.setWidth(Dimen.menuWidth());
+        okay.setHeight(Dimen.menuHeight());
+        okay.alignTopTo(saved.bottom());
+        okay.setText("Okay");
+        okay.setTextSize(Dimen.menuTextSize());
+
+        menuContainer.fitToChildren();
+        menuContainer.alignCenterWithChildren();
+    }
+
+    // Save the level to a new file.
+    public void level_editor_esc_saveas() {
         this.resetRoot();
 
         UIContainer menuContainer = new UIContainer();
@@ -759,7 +817,9 @@ public class UIHandler {
         UITextInput levelName = new UITextInput() {
             protected void onSubmit() {
                 println("Saving level to file.");
-                this.handler.game.levelIO.saveLevelToFile(this.handler.game.currentLevel, "levels/" + this.getInput() + ".utg");
+                String filePath = "levels/" + this.getInput() + ".utg";
+                this.handler.game.levelIO.saveLevelToFile(this.handler.game.currentLevel, filePath);
+                this.handler.game.currentLevel.setFilePath(filePath);
                 this.handler.level_editor_esc();
             }
         };
