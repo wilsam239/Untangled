@@ -67,8 +67,8 @@ public class LevelRandom extends Level {
         
         // For each vertex, calculate its position in the circle.
         for (int i = 0; i < vertexCount; i++) {
-            float x = cos(step * i) * distance + (Dimen.gameWidth / 2);
-            float y = sin(step * i) * distance + (Dimen.gameHeight / 2);
+            float x = cos(step * i) * distance + (Dimen.currentSizeX() / 2);
+            float y = sin(step * i) * distance + (Dimen.currentSizeY() / 2);
 
             this.vertices.get(i).move(x, y);
         }
@@ -134,8 +134,8 @@ public class LevelRandom extends Level {
     // Randomise the placement of each vertex.
     private void randomisePlacement() {
         for (Vertex v : this.vertices) {
-            float vertexX = random(Dimen.vertexBuffer, Dimen.gameWidth - Dimen.vertexBuffer);
-            float vertexY = random(Dimen.vertexBuffer, Dimen.gameHeight - Dimen.vertexBuffer);
+            float vertexX = random(Dimen.vertexBuffer(), Dimen.currentSizeX() - Dimen.vertexBuffer());
+            float vertexY = random(Dimen.vertexBuffer(), Dimen.currentSizeY() - Dimen.vertexBuffer());
 
             v.move(vertexX, vertexY);
         }
