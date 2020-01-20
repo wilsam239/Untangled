@@ -71,6 +71,21 @@ public class UIHandler {
         startEndless.setText("Endless");
         startEndless.setTextSize(Dimen.menuTextSize());
 
+
+        UIButton startEditor = new UIButton() {
+            protected void onClick() {
+                println("Level Editor!");
+                this.handler.level_editor_select();
+            }
+        };
+        menuContainer.addChild(startEditor);
+        startEditor.handler = this;
+        startEditor.fillParentWidth();
+        startEditor.setHeight(Dimen.menuHeight());
+        startEditor.alignTopTo(startEndless.bottom());
+        startEditor.setText("Level Editor");
+        startEditor.setTextSize(Dimen.menuTextSize());
+
         // Settings Button
         UIButton settings = new UIButton() {
             protected void onClick() {
@@ -82,9 +97,24 @@ public class UIHandler {
         settings.handler = this;
         settings.fillParentWidth();
         settings.setHeight(Dimen.menuHeight());
-        settings.alignTopTo(startEndless.bottom());
+        settings.alignTopTo(startEditor.bottom());
         settings.setText("Settings");
         settings.setTextSize(Dimen.menuTextSize());
+        
+        // Settings Button
+        UIButton exit = new UIButton() {
+            protected void onClick() {
+                println("Exit!");
+                exit();
+            }
+        };
+        menuContainer.addChild(exit);
+        exit.handler = this;
+        exit.fillParentWidth();
+        exit.setHeight(Dimen.menuHeight());
+        exit.alignBottom();
+        exit.setText("Exit");
+        exit.setTextSize(Dimen.menuTextSize());
     }
 
     public void story_menu() {
@@ -520,49 +550,20 @@ public class UIHandler {
     public void settings_menu() {
         this.resetRoot();
 
+        // The Settings title
+        UIContainer title = new UIContainer();
+        this.root.addChild(title);
+        title.setHeight(Dimen.menuHeight() * 2);
+        title.fillParentWidth();
+        title.alignTop();
+        title.setText("Settings");
+        title.setTextSize(Dimen.headingTextSize());
+
         // Menu Container
         UIContainer menuContainer = new UIContainer();
         this.root.addChild(menuContainer);
-        menuContainer.fillParentHeight();
         menuContainer.setWidth(Dimen.menuWidth());
         menuContainer.alignCenterX();
-
-        // The Settings title
-        UIContainer settingsTitle = new UIContainer();
-        menuContainer.addChild(settingsTitle);
-        settingsTitle.setHeight(Dimen.menuHeight() * 2);
-        settingsTitle.fillParentWidth();
-        settingsTitle.alignTop();
-        settingsTitle.setText("Settings");
-        settingsTitle.setTextSize(Dimen.headingTextSize());
-
-        UIButton backBtn = new UIButton() {
-            protected void onClick() {
-                println("Back!");
-                this.handler.main_menu();
-            }
-        };
-        menuContainer.addChild(backBtn);
-        backBtn.handler = this;
-        backBtn.fillParentWidth();
-        backBtn.setHeight(Dimen.menuHeight());
-        backBtn.alignTopTo(settingsTitle.bottom());
-        backBtn.setText("Back");
-        backBtn.setTextSize(Dimen.menuTextSize());
-
-        UIButton levelEditBtn = new UIButton() {
-            protected void onClick() {
-                println("Level Editor!");
-                this.handler.level_editor_select();
-            }
-        };
-        menuContainer.addChild(levelEditBtn);
-        levelEditBtn.handler = this;
-        levelEditBtn.fillParentWidth();
-        levelEditBtn.setHeight(Dimen.menuHeight());
-        levelEditBtn.alignTopTo(backBtn.bottom());
-        levelEditBtn.setText("Level Editor");
-        levelEditBtn.setTextSize(Dimen.menuTextSize());
 
         // Resolution Setting
 
@@ -570,7 +571,7 @@ public class UIHandler {
         menuContainer.addChild(resContainer);
         resContainer.fillParentWidth();
         resContainer.setHeight(Dimen.menuHeight() * 2);
-        resContainer.alignTopTo(levelEditBtn.bottom());
+        resContainer.alignTop();
 
         UIContainer resolution = new UIContainer();
         resContainer.addChild(resolution);
@@ -630,12 +631,39 @@ public class UIHandler {
         resChangerRight.setText(">");
         resChangerRight.setTextSize(Dimen.menuTextSize());
 
+        UIButton backBtn = new UIButton() {
+            protected void onClick() {
+                println("Back!");
+                this.handler.main_menu();
+            }
+        };
+        menuContainer.addChild(backBtn);
+        backBtn.handler = this;
+        backBtn.fillParentWidth();
+        backBtn.setHeight(Dimen.menuHeight());
+        backBtn.alignTopTo(resContainer.bottom());
+        backBtn.setText("Back");
+        backBtn.setTextSize(Dimen.menuTextSize());
+
+        menuContainer.fitToChildrenY();
+        menuContainer.alignCenterWithChildrenY();
+
     }
 
     // ----- LEVEL EDITOR -----
 
     public void level_editor_select() {
         this.resetRoot();
+
+        // The Settings title
+        UIContainer title = new UIContainer();
+        this.root.addChild(title);
+        title.setHeight(Dimen.menuHeight() * 2);
+        title.setWidth(Dimen.menuWidth());
+        title.alignTop();
+        title.alignCenterX();
+        title.setText("Level Editor");
+        title.setTextSize(Dimen.headingTextSize());
 
         UIContainer menuContainer = new UIContainer();
         this.root.addChild(menuContainer);
@@ -674,7 +702,7 @@ public class UIHandler {
         UIButton backBtn = new UIButton() {
             protected void onClick() {
                 println("Back!");
-                this.handler.settings_menu();
+                this.handler.main_menu();
             }
         };
         menuContainer.addChild(backBtn);

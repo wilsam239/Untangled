@@ -197,7 +197,15 @@ abstract class UIElement {
         float diff = oldPos - this.x();
 
         for (UIElement child : this.children) {
-            child.alignLeftTo(child.x() - diff);
+            child.alignRecursiveX(diff);
+        }
+    }
+
+    private void alignRecursiveX(float diff) {
+        this.alignLeftTo(this.x() - diff);
+
+        for (UIElement child : this.children) {
+            child.alignRecursiveX(diff);
         }
     }
 
@@ -207,7 +215,15 @@ abstract class UIElement {
         float diff = oldPos - this.y();
 
         for (UIElement child : this.children) {
-            child.alignTopTo(child.y() - diff);
+            child.alignRecursiveY(diff);
+        }
+    }
+
+    private void alignRecursiveY(float diff) {
+        this.alignTopTo(this.y() - diff);
+
+        for (UIElement child : this.children) {
+            child.alignRecursiveY(diff);
         }
     }
 
