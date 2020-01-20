@@ -283,9 +283,87 @@ public class UIHandler {
 
         level_1_level_container.fitToChildrenX();
         level_1_level_container.alignCenterWithChildrenX();
+        level_1_container.setHeight(level_1_container.height() + Dimen.storyMenuPadding());
 
 
         // --- Level 2 ---
+        UIContainer level_2_container = new UIContainer();
+        this.root.addChild(level_2_container);
+        level_2_container.fillParentWidth();
+        level_2_container.setHeight(Dimen.menuHeight() * 2);
+        level_2_container.alignTopTo(level_1_container.bottom());
+        level_2_container.setFill(new Colour(128, 55, 55, 32));
+        
+
+        UIContainer level_2_title = new UIContainer();
+        level_2_container.addChild(level_2_title);
+        level_2_title.fillParentWidth();
+        level_2_title.setHeight(Dimen.menuHeight());
+        level_2_title.alignTop();
+        level_2_title.setText("Level 2");
+        level_2_title.setTextSize(Dimen.menuTextSize());
+        
+        UIContainer level_2_level_container = new UIContainer();
+        level_2_container.addChild(level_2_level_container);
+        level_2_level_container.setHeight(Dimen.menuHeight());
+        level_2_level_container.alignBottom();
+
+        // -- Level 2-1 --
+        UIButton level_2_1 = new UIButton() {
+            protected void onClick() {
+                println("Loading Level 2-1");
+                LevelStory level = new LevelStory(this.handler.game, 11);
+                this.handler.game.currentLevel = level;
+                this.handler.resetRoot();
+            }
+        };
+        level_2_level_container.addChild(level_2_1);
+        level_2_1.handler = this;
+        level_2_1.setWidth(Dimen.menuHeight());
+        level_2_1.setHeight(Dimen.menuHeight());
+        level_2_1.alignCenterY();
+        level_2_1.alignLeftTo(level_2_level_container.left() + Dimen.storyMenuPadding());
+        level_2_1.setText("1");
+
+        // -- Level 2-2 --
+        UIButton level_2_2 = new UIButton() {
+            protected void onClick() {
+                println("Loading Level 2-2");
+                LevelStory level = new LevelStory(this.handler.game, 12);
+                this.handler.game.currentLevel = level;
+                this.handler.resetRoot();
+            }
+        };
+        level_2_level_container.addChild(level_2_2);
+        level_2_2.handler = this;
+        level_2_2.setWidth(Dimen.menuHeight());
+        level_2_2.setHeight(Dimen.menuHeight());
+        level_2_2.alignCenterY();
+        level_2_2.alignLeftTo(level_2_1.right() + Dimen.storyMenuPadding());
+        level_2_2.setText("2");
+
+
+        // -- Level 2-3 --
+        UIButton level_2_3 = new UIButton() {
+            protected void onClick() {
+                println("Loading Level 1-3");
+                LevelStory level = new LevelStory(this.handler.game, 13);
+                this.handler.game.currentLevel = level;
+                this.handler.resetRoot();
+            }
+        };
+        level_2_level_container.addChild(level_2_3);
+        level_2_3.handler = this;
+        level_2_3.setWidth(Dimen.menuHeight());
+        level_2_3.setHeight(Dimen.menuHeight());
+        level_2_3.alignCenterY();
+        level_2_3.alignLeftTo(level_2_2.right() + Dimen.storyMenuPadding());
+        level_2_3.setText("3");
+
+        level_2_level_container.fitToChildrenX();
+        level_2_level_container.alignCenterWithChildrenX();
+        level_2_container.setHeight(level_2_container.height() + Dimen.storyMenuPadding());
+
 
         // --- Back Button ---
         UIButton back = new UIButton() {
@@ -305,7 +383,7 @@ public class UIHandler {
 
     // ----- Story Mode -----
 
-    public void story_solved() {
+    public void story_solved(boolean nextValid) {
         this.resetRoot();
 
         // Container for the menu.
@@ -315,8 +393,8 @@ public class UIHandler {
 
         UIContainer movesMade = new UIContainer();
         menuContainer.addChild(movesMade);
-        movesMade.setWidth(Dimen.menuWidth);
-        movesMade.setHeight(Dimen.menuHeight);
+        movesMade.setWidth(Dimen.menuWidth());
+        movesMade.setHeight(Dimen.menuHeight());
         movesMade.setText("Moves made: " + this.game.currentLevel.numberOfMovesMade());
 
         // Return to menu button.
@@ -328,29 +406,34 @@ public class UIHandler {
         };
         menuContainer.addChild(backToMenu);
         backToMenu.handler = this;
-        backToMenu.setWidth(Dimen.menuWidth / 2);
-        backToMenu.setHeight(Dimen.menuHeight);
+        backToMenu.setWidth(Dimen.menuWidth() / 2);
+        backToMenu.setHeight(Dimen.menuHeight());
         backToMenu.alignTopTo(movesMade.bottom());
         backToMenu.setText("Return To Menu");
-        backToMenu.setTextSize(Dimen.menuTextSize);
+        backToMenu.setTextSize(Dimen.menuTextSize());
 
-        // Next level button.
-        UIButton nextLevel = new UIButton() {
-            protected void onClick() {
-                int id = ((LevelStory) this.handler.game.currentLevel).getID();
-                LevelStory level = new LevelStory(this.handler.game, id + 1);
-                this.handler.game.currentLevel = level;
-                this.handler.resetRoot();
-            }
-        };
-        menuContainer.addChild(nextLevel);
-        nextLevel.handler = this;
-        nextLevel.setWidth(Dimen.menuWidth / 2);
-        nextLevel.setHeight(Dimen.menuHeight);
-        nextLevel.alignTopTo(movesMade.bottom());
-        nextLevel.alignLeftTo(backToMenu.right());
-        nextLevel.setText("Next Level");
-        nextLevel.setTextSize(Dimen.menuTextSize);
+        if (nextValid) {
+            // Next level button.
+            UIButton nextLevel = new UIButton() {
+                protected void onClick() {
+                    int id = ((LevelStory) this.handler.game.currentLevel).getID();
+                    LevelStory level = new LevelStory(this.handler.game, id + 1);
+                    this.handler.game.currentLevel = level;
+                    this.handler.resetRoot();
+                }
+            };
+            menuContainer.addChild(nextLevel);
+            nextLevel.handler = this;
+            nextLevel.setWidth(Dimen.menuWidth() / 2);
+            nextLevel.setHeight(Dimen.menuHeight());
+            nextLevel.alignTopTo(movesMade.bottom());
+            nextLevel.alignLeftTo(backToMenu.right());
+            nextLevel.setText("Next Level");
+            nextLevel.setTextSize(Dimen.menuTextSize());
+        } else {
+            backToMenu.setWidth(Dimen.menuWidth());
+        }
+
 
         menuContainer.fitToChildren();
         menuContainer.alignCenterWithChildren();

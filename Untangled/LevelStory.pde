@@ -52,8 +52,8 @@ class LevelStory extends Level {
     protected void onSolve() {
         println("Level Solved!");
 
-        this.game.uiHandler.story_solved();
-    } 
+        this.game.uiHandler.story_solved(LevelStoryInfo.getFilePath(this.id + 1) != null);
+    }
 }
 
 public static class LevelStoryInfo {
@@ -69,10 +69,13 @@ public static class LevelStoryInfo {
         "levels/level_1_6.utg",
         "levels/level_1_7.utg",
         "levels/level_1_8.utg",
-        "levels/level_1_9.utg"
+        "levels/level_1_9.utg",
+        null,
+        "levels/level_2_1.utg"
     };
 
     public static String getFilePath(int id) {
+        if (id < 0 || id > LevelStoryInfo.filePaths.length) return null;
         return LevelStoryInfo.filePaths[id - 1];
     }
 
