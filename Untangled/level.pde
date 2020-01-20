@@ -121,7 +121,7 @@ abstract class Level {
         int vertexIndex = -1;
         for(int i = 0; i < vertices.size(); i++) {
             Vertex v = vertices.get(i);
-            if (dist(xPos, yPos, v.x(), v.y()) < Dimen.vertexRadius) {
+            if (dist(xPos, yPos, v.x(), v.y()) < Dimen.vertexRadius()) {
                 vertexIndex = i;
                 break;
             }
