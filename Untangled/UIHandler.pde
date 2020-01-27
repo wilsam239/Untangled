@@ -172,6 +172,7 @@ public class UIHandler {
         level_1_1.alignCenterY();
         level_1_1.alignLeftTo(level_1_level_container.left() + Dimen.storyMenuPadding());
         level_1_1.setText("1");
+        level_1_1.setTextSize(Dimen.menuTextSize());
 
         // -- Level 1-2 --
         UIButton level_1_2 = new UIButton() {
@@ -189,6 +190,7 @@ public class UIHandler {
         level_1_2.alignCenterY();
         level_1_2.alignLeftTo(level_1_1.right() + Dimen.storyMenuPadding());
         level_1_2.setText("2");
+        level_1_2.setTextSize(Dimen.menuTextSize());
 
 
         // -- Level 1-3 --
@@ -207,6 +209,7 @@ public class UIHandler {
         level_1_3.alignCenterY();
         level_1_3.alignLeftTo(level_1_2.right() + Dimen.storyMenuPadding());
         level_1_3.setText("3");
+        level_1_3.setTextSize(Dimen.menuTextSize());
 
         // -- Level 1-4 --
         UIButton level_1_4 = new UIButton() {
@@ -224,6 +227,7 @@ public class UIHandler {
         level_1_4.alignCenterY();
         level_1_4.alignLeftTo(level_1_3.right() + Dimen.storyMenuPadding());
         level_1_4.setText("4");
+        level_1_4.setTextSize(Dimen.menuTextSize());
 
         // -- Level 1-5 --
         UIButton level_1_5 = new UIButton() {
@@ -241,6 +245,7 @@ public class UIHandler {
         level_1_5.alignCenterY();
         level_1_5.alignLeftTo(level_1_4.right() + Dimen.storyMenuPadding());
         level_1_5.setText("5");
+        level_1_5.setTextSize(Dimen.menuTextSize());
 
         // -- Level 1-6 --
         UIButton level_1_6 = new UIButton() {
@@ -258,6 +263,7 @@ public class UIHandler {
         level_1_6.alignCenterY();
         level_1_6.alignLeftTo(level_1_5.right() + Dimen.storyMenuPadding());
         level_1_6.setText("6");
+        level_1_6.setTextSize(Dimen.menuTextSize());
 
         // -- Level 1-7 --
         UIButton level_1_7 = new UIButton() {
@@ -275,6 +281,7 @@ public class UIHandler {
         level_1_7.alignCenterY();
         level_1_7.alignLeftTo(level_1_6.right() + Dimen.storyMenuPadding());
         level_1_7.setText("7");
+        level_1_7.setTextSize(Dimen.menuTextSize());
 
         // -- Level 1-8 --
         UIButton level_1_8 = new UIButton() {
@@ -292,6 +299,7 @@ public class UIHandler {
         level_1_8.alignCenterY();
         level_1_8.alignLeftTo(level_1_7.right() + Dimen.storyMenuPadding());
         level_1_8.setText("8");
+        level_1_8.setTextSize(Dimen.menuTextSize());
 
         // -- Level 1-9 --
         UIButton level_1_9 = new UIButton() {
@@ -309,6 +317,7 @@ public class UIHandler {
         level_1_9.alignCenterY();
         level_1_9.alignLeftTo(level_1_8.right() + Dimen.storyMenuPadding());
         level_1_9.setText("9");
+        level_1_9.setTextSize(Dimen.menuTextSize());
 
         level_1_level_container.fitToChildrenX();
         level_1_level_container.alignCenterWithChildrenX();
@@ -353,6 +362,7 @@ public class UIHandler {
         level_2_1.alignCenterY();
         level_2_1.alignLeftTo(level_2_level_container.left() + Dimen.storyMenuPadding());
         level_2_1.setText("1");
+        level_2_1.setTextSize(Dimen.menuTextSize());
 
         // -- Level 2-2 --
         UIButton level_2_2 = new UIButton() {
@@ -370,6 +380,7 @@ public class UIHandler {
         level_2_2.alignCenterY();
         level_2_2.alignLeftTo(level_2_1.right() + Dimen.storyMenuPadding());
         level_2_2.setText("2");
+        level_2_2.setTextSize(Dimen.menuTextSize());
 
 
         // -- Level 2-3 --
@@ -388,6 +399,25 @@ public class UIHandler {
         level_2_3.alignCenterY();
         level_2_3.alignLeftTo(level_2_2.right() + Dimen.storyMenuPadding());
         level_2_3.setText("3");
+        level_2_3.setTextSize(Dimen.menuTextSize());
+
+        // -- Level 2-4 --
+        UIButton level_2_4 = new UIButton() {
+            protected void onClick() {
+                println("Loading Level 1-4");
+                LevelStory level = new LevelStory(this.handler.game, 14);
+                this.handler.game.currentLevel = level;
+                this.handler.resetRoot();
+            }
+        };
+        level_2_level_container.addChild(level_2_4);
+        level_2_4.handler = this;
+        level_2_4.setWidth(Dimen.menuHeight());
+        level_2_4.setHeight(Dimen.menuHeight());
+        level_2_4.alignCenterY();
+        level_2_4.alignLeftTo(level_2_3.right() + Dimen.storyMenuPadding());
+        level_2_4.setText("4");
+        level_2_4.setTextSize(Dimen.menuTextSize());
 
         level_2_level_container.fitToChildrenX();
         level_2_level_container.alignCenterWithChildrenX();
@@ -407,7 +437,7 @@ public class UIHandler {
         back.alignBottom();
         back.alignCenterX();
         back.setText("Back");
-        back.setTextSize(Dimen.menuTextSize);
+        back.setTextSize(Dimen.menuTextSize());
     }
 
     // ----- Story Mode -----
@@ -425,6 +455,7 @@ public class UIHandler {
         movesMade.setWidth(Dimen.menuWidth());
         movesMade.setHeight(Dimen.menuHeight());
         movesMade.setText("Moves made: " + this.game.currentLevel.numberOfMovesMade());
+        movesMade.setTextSize(Dimen.menuTextSize());
 
         // Return to menu button.
         UIButton backToMenu = new UIButton() {
@@ -589,16 +620,18 @@ public class UIHandler {
 
         UIContainer levels = new UIContainer();
         menuContainer.addChild(levels);
-        levels.setWidth(Dimen.menuWidth);
-        levels.setHeight(Dimen.menuHeight);
+        levels.setWidth(Dimen.menuWidth());
+        levels.setHeight(Dimen.menuHeight());
         levels.setText("You completed " + levelsCompleted + " levels!");
+        levels.setTextSize(Dimen.menuTextSize());
 
         UIContainer time = new UIContainer();
         menuContainer.addChild(time);
-        time.setWidth(Dimen.menuWidth);
-        time.setHeight(Dimen.menuHeight);
+        time.setWidth(Dimen.menuWidth());
+        time.setHeight(Dimen.menuHeight());
         time.alignTopTo(levels.bottom());
         time.setText("You lasted " + timeLasted + " seconds!");
+        time.setTextSize(Dimen.menuTextSize());
 
         UIButton exit = new UIButton() {
             protected void onClick() {
@@ -608,10 +641,11 @@ public class UIHandler {
         };
         menuContainer.addChild(exit);
         exit.handler = this;
-        exit.setWidth(Dimen.menuWidth);
-        exit.setHeight(Dimen.menuHeight);
+        exit.setWidth(Dimen.menuWidth());
+        exit.setHeight(Dimen.menuHeight());
         exit.alignTopTo(time.bottom());
         exit.setText("Exit");
+        exit.setTextSize(Dimen.menuTextSize());
 
         menuContainer.fitToChildren();
         menuContainer.alignCenterWithChildren();
@@ -840,7 +874,7 @@ public class UIHandler {
 
         UIContainer hint = new UIContainer();
         this.root.addChild(hint);
-        hint.setHeight(Dimen.menuHeight());
+        hint.setHeight(Dimen.gameAreaStart());
         hint.setWidth(Dimen.menuWidth());
         hint.alignBottom();
         hint.alignRight();
@@ -868,7 +902,7 @@ public class UIHandler {
         UIButton exit = new UIButton() {
             protected void onClick() {
                 this.handler.game.currentLevel = null;
-                this.handler.settings_menu();
+                this.handler.level_editor_select();
             }
         };
         menuContainer.addChild(exit);

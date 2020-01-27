@@ -71,7 +71,10 @@ public static class LevelStoryInfo {
         "levels/level_1_8.utg",
         "levels/level_1_9.utg",
         null,
-        "levels/level_2_1.utg"
+        "levels/level_2_1.utg",
+        "levels/level_2_2.utg",
+        "levels/level_2_3.utg",
+        "levels/level_2_4.utg"
     };
 
     public static String getFilePath(int id) {

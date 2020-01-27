@@ -9,6 +9,9 @@ abstract class UIElement {
     // The elements fill colour
     private Colour fill = null;
 
+    // Wether the outline should be drawn.
+    private boolean hasStroke = false;
+
     // The elements text
     protected String text = null;
     private float textSize = Dimen.menuTextSize;
@@ -319,6 +322,10 @@ abstract class UIElement {
         this.textSize = size;
     }
 
+    public void setStroke(boolean stroke) {
+        this.hasStroke = stroke;
+    }
+
     // Set padding
 
     public void setPadding(float all) {
@@ -355,6 +362,8 @@ abstract class UIElement {
     // Drawing
     
     public void draw() {
+        if (this.hasStroke) stroke(Colours.thundercloud.R, Colours.thundercloud.G, Colours.thundercloud.B);
+        else noStroke();
         if (this.bImage != null) this.drawImage();
         if (this.fill != null) this.drawFill();
         if (this.text != null) this.drawText();
