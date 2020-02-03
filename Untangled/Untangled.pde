@@ -11,7 +11,7 @@ void setup() {
     size(1280,720);
     frameRate(Untangled.FRAMERATE);
 
-    icon = loadImage("icon.png");
+    icon = loadImage("Icon_64.png");
     surface.setIcon(icon);
 
     Resources.currentBgImage = loadImage(Resources.currentBgImagePath());
